@@ -1,15 +1,10 @@
+import Dos from "./components/Dos";
+
 function App() {
-  function A() {
-    console.log("123");
-    return 123;
-  }
-
-  A();
-
   return (
-    <>
-      <p>hello</p>
-    </>
+    <div className="bg-blue-bg w-screen h-screen">
+      <Dos />
+    </div>
   );
 }
 
