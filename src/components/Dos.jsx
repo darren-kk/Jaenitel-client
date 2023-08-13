@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 import { commandList } from "../constants";
+import Input from "./shared/Input";
 
 function Dos() {
   const [command, setCommand] = useState("");
@@ -8,7 +9,6 @@ function Dos() {
 
   function handleCommand() {
     if (command === "h") {
-      console.log(command);
       setShowCommandList(true);
     }
 
@@ -27,8 +27,8 @@ function Dos() {
         <div className="flex">
           <label className="text-white">
             선택 {">>"}
-            <input
-              className="bg-transparent text-white ml-2 outline-none"
+            <Input
+              className="ml-2 outline-none"
               type="text"
               value={command}
               onChange={(event) => setCommand(event.target.value)}
