@@ -1,3 +1,23 @@
+@import url("https://fonts.cdnfonts.com/css/press-start-2p");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+  color: white;
+}
+
+@layer components {
+  .flex-center {
+    @apply flex flex-col justify-center items-center;
+  }
+  .flex-between {
+    @apply flex flex-col justify-between items-center;
+  }
+  .border-button {
+    @apply border-b-black border-r-black border-2;
+  }
+  .border-input {
+    @apply border-t-black border-l-black border-2;
+  }
+}
