@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from "react";
-import { atom } from "jotai";
+import { useAtom } from "jotai";
 
 import Modal from "./shared/Modal";
 import Input from "./shared/Input";
 import Button from "./shared/Button";
 
+import { showModalAtom } from "../atoms";
+
 function ModemModal() {
+  const [, setShowModal] = useAtom(showModalAtom);
+
   const [modemInput, setModemInput] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isFocused, setIsFocused] = useState(false);
@@ -37,7 +41,9 @@ function ModemModal() {
   useEffect(() => {
     const audioElement = audioElementRef.current;
 
-    const handleAudioEnd = () => {};
+    const handleAudioEnd = () => {
+      setShowModal(false);
+    };
 
     if (!isMuted && isConnecting) {
       audioElement.play();
@@ -50,7 +56,7 @@ function ModemModal() {
     return () => {
       audioElement.removeEventListener("ended", handleAudioEnd);
     };
-  }, [isConnecting, isMuted]);
+  }, [isConnecting, isMuted, setShowModal]);
 
   useEffect(() => {
     const handleKeyPress = (event) => {

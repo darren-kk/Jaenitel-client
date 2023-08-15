@@ -1,7 +1,13 @@
+import { useAtom } from "jotai";
+
 import LoginDos from "../components/LoginDos";
 import ModemModal from "../components/ModemModal";
 
+import { showModalAtom } from "../atoms";
+
 function Login() {
+  const [showModal] = useAtom(showModalAtom);
+
   return (
     <div className="flex-center w-full h-4/5 p-10">
       <header className="flex-between border border-4 border-white w-3/5 h-96 mb-10 pt-10 pb-10">
@@ -13,7 +19,7 @@ function Login() {
         <span className="text-xl tracking-wider">▶︎ 게시판 및 대화실 이용시 건전한 언어를 사용합시다.</span>
       </div>
       <LoginDos />
-      <ModemModal />
+      {showModal && <ModemModal />}
     </div>
   );
 }
