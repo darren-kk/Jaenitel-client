@@ -1,8 +1,10 @@
 import PropTypes from "prop-types";
+import { forwardRef } from "react";
 
-function Input({ className, type, value, readOnly = false, onChange, onKeyDown }) {
+function Input({ className, type, value, readOnly = false, onChange, onKeyDown }, ref) {
   return (
     <input
+      ref={ref}
       className={`bg-transparent ${className}`}
       type={type}
       value={value}
@@ -13,6 +15,8 @@ function Input({ className, type, value, readOnly = false, onChange, onKeyDown }
   );
 }
 
+const InputRef = forwardRef(Input);
+
 Input.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
@@ -22,4 +26,4 @@ Input.propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-export default Input;
+export default InputRef;

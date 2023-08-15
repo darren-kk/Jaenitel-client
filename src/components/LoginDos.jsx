@@ -1,22 +1,46 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 
-import { commandList } from "../constants";
+import usePostLogin from "../apis/postLogin";
 import Input from "./shared/Input";
 
 function LoginDos() {
-  const [command, setCommand] = useState("");
-  const [showCommandList, setShowCommandList] = useState(false);
+  const [loginInfo, setLoginInfo] = useState({
+    email: "",
+    password: "",
+  });
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
 
-  function handleCommand() {
-    if (command === "h") {
-      setShowCommandList(true);
+  const idInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
+
+  const fetchLogin = usePostLogin();
+
+  useEffect(() => {
+    if (idInputRef.current) {
+      idInputRef.current.focus();
+    }
+  }, []);
+
+  useEffect(() => {
+    if (showPasswordInput && passwordInputRef.current) {
+      passwordInputRef.current.focus();
+    }
+  }, [showPasswordInput]);
+
+  function handleIdKeyDown(event) {
+    if (event.nativeEvent.isComposing) {
+      return;
     }
 
-    if (command !== "h" && showCommandList) {
-      setShowCommandList(false);
+    if (event.key === "Enter" || event.key === "Tab") {
+      setShowPasswordInput(true);
     }
+  }
 
-    setCommand("");
+  function handlePassswordKeyDown(event) {
+    if (event.key === "Enter") {
+      fetchLogin(loginInfo);
+    }
   }
 
   return (
@@ -24,29 +48,32 @@ function LoginDos() {
       <div className="bg-white w-full h-1 mb-2"></div>
       <div className="flex flex-col px-16 py-5">
         <span>## 이용자 ID가 없거나 신규/무료가입을 하시려면 guest를 입력 하십시오.</span>
-        <div className="flex">
+        <form className="flex flex-col">
           <label>
             이용자 ID :
             <Input
-              className="ml-2 outline-none"
+              ref={idInputRef}
+              className="ml-2 outline-none w-4/5"
               type="text"
-              value={command}
-              onChange={(event) => setCommand(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  handleCommand();
-                }
-              }}
+              value={loginInfo.email}
+              onChange={(event) => setLoginInfo({ ...loginInfo, email: event.target.value })}
+              onKeyDown={handleIdKeyDown}
             />
           </label>
-        </div>
-        {showCommandList
-          ? commandList.map((item) => (
-              <pre key={item.commandName}>
-                {item.commandName}: {item.commandValue}
-              </pre>
-            ))
-          : ""}
+          {showPasswordInput && (
+            <label>
+              비밀번호 :
+              <Input
+                ref={passwordInputRef}
+                className="ml-2 outline-none w-4/5"
+                type="text"
+                value={loginInfo.password}
+                onChange={(event) => setLoginInfo({ ...loginInfo, password: event.target.value })}
+                onKeyDown={handlePassswordKeyDown}
+              />
+            </label>
+          )}
+        </form>
       </div>
     </div>
   );
