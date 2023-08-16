@@ -14,7 +14,7 @@ function usePostLogin() {
     return await fetchData("POST", "/auth/login", loginInfo);
   }
 
-  const { mutate: fetchLogin } = useMutation(handleLogin, {
+  const { mutateAsync: fetchLogin } = useMutation(handleLogin, {
     onSuccess: (result) => {
       const { data } = result;
 
@@ -22,7 +22,7 @@ function usePostLogin() {
       navigate("/boards");
     },
     onError: (result) => {
-      const error = new Error(result.response.statusText);
+      const error = new Error(result.response.data.message);
       error.status = result.response.status;
 
       throw error;
