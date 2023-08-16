@@ -3,9 +3,12 @@ import { useState } from "react";
 import { commandList } from "../constants";
 import Input from "./shared/Input";
 
+import usePostLogout from "../apis/postLogout";
+
 function MainDos() {
   const [command, setCommand] = useState("");
   const [showCommandList, setShowCommandList] = useState(false);
+  const fetchLogout = usePostLogout();
 
   function handleCommand() {
     if (command === "h") {
@@ -14,6 +17,14 @@ function MainDos() {
 
     if (command !== "h" && showCommandList) {
       setShowCommandList(false);
+    }
+
+    if (command === "x") {
+      try {
+        fetchLogout();
+      } catch (error) {
+        console.error(error);
+      }
     }
 
     setCommand("");
