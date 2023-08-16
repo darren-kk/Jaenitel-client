@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 import usePostLogin from "../apis/postLogin";
 import Input from "./shared/Input";
 
-import { isSignupAtom } from "../atoms";
+import { isSignupAtom, showModalAtom } from "../atoms";
 
 function LoginDos() {
   const [loginInfo, setLoginInfo] = useState({
@@ -18,6 +18,7 @@ function LoginDos() {
   const passwordInputRef = useRef(null);
 
   const [, setIsSignup] = useAtom(isSignupAtom);
+  const [showModal] = useAtom(showModalAtom);
 
   const fetchLogin = usePostLogin();
 
@@ -36,6 +37,10 @@ function LoginDos() {
   function handleIdKeyDown(event) {
     if (event.nativeEvent.isComposing) {
       return;
+    }
+
+    if (showModal) {
+      event.preventDefault();
     }
 
     if (showPasswordInput) {
