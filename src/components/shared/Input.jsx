@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { forwardRef } from "react";
 
-function Input({ className, type, value, readOnly = false, onChange, onKeyDown }, ref) {
+function InputRef({ className, type, value, readOnly = false, onChange, onKeyDown }, ref) {
   return (
     <input
       ref={ref}
@@ -15,9 +15,9 @@ function Input({ className, type, value, readOnly = false, onChange, onKeyDown }
   );
 }
 
-const InputRef = forwardRef(Input);
+const Input = forwardRef(InputRef);
 
-Input.propTypes = {
+InputRef.propTypes = {
   className: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,
@@ -26,4 +26,4 @@ Input.propTypes = {
   onKeyDown: PropTypes.func,
 };
 
-export default InputRef;
+export default Input;
