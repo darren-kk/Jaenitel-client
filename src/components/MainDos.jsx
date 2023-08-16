@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
-import { commandList } from "../constants";
+import { commandList, boardsNumberList } from "../constants";
 import Input from "./shared/Input";
 
 import usePostLogout from "../apis/postLogout";
@@ -8,7 +9,15 @@ import usePostLogout from "../apis/postLogout";
 function MainDos() {
   const [command, setCommand] = useState("");
   const [showCommandList, setShowCommandList] = useState(false);
+  const commandInputRef = useRef(null);
   const fetchLogout = usePostLogout();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (commandInputRef.current) {
+      commandInputRef.current.focus();
+    }
+  }, []);
 
   function handleCommand() {
     if (command === "h") {
@@ -27,6 +36,15 @@ function MainDos() {
       }
     }
 
+    if (command === "t") {
+      navigate("/boards");
+    }
+
+    if (command.endsWith(" go")) {
+      const number = command.split(" ")[0];
+      navigate(`${boardsNumberList[number]}`);
+    }
+
     setCommand("");
   }
 
@@ -39,6 +57,7 @@ function MainDos() {
           <label>
             선택 {">>"}
             <Input
+              ref={commandInputRef}
               className="ml-2 outline-none"
               type="text"
               value={command}
