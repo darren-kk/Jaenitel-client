@@ -8,8 +8,17 @@ export const commandList = [
 export const boardsNumberList = {
   1: "/boards/greetings",
   2: "/boards/messages",
-  3: "/boards/chat-rooms",
+  3: "/boards/chatrooms",
   11: "/boards/free",
   12: "/boards/humor",
   21: "/boards/special",
+};
+
+export const boardNames = {
+  humor: "유머 게시판",
+  messages: "쪽지",
+  chatrooms: "실시간 대화방",
+  free: "자유 게시판",
+  greetings: "가입 인사",
+  special: "special",
 };
