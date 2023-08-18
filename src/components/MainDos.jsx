@@ -76,10 +76,10 @@ function MainDos() {
   }
 
   return (
-    <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-10vh">
+    <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x)</span>
+        <span>## 명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x)</span>
         <div className="flex">
           <label>
             선택 {">>"}

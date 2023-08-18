@@ -3,6 +3,9 @@ export const commandList = [
   { commandName: "[번호] go", commandValue: "[번호] 페이지 이동" },
   { commandName: "t", commandValue: "초기 화면" },
   { commandName: "x", commandValue: "로그아웃 / 종료" },
+  { commandName: "next", commandValue: "다음 페이지" },
+  { commandName: "prev", commandValue: "이전 페이지" },
+  { commandName: "new", commandValue: "글쓰기" },
 ];
 
 export const boardsNumberList = {
