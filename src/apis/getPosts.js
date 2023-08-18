@@ -3,16 +3,21 @@ import { useAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom } from "../atoms";
+import { userAtom, totalPageAtom } from "../atoms";
 
-function useGetPosts(category) {
+function useGetPosts(category, page, limit) {
   const [user] = useAtom(userAtom);
+  const [, setTotalPage] = useAtom(totalPageAtom);
 
-  async function handleLogin() {
-    return await fetchData("GET", `/users/${user._id}/posts?category=${category}`);
+  async function fetchPosts() {
+    return await fetchData("GET", `/users/${user._id}/posts?category=${category}&page=${page}&limit=${limit}`);
   }
 
-  const queryInfo = useQuery(["posts"], handleLogin, {
+  const queryInfo = useQuery(["posts", category, page, limit], fetchPosts, {
+    keepPreviousData: true,
+    onSuccess: (result) => {
+      setTotalPage(result.data.totalPages);
+    },
     onError: (result) => {
       const error = new Error(result.response.data.message);
       error.status = result.response.status;
