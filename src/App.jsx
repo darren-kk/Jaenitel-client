@@ -1,14 +1,19 @@
 import { Routes, Route, Navigate } from "react-router-dom";
+import { useAtom } from "jotai";
 
 import MainDos from "./components/MainDos";
 import Login from "./pages/Login";
 import Boards from "./pages/Boards";
 import Board from "./pages/Board";
 
+import { userAtom } from "./atoms";
+
 function App() {
+  const [user] = useAtom(userAtom);
+
   return (
     <div className="bg-blue-bg w-screen h-screen">
-      <MainDos />
+      {user && <MainDos />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/boards" element={<Boards />} />

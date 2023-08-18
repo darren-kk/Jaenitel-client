@@ -32,6 +32,7 @@ function SignupDos() {
 
   function moveFocus(event) {
     if (event.key === "Enter" || event.key === "Tab" || event.key === "ArrowDown") {
+      event.preventDefault();
       focusedIndex++;
     }
 

@@ -50,6 +50,7 @@ function LoginDos() {
     }
 
     if (event.key === "Enter" || event.key === "Tab") {
+      event.preventDefault();
       if (loginInfo.email === "guest") {
         setIsSignup(true);
       }
