@@ -29,7 +29,7 @@ function Board() {
             <div key={post.id} className="flex justify-between w-full mb-4">
               <span className="text-xl w-2/12">{posts.length - index}</span>
               <span className="text-xl w-3/12">{post.madeBy.nickname}</span>
-              <span className="text-xl w-4/12">{post.createdDate}</span>
+              <span className="text-xl w-4/12">{post.createdDate.split("T")[0]}</span>
               <span className="text-xl w-5/12">{post.title}</span>
             </div>
           ))}
