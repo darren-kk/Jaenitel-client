@@ -13,6 +13,11 @@ module.exports = {
       fontFamily: {
         "press-start": ['"Press Start 2P"', "sans"],
       },
+      spacing: {
+        "10vh": "10vh",
+        "20vh": "20vh",
+        "65vh": "65vh",
+      },
     },
   },
   plugins: [],
