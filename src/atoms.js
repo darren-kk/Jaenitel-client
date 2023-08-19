@@ -9,3 +9,4 @@ export const totalPageAtom = atom(0);
 export const postsPerPageAtom = atom(10);
 
 export const scrollRefAtom = atom(null);
+export const videoRefAtom = atom(null);
