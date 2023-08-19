@@ -34,8 +34,14 @@ body {
   .flex-items-start {
     @apply flex flex-col justify-center items-start;
   }
+  .flex-row-center {
+    @apply flex justify-center items-center;
+  }
   .border-button {
     @apply border-b-black border-r-black border-2;
+  }
+  .border-button-pushed {
+    @apply border-t-black border-l-black border-2;
   }
   .border-input {
     @apply border-t-black border-l-black border-2;
