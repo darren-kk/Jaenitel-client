@@ -12,11 +12,13 @@ module.exports = {
       },
       fontFamily: {
         "press-start": ['"Press Start 2P"', "sans"],
+        "dung-guen-mo": ['"DungGeunMo"', "sans"],
       },
       spacing: {
         "10vh": "10vh",
         "15vh": "15vh",
         "20vh": "20vh",
+        "40vh": "40vh",
         "55vh": "55vh",
         "60vh": "60vh",
         "65vh": "65vh",
