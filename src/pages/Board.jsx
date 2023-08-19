@@ -1,17 +1,17 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useAtom } from "jotai";
 
 import useGetPosts from "../apis/getPosts";
 
-import { currentPageAtom, totalPageAtom } from "../atoms";
+import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms";
 
 import { boardNames } from "../constants";
 
 function Board() {
   const [currentPage] = useAtom(currentPageAtom);
   const [totalPage] = useAtom(totalPageAtom);
-  const [postsPerPage, setPostsPerPage] = useState(10);
+  const [postsPerPage, setPostsPerPage] = useAtom(postsPerPageAtom);
 
   const mainRef = useRef(null);
   const location = useLocation("");
@@ -39,7 +39,7 @@ function Board() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, [mainRef]);
+  }, [mainRef, setPostsPerPage]);
 
   for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
     pageNumbers.push(i);

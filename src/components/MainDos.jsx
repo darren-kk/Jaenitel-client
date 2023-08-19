@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 
 import { commandList, boardsNumberList } from "../constants";
-import { currentPageAtom, totalPageAtom } from "../atoms";
+import { currentPageAtom, totalPageAtom, scrollRefAtom } from "../atoms";
 import Input from "./shared/Input";
 
 import usePostLogout from "../apis/postLogout";
@@ -14,6 +14,7 @@ function MainDos() {
 
   const [, setCurrentPage] = useAtom(currentPageAtom);
   const [totalPage] = useAtom(totalPageAtom);
+  const scrollRef = useAtomValue(scrollRefAtom);
 
   const commandInputRef = useRef(null);
 
@@ -75,6 +76,26 @@ function MainDos() {
     setCommand("");
   }
 
+  function handleKeyDown(event) {
+    if (event.key === "Enter") {
+      handleCommand();
+    }
+
+    if (event.key === "ArrowDown") {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollTop + 30,
+        behavior: "smooth",
+      });
+    }
+
+    if (event.key === "ArrowUp") {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollTop - 30,
+        behavior: "smooth",
+      });
+    }
+  }
+
   return (
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
@@ -89,11 +110,7 @@ function MainDos() {
               type="text"
               value={command}
               onChange={(event) => setCommand(event.target.value)}
-              onKeyDown={(event) => {
-                if (event.key === "Enter") {
-                  handleCommand();
-                }
-              }}
+              onKeyDown={handleKeyDown}
             />
           </label>
         </div>
