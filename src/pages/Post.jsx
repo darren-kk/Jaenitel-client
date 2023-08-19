@@ -1,27 +1,36 @@
+import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { useAtom, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
 import useGetPosts from "../apis/getPosts";
 
-import { useRef } from "react";
-
-import { currentPageAtom, postsPerPageAtom, scrollRefAtom } from "../atoms";
+import { currentPageAtom, postsPerPageAtom, scrollRefAtom, videoRefAtom } from "../atoms";
 import { boardNames } from "../constants";
+
+import Video from "../components/shared/Video";
 
 function Post() {
   const { boardName, postNumber } = useParams();
-  const [currentPage] = useAtom(currentPageAtom);
-  const [postsPerPage] = useAtom(postsPerPageAtom);
+  const currentPage = useAtomValue(currentPageAtom);
+  const postsPerPage = useAtomValue(postsPerPageAtom);
   const setScrollRef = useSetAtom(scrollRefAtom);
+  const setVideoRef = useSetAtom(videoRefAtom);
 
   const scrollRef = useRef(null);
+  const videoRef = useRef(null);
 
   const { posts } = useGetPosts(boardName, currentPage, postsPerPage);
   const post = posts?.find((post) => post.index === Number(postNumber));
 
-  if (scrollRef) {
-    setScrollRef(scrollRef);
-  }
+  useEffect(() => {
+    if (videoRef) {
+      setVideoRef(videoRef);
+    }
+
+    if (scrollRef) {
+      setScrollRef(scrollRef);
+    }
+  }, [setScrollRef, setVideoRef]);
 
   return (
     <div className="flex-center pt-5">
@@ -38,7 +47,7 @@ function Post() {
         </div>
       </header>
       <div className="bg-white w-full h-1 mb-2"></div>
-      <main ref={scrollRef} className="flex-start w-full h-65vh px-10 py-4 overflow-auto">
+      <main ref={scrollRef} className="flex-start w-full h-65vh px-4 py-4 overflow-auto">
         {post?.contents.map((content, index) => {
           if (content.content) {
             return (
@@ -53,11 +62,7 @@ function Post() {
             );
           }
           if (content.videoUrl) {
-            return (
-              <video className="max-h-40vh mb-8" key={content._id} controls>
-                <source src={content.videoUrl} type="video/mp4" />
-              </video>
-            );
+            return <Video ref={videoRef} key={content._id} src={content.videoUrl} />;
           }
         })}
       </main>

@@ -1,9 +1,9 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAtom, useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 import { commandList, boardsNumberList } from "../constants";
-import { currentPageAtom, totalPageAtom, scrollRefAtom } from "../atoms";
+import { currentPageAtom, totalPageAtom, scrollRefAtom, videoRefAtom } from "../atoms";
 import Input from "./shared/Input";
 
 import usePostLogout from "../apis/postLogout";
@@ -12,9 +12,10 @@ function MainDos() {
   const [command, setCommand] = useState("");
   const [showCommandList, setShowCommandList] = useState(false);
 
-  const [, setCurrentPage] = useAtom(currentPageAtom);
-  const [totalPage] = useAtom(totalPageAtom);
+  const setCurrentPage = useSetAtom(currentPageAtom);
+  const totalPage = useAtomValue(totalPageAtom);
   const scrollRef = useAtomValue(scrollRefAtom);
+  const videoRef = useAtomValue(videoRefAtom);
 
   const commandInputRef = useRef(null);
 
@@ -71,6 +72,19 @@ function MainDos() {
 
     if (command === "prev") {
       setCurrentPage((old) => (old === 1 ? old : old - 1));
+    }
+
+    if (command === "play") {
+      videoRef.current.play();
+    }
+
+    if (command === "pause") {
+      videoRef.current.pause();
+    }
+
+    if (command === "stop") {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
     }
 
     setCommand("");
