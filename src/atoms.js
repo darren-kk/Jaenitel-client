@@ -10,3 +10,12 @@ export const postsPerPageAtom = atom(10);
 
 export const scrollRefAtom = atom(null);
 export const videoRefAtom = atom(null);
+export const titleRefAtom = atom(null);
+
+export const isNewPostAtom = atom(false);
+export const postInfoAtom = atom({
+  title: "",
+  category: "",
+  madeBy: userAtom._id,
+  contents: [{ textContent: "" }],
+});
