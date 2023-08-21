@@ -66,6 +66,10 @@ function MainDos() {
       navigate(`/boards/${boardName}/post/${number}`);
     }
 
+    if (command === "new" && ["humor", "greetings", "free"].includes(boardName)) {
+      navigate(`/boards/${boardName}/post/new`);
+    }
+
     if (command === "next") {
       setCurrentPage((old) => (old === totalPage ? old : old + 1));
     }

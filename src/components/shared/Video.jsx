@@ -47,7 +47,7 @@ function VideoRef({ className, src }, ref) {
         </video>
       </div>
 
-      <div className="flex justify-between items-center p-2 bg-gray-bg w-full">
+      <div className="flex justify-between items-center py-2 bg-gray-bg w-full">
         <div className="flex justify-between items-center">
           <button
             className={`flex-row-center text-black font-extrabold w-6 h-6 pt-1 ${
@@ -64,7 +64,7 @@ function VideoRef({ className, src }, ref) {
             ||
           </button>
           <button
-            className={`flex-row-center text-black font-extrabold w-6 h-6 pt-1 ${
+            className={`flex-row-center text-black font-extrabold w-6 h-6 ml-1 pt-1 ${
               !isPlaying && currentTime === 0 ? "border-button-pushed" : ""
             }`}
           >
