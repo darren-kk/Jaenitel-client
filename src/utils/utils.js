@@ -25,3 +25,42 @@ export function checkInputValidation(loginInfo) {
       return true;
   }
 }
+
+export function handlePostCommand(command, setCommand, handleAddContent, titleRef, videoRef, refs) {
+  if (command === "text") {
+    handleAddContent("textContent");
+  }
+
+  if (command === "image") {
+    handleAddContent("imageContent");
+  }
+
+  if (command === "video") {
+    handleAddContent("videoContent");
+  }
+
+  if (command === "title") {
+    titleRef.current.focus();
+  }
+
+  if (command.endsWith(" go")) {
+    const number = command.split(" ")[0];
+
+    refs.current[number - 1].focus();
+  }
+
+  if (command === "play") {
+    videoRef.current.play();
+  }
+
+  if (command === "pause") {
+    videoRef.current.pause();
+  }
+
+  if (command === "stop") {
+    videoRef.current.pause();
+    videoRef.current.currentTime = 0;
+  }
+
+  setCommand("");
+}
