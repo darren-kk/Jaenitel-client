@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
 import { commandList, boardsNumberList } from "../constants";
 import { currentPageAtom, totalPageAtom, scrollRefAtom, videoRefAtom } from "../atoms";
@@ -13,6 +13,7 @@ function MainDos() {
   const [showCommandList, setShowCommandList] = useState(false);
 
   const setCurrentPage = useSetAtom(currentPageAtom);
+
   const totalPage = useAtomValue(totalPageAtom);
   const scrollRef = useAtomValue(scrollRefAtom);
   const videoRef = useAtomValue(videoRefAtom);
@@ -27,9 +28,21 @@ function MainDos() {
   const boardName = path[path.length - 1];
 
   useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "l") {
+        commandInputRef.current.focus();
+      }
+    };
+
     if (commandInputRef.current) {
       commandInputRef.current.focus();
     }
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   function handleCommand() {
@@ -118,7 +131,7 @@ function MainDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>## 명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x)</span>
+        <span>## 명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x) dos(컨트롤 + 쉬프트 + l(엘))</span>
         <div className="flex">
           <label>
             선택 {">>"}
