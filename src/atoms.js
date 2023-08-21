@@ -16,6 +16,6 @@ export const isNewPostAtom = atom(false);
 export const postInfoAtom = atom({
   title: "",
   category: "",
-  madeBy: userAtom._id,
+  madeBy: "",
   contents: [{ textContent: "" }],
 });
