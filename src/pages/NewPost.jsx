@@ -20,6 +20,7 @@ function NewPost() {
   const location = useLocation("");
   const path = location.pathname.split("/");
   const boardName = path[2];
+  const boardState = path[path.length - 1];
 
   const videoRef = useRef(null);
   const scrollRef = useRef(null);
@@ -27,14 +28,14 @@ function NewPost() {
   const contentRefs = useRef([]);
 
   useEffect(() => {
-    if (user && boardName) {
+    if (user && boardName && boardState === "new") {
       setPostInfo((prev) => ({
         ...prev,
         madeBy: user._id,
         category: boardName,
       }));
     }
-  }, [user, boardName, setPostInfo]);
+  }, [user, boardName, setPostInfo, boardState]);
 
   useEffect(() => {
     if (titleRef) {
@@ -128,7 +129,8 @@ function NewPost() {
           </label>
           <span>글 내용: </span>
           {postInfo.contents.map((content, index) => {
-            const contentType = Object.keys(content)[0];
+            const keys = Object.keys(content);
+            const contentType = keys[0] === "_id" ? keys[1] : keys[0];
 
             switch (contentType) {
               case "textContent":
@@ -159,7 +161,15 @@ function NewPost() {
                       onChange={(event) => handleContentChange(event, index, "imageContent")}
                     />
                     {content.imageContent && (
-                      <img className="max-h-40vh mb-8" src={URL.createObjectURL(content.imageContent)} alt="Preview" />
+                      <img
+                        className="max-h-40vh mb-8"
+                        src={
+                          typeof content.imageContent === "string"
+                            ? content.imageContent
+                            : URL.createObjectURL(content.imageContent)
+                        }
+                        alt="Preview"
+                      />
                     )}
                   </div>
                 );
@@ -173,7 +183,16 @@ function NewPost() {
                       ref={(el) => (contentRefs.current[index] = el)}
                       onChange={(event) => handleContentChange(event, index, "videoContent")}
                     />
-                    {content.videoContent && <Video ref={videoRef} src={URL.createObjectURL(content.videoContent)} />}
+                    {content.videoContent && (
+                      <Video
+                        ref={videoRef}
+                        src={
+                          typeof content.videoContent === "string"
+                            ? content.videoContent
+                            : URL.createObjectURL(content.videoContent)
+                        }
+                      />
+                    )}
                   </div>
                 );
               default:

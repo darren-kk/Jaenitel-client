@@ -4,7 +4,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import useGetPosts from "../apis/getPosts";
 
-import { currentPageAtom, postsPerPageAtom, scrollRefAtom, videoRefAtom } from "../atoms";
+import { currentPageAtom, postsPerPageAtom, scrollRefAtom, videoRefAtom, postInfoAtom } from "../atoms";
 import { boardNames } from "../constants";
 
 import Video from "../components/shared/Video";
@@ -15,12 +15,19 @@ function Post() {
   const postsPerPage = useAtomValue(postsPerPageAtom);
   const setScrollRef = useSetAtom(scrollRefAtom);
   const setVideoRef = useSetAtom(videoRefAtom);
+  const setPostInfo = useSetAtom(postInfoAtom);
 
   const scrollRef = useRef(null);
   const videoRef = useRef(null);
 
   const { posts } = useGetPosts(boardName, currentPage, postsPerPage);
   const post = posts?.find((post) => post.index === Number(postNumber));
+
+  useEffect(() => {
+    if (post) {
+      setPostInfo(post);
+    }
+  }, [setPostInfo, post]);
 
   useEffect(() => {
     if (videoRef) {
@@ -49,20 +56,20 @@ function Post() {
       <div className="bg-white w-full h-1 mb-2"></div>
       <main ref={scrollRef} className="flex-start w-full h-65vh px-4 py-4 overflow-auto">
         {post?.contents.map((content, index) => {
-          if (content.content) {
+          if (content.textContent) {
             return (
               <pre className="font-dung-guen-mo max-h-40vh mb-8" key={content._id}>
-                {content.content}
+                {content.textContent}
               </pre>
             );
           }
-          if (content.imageUrl) {
+          if (content.imageContent) {
             return (
-              <img className="max-h-40vh mb-8" key={content._id} src={content.imageUrl} alt={`Content ${index}`} />
+              <img className="max-h-40vh mb-8" key={content._id} src={content.imageContent} alt={`Content ${index}`} />
             );
           }
-          if (content.videoUrl) {
-            return <Video ref={videoRef} key={content._id} src={content.videoUrl} />;
+          if (content.videoContent) {
+            return <Video ref={videoRef} key={content._id} src={content.videoContent} />;
           }
         })}
       </main>
