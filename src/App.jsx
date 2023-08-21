@@ -1,5 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 
 import MainDos from "./components/MainDos";
 import Login from "./pages/Login";
@@ -8,14 +8,15 @@ import Board from "./pages/Board";
 import Post from "./pages/Post";
 import NewPost from "./pages/NewPost";
 
-import { userAtom } from "./atoms";
+import { userAtom, isNewPostAtom } from "./atoms";
 
 function App() {
-  const [user] = useAtom(userAtom);
+  const user = useAtomValue(userAtom);
+  const isNewPost = useAtomValue(isNewPostAtom);
 
   return (
     <div className="bg-blue-bg w-screen h-screen">
-      {user && <MainDos />}
+      {user && !isNewPost && <MainDos />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/boards" element={<Boards />} />
