@@ -1,16 +1,17 @@
 import { useRef, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { useSetAtom, useAtom } from "jotai";
+import { useAtomValue, useSetAtom, useAtom } from "jotai";
 
 import Input from "../components/shared/Input";
 import Video from "../components/shared/Video";
 import PostDos from "../components/PostDos";
 
 import { boardNames } from "../constants";
-import { videoRefAtom, scrollRefAtom, postInfoAtom, titleRefAtom } from "../atoms";
+import { userAtom, videoRefAtom, scrollRefAtom, postInfoAtom, titleRefAtom } from "../atoms";
 import { handlePostCommand } from "../utils/utils";
 
 function NewPost() {
+  const user = useAtomValue(userAtom);
   const setVideoRef = useSetAtom(videoRefAtom);
   const setScrollRef = useSetAtom(scrollRefAtom);
   const setTitleRef = useSetAtom(titleRefAtom);
@@ -24,6 +25,16 @@ function NewPost() {
   const scrollRef = useRef(null);
   const titleRef = useRef(null);
   const contentRefs = useRef([]);
+
+  useEffect(() => {
+    if (user && boardName) {
+      setPostInfo((prev) => ({
+        ...prev,
+        madeBy: user._id,
+        category: boardName,
+      }));
+    }
+  }, [user, boardName, setPostInfo]);
 
   useEffect(() => {
     if (titleRef) {

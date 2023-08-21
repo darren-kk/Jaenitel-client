@@ -4,7 +4,8 @@ import PropTypes from "prop-types";
 
 import Input from "./shared/Input";
 
-import { videoRefAtom, scrollRefAtom, titleRefAtom } from "../atoms";
+import { videoRefAtom, scrollRefAtom, titleRefAtom, postInfoAtom } from "../atoms";
+import useCreatePost from "../apis/createPost";
 
 function PostDos({ handlePostCommand, handleAddContent, contentRefs }) {
   const [command, setCommand] = useState("");
@@ -13,6 +14,9 @@ function PostDos({ handlePostCommand, handleAddContent, contentRefs }) {
   const scrollRef = useAtomValue(scrollRefAtom);
   const videoRef = useAtomValue(videoRefAtom);
   const titleRef = useAtomValue(titleRefAtom);
+  const postInfo = useAtomValue(postInfoAtom);
+
+  const createPost = useCreatePost(postInfo);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -28,9 +32,9 @@ function PostDos({ handlePostCommand, handleAddContent, contentRefs }) {
     };
   }, []);
 
-  function handleKeyDown(event) {
+  async function handleKeyDown(event) {
     if (event.key === "Enter") {
-      handlePostCommand(command, setCommand, handleAddContent, titleRef, videoRef, contentRefs);
+      handlePostCommand(command, setCommand, handleAddContent, titleRef, videoRef, contentRefs, createPost);
     }
 
     if (event.key === "ArrowDown") {

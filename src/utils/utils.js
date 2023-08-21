@@ -26,7 +26,7 @@ export function checkInputValidation(loginInfo) {
   }
 }
 
-export function handlePostCommand(command, setCommand, handleAddContent, titleRef, videoRef, refs) {
+export async function handlePostCommand(command, setCommand, handleAddContent, titleRef, videoRef, refs, createPost) {
   if (command === "text") {
     handleAddContent("textContent");
   }
@@ -60,6 +60,10 @@ export function handlePostCommand(command, setCommand, handleAddContent, titleRe
   if (command === "stop") {
     videoRef.current.pause();
     videoRef.current.currentTime = 0;
+  }
+
+  if (command === "submit") {
+    createPost();
   }
 
   setCommand("");
