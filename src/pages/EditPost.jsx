@@ -32,6 +32,15 @@ function EditPost() {
     if (post) {
       setPostInfo(post);
     }
+
+    return () => {
+      setPostInfo({
+        title: "",
+        category: "",
+        madeBy: "",
+        contents: [{ textContent: "" }],
+      });
+    };
   }, []);
 
   useEffect(() => {
