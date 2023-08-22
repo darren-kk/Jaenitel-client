@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router-dom";
+
 export function checkInputValidation(loginInfo) {
   const { email, password, reWrittenPassword, nickname } = loginInfo;
 
@@ -26,45 +28,62 @@ export function checkInputValidation(loginInfo) {
   }
 }
 
-export async function handlePostCommand(command, setCommand, handleAddContent, titleRef, videoRef, refs, createPost) {
-  if (command === "text") {
-    handleAddContent("textContent");
+export function useHandlePostCommand(setCommand, handleAddContent, titleRef, videoRef, refs, createPost, editPost) {
+  const navigate = useNavigate();
+
+  function executeCommand(command) {
+    switch (command) {
+      case "text":
+        handleAddContent("textContent");
+        break;
+
+      case "image":
+        handleAddContent("imageContent");
+        break;
+
+      case "video":
+        handleAddContent("videoContent");
+        break;
+
+      case "title":
+        titleRef.current.focus();
+        break;
+
+      case "t":
+        navigate("/boards");
+        break;
+
+      case "play":
+        videoRef.current.play();
+        break;
+
+      case "pause":
+        videoRef.current.pause();
+        break;
+
+      case "stop":
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+        break;
+
+      case "submit":
+        createPost();
+        break;
+
+      case "edit":
+        console.log("is editing");
+        editPost();
+        break;
+
+      default:
+        if (command.endsWith(" go")) {
+          const number = command.split(" ")[0];
+          refs.current[number - 1].focus();
+        }
+    }
+
+    setCommand("");
   }
 
-  if (command === "image") {
-    handleAddContent("imageContent");
-  }
-
-  if (command === "video") {
-    handleAddContent("videoContent");
-  }
-
-  if (command === "title") {
-    titleRef.current.focus();
-  }
-
-  if (command.endsWith(" go")) {
-    const number = command.split(" ")[0];
-
-    refs.current[number - 1].focus();
-  }
-
-  if (command === "play") {
-    videoRef.current.play();
-  }
-
-  if (command === "pause") {
-    videoRef.current.pause();
-  }
-
-  if (command === "stop") {
-    videoRef.current.pause();
-    videoRef.current.currentTime = 0;
-  }
-
-  if (command === "submit") {
-    createPost();
-  }
-
-  setCommand("");
+  return { executeCommand };
 }
