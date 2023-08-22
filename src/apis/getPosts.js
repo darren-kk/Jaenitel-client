@@ -19,7 +19,7 @@ function useGetPosts(category, page, limit) {
     onSuccess: (result) => {
       const postsWithIndex = {};
       result.data.posts.forEach((post) => {
-        postsWithIndex[post.index] = post._id;
+        postsWithIndex[post.index] = { postId: post._id, madeBy: post.madeBy._id };
       });
 
       setPosts(postsWithIndex);
