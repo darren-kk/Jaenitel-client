@@ -19,3 +19,5 @@ export const postInfoAtom = atom({
   madeBy: "",
   contents: [{ textContent: "" }],
 });
+
+export const postsAtom = atom([]);

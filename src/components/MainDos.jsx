@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAtomValue, useSetAtom } from "jotai";
 
 import { commandList, boardsNumberList } from "../constants";
-import { currentPageAtom, totalPageAtom, scrollRefAtom, videoRefAtom } from "../atoms";
+import { currentPageAtom, totalPageAtom, scrollRefAtom, videoRefAtom, postsAtom } from "../atoms";
 import Input from "./shared/Input";
 
 import usePostLogout from "../apis/postLogout";
@@ -17,6 +17,7 @@ function MainDos() {
   const totalPage = useAtomValue(totalPageAtom);
   const scrollRef = useAtomValue(scrollRefAtom);
   const videoRef = useAtomValue(videoRefAtom);
+  const posts = useAtomValue(postsAtom);
 
   const commandInputRef = useRef(null);
 
@@ -76,11 +77,15 @@ function MainDos() {
         return;
       }
 
-      navigate(`/boards/${boardName}/post/${number}`);
+      navigate(`/boards/${boardName}/post/${posts[number]}`);
     }
 
     if (command === "new" && ["humor", "greetings", "free"].includes(boardName)) {
       navigate(`/boards/${boardName}/post/new`);
+    }
+
+    if (command === "edit" && ["humor", "greetings", "free"].includes(path[2])) {
+      navigate(`/boards/${path[2]}/post/edit`);
     }
 
     if (command === "next") {

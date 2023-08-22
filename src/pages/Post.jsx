@@ -1,33 +1,23 @@
 import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useSetAtom } from "jotai";
 
-import useGetPosts from "../apis/getPosts";
+import useGetPost from "../apis/getPost";
 
-import { currentPageAtom, postsPerPageAtom, scrollRefAtom, videoRefAtom, postInfoAtom } from "../atoms";
+import { scrollRefAtom, videoRefAtom } from "../atoms";
 import { boardNames } from "../constants";
 
 import Video from "../components/shared/Video";
 
 function Post() {
-  const { boardName, postNumber } = useParams();
-  const currentPage = useAtomValue(currentPageAtom);
-  const postsPerPage = useAtomValue(postsPerPageAtom);
+  const { boardName, postId } = useParams();
   const setScrollRef = useSetAtom(scrollRefAtom);
   const setVideoRef = useSetAtom(videoRefAtom);
-  const setPostInfo = useSetAtom(postInfoAtom);
 
   const scrollRef = useRef(null);
   const videoRef = useRef(null);
 
-  const { posts } = useGetPosts(boardName, currentPage, postsPerPage);
-  const post = posts?.find((post) => post.index === Number(postNumber));
-
-  useEffect(() => {
-    if (post) {
-      setPostInfo(post);
-    }
-  }, [setPostInfo, post]);
+  const { post } = useGetPost(postId);
 
   useEffect(() => {
     if (videoRef) {

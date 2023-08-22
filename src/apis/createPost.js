@@ -4,13 +4,13 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, isNewPostAtom } from "../atoms";
+import { userAtom, isNewPostAtom, postInfoAtom } from "../atoms";
 
 function useCreatePost(postInfo) {
-  console.log(postInfo, "<<<<<");
   const navigate = useNavigate();
   const user = useAtomValue(userAtom);
   const setIsNewPost = useSetAtom(isNewPostAtom);
+  const setPostInfo = useSetAtom(postInfoAtom);
 
   async function handleFetchPost() {
     const formData = new FormData();
@@ -38,6 +38,12 @@ function useCreatePost(postInfo) {
   const { mutateAsync: fetchPost } = useMutation(handleFetchPost, {
     onSuccess: () => {
       setIsNewPost(false);
+      setPostInfo({
+        title: "",
+        category: "",
+        madeBy: "",
+        contents: [{ textContent: "" }],
+      });
       navigate(`/boards/${postInfo.category}`);
     },
     onError: (result) => {
