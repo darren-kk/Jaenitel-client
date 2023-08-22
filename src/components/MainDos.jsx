@@ -85,7 +85,7 @@ function MainDos() {
     }
 
     if (command === "edit" && ["humor", "greetings", "free"].includes(path[2])) {
-      navigate(`/boards/${path[2]}/post/edit`);
+      navigate(`/boards/${path[2]}/post/${boardName}/edit`);
     }
 
     if (command === "next") {

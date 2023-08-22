@@ -6,8 +6,10 @@ import Input from "./shared/Input";
 
 import { videoRefAtom, scrollRefAtom, titleRefAtom, postInfoAtom } from "../atoms";
 import useCreatePost from "../apis/createPost";
+import usePutPost from "../apis/putPost";
+import { useHandlePostCommand } from "../utils/utils";
 
-function PostDos({ handlePostCommand, handleAddContent, contentRefs }) {
+function PostDos({ handleAddContent, contentRefs }) {
   const [command, setCommand] = useState("");
   const commandInputRef = useRef(null);
 
@@ -17,6 +19,17 @@ function PostDos({ handlePostCommand, handleAddContent, contentRefs }) {
   const postInfo = useAtomValue(postInfoAtom);
 
   const createPost = useCreatePost(postInfo);
+  const editPost = usePutPost(postInfo);
+
+  const { executeCommand } = useHandlePostCommand(
+    setCommand,
+    handleAddContent,
+    titleRef,
+    videoRef,
+    contentRefs,
+    createPost,
+    editPost,
+  );
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -34,7 +47,7 @@ function PostDos({ handlePostCommand, handleAddContent, contentRefs }) {
 
   async function handleKeyDown(event) {
     if (event.key === "Enter") {
-      handlePostCommand(command, setCommand, handleAddContent, titleRef, videoRef, contentRefs, createPost);
+      executeCommand(command);
     }
 
     if (event.key === "ArrowDown") {
@@ -76,7 +89,6 @@ function PostDos({ handlePostCommand, handleAddContent, contentRefs }) {
 }
 
 PostDos.propTypes = {
-  handlePostCommand: PropTypes.func.isRequired,
   handleAddContent: PropTypes.func.isRequired,
   contentRefs: PropTypes.object.isRequired,
 };

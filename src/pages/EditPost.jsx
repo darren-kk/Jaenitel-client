@@ -1,25 +1,27 @@
 import { useRef, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
-import { useAtomValue, useSetAtom, useAtom } from "jotai";
+import { useSetAtom, useAtom } from "jotai";
 
 import Input from "../components/shared/Input";
 import Video from "../components/shared/Video";
 import PostDos from "../components/PostDos";
 
 import { boardNames } from "../constants";
-import { userAtom, videoRefAtom, scrollRefAtom, postInfoAtom, titleRefAtom } from "../atoms";
+import { videoRefAtom, scrollRefAtom, postInfoAtom, titleRefAtom } from "../atoms";
+import useGetPost from "../apis/getPost";
 
-function NewPost() {
-  const user = useAtomValue(userAtom);
+function EditPost() {
   const setVideoRef = useSetAtom(videoRefAtom);
   const setScrollRef = useSetAtom(scrollRefAtom);
   const setTitleRef = useSetAtom(titleRefAtom);
   const [postInfo, setPostInfo] = useAtom(postInfoAtom);
 
   const location = useLocation("");
-  const { boardName } = useParams();
+  const { boardName, postId } = useParams();
   const path = location.pathname.split("/");
   const boardState = path[path.length - 1];
+
+  const { post } = useGetPost(postId);
 
   const videoRef = useRef(null);
   const scrollRef = useRef(null);
@@ -27,15 +29,10 @@ function NewPost() {
   const contentRefs = useRef([]);
 
   useEffect(() => {
-    if (user && boardName) {
-      setPostInfo({
-        title: "",
-        madeBy: user._id,
-        category: boardName,
-        contents: [{ textContent: "" }],
-      });
+    if (post) {
+      setPostInfo(post);
     }
-  }, [user, boardName, setPostInfo, boardState]);
+  }, []);
 
   useEffect(() => {
     if (titleRef) {
@@ -87,6 +84,7 @@ function NewPost() {
   }
 
   function handleContentChange(event, index, contentType) {
+    console.log(event.files, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     const newContents = [...postInfo.contents];
 
     if (contentType === "imageContent" || contentType === "videoContent") {
@@ -104,6 +102,8 @@ function NewPost() {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   }
+
+  console.log(postInfo);
 
   return (
     <div className="flex-center pt-5">
@@ -161,7 +161,15 @@ function NewPost() {
                       onChange={(event) => handleContentChange(event, index, "imageContent")}
                     />
                     {content.imageContent && (
-                      <img className="max-h-40vh mb-8" src={URL.createObjectURL(content.imageContent)} alt="Preview" />
+                      <img
+                        className="max-h-40vh mb-8"
+                        src={
+                          typeof content.imageContent === "string"
+                            ? content.imageContent
+                            : URL.createObjectURL(content.imageContent)
+                        }
+                        alt="Preview"
+                      />
                     )}
                   </div>
                 );
@@ -175,7 +183,17 @@ function NewPost() {
                       ref={(el) => (contentRefs.current[index] = el)}
                       onChange={(event) => handleContentChange(event, index, "videoContent")}
                     />
-                    {content.videoContent && <Video ref={videoRef} src={URL.createObjectURL(content.videoContent)} />}
+                    {content.videoContent && (
+                      <Video
+                        key={content.videoContent}
+                        ref={videoRef}
+                        src={
+                          typeof content.videoContent === "string"
+                            ? content.videoContent
+                            : URL.createObjectURL(content.videoContent)
+                        }
+                      />
+                    )}
                   </div>
                 );
               default:
@@ -189,4 +207,4 @@ function NewPost() {
   );
 }
 
-export default NewPost;
+export default EditPost;

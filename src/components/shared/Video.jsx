@@ -9,6 +9,8 @@ function VideoRef({ className, src }, ref) {
     const videoRef = ref.current;
 
     if (videoRef) {
+      videoRef.load();
+
       const handlePlayPause = () => {
         setIsPlaying(!videoRef.paused);
       };
@@ -27,7 +29,7 @@ function VideoRef({ className, src }, ref) {
         videoRef.removeEventListener("timeupdate", handleTimeUpdate);
       };
     }
-  }, [ref]);
+  }, [ref, src]);
 
   return (
     <div className="flex-center w-96 h-fit bg-gray-bg border-2 mb-8 p-1">
