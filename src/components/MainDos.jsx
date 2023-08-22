@@ -3,14 +3,16 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAtomValue, useSetAtom } from "jotai";
 
 import { commandList, boardsNumberList } from "../constants";
-import { currentPageAtom, totalPageAtom, scrollRefAtom, videoRefAtom, postsAtom } from "../atoms";
+import { currentPageAtom, totalPageAtom, scrollRefAtom, videoRefAtom, postsAtom, userAtom } from "../atoms";
 import Input from "./shared/Input";
 
 import usePostLogout from "../apis/postLogout";
+import useDeletePost from "../apis/deletePost";
 
 function MainDos() {
   const [command, setCommand] = useState("");
   const [showCommandList, setShowCommandList] = useState(false);
+  const [labelMessage, setLabelMessage] = useState("");
 
   const setCurrentPage = useSetAtom(currentPageAtom);
 
@@ -18,19 +20,20 @@ function MainDos() {
   const scrollRef = useAtomValue(scrollRefAtom);
   const videoRef = useAtomValue(videoRefAtom);
   const posts = useAtomValue(postsAtom);
+  const user = useAtomValue(userAtom);
 
   const commandInputRef = useRef(null);
 
-  const fetchLogout = usePostLogout();
   const navigate = useNavigate();
-
   const location = useLocation("");
   const path = location.pathname.split("/");
-  const boardName = path[path.length - 1];
+
+  const fetchLogout = usePostLogout();
+  const fetchDeletePost = useDeletePost(path[2]);
 
   useEffect(() => {
     const handleKeyDown = (event) => {
-      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "l") {
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
         commandInputRef.current.focus();
       }
     };
@@ -46,7 +49,21 @@ function MainDos() {
     };
   }, []);
 
-  function handleCommand() {
+  async function handleCommand() {
+    let boardName;
+    let index;
+    let postId;
+
+    if (path.length >= 2) {
+      boardName = path[2];
+    }
+    if (path.length >= 4) {
+      index = path[4];
+    }
+    if (path.length >= 5) {
+      postId = path[5];
+    }
+
     if (command === "h") {
       setShowCommandList(true);
     }
@@ -67,25 +84,70 @@ function MainDos() {
       navigate("/boards");
     }
 
+    if (labelMessage) {
+      if (command === "y") {
+        if (labelMessage.endsWith("?")) {
+          console.log(postId);
+          await fetchDeletePost(postId);
+        }
+
+        setCommand("");
+        setLabelMessage("");
+
+        return;
+      }
+
+      if (command === "n") {
+        setCommand("");
+        setLabelMessage("");
+
+        return;
+      }
+    }
+
     if (command.endsWith(" go")) {
       const number = command.split(" ")[0];
 
-      if (boardName === "boards") {
+      if (path[path.length - 1] === "boards") {
         navigate(`${boardsNumberList[number]}`);
         setCommand("");
 
         return;
       }
 
-      navigate(`/boards/${boardName}/post/${posts[number]}`);
+      navigate(`/boards/${boardName}/post/${number}/${posts[number].postId}`);
+    }
+
+    if (command === "delete" && postId) {
+      if (path[path.legnth - 1] === "edit") {
+        setCommand("");
+
+        return;
+      }
+
+      if (user._id !== posts[index].madeBy) {
+        setLabelMessage("삭제 권한이 없습니다!");
+        setCommand("");
+
+        return;
+      }
+
+      setLabelMessage("해당 게시글을 삭제하시겠습니까?");
     }
 
     if (command === "new" && ["humor", "greetings", "free"].includes(boardName)) {
       navigate(`/boards/${boardName}/post/new`);
     }
 
-    if (command === "edit" && ["humor", "greetings", "free"].includes(path[2])) {
-      navigate(`/boards/${path[2]}/post/${boardName}/edit`);
+    if (command === "edit" && postId) {
+      if (user._id !== posts[index].madeBy) {
+        setLabelMessage("수정 권한이 없습니다!");
+        setCommand("");
+
+        return;
+      }
+
+      navigate(`/boards/${boardName}/post/${index}/${postId}/edit`);
     }
 
     if (command === "next") {
@@ -136,10 +198,10 @@ function MainDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>## 명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x) dos(컨트롤 + 쉬프트 + l(엘))</span>
+        <span>## 명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x) dos(컨트롤 + 쉬프트 + k(케이))</span>
         <div className="flex">
           <label>
-            선택 {">>"}
+            {labelMessage ? `${labelMessage} 확인(y) 취소(n)` : `선택 >>`}
             <Input
               ref={commandInputRef}
               className="ml-2 outline-none"

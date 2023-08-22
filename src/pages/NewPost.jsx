@@ -35,7 +35,7 @@ function NewPost() {
         contents: [{ textContent: "" }],
       });
     }
-  }, [user, boardName, setPostInfo, boardState]);
+  }, [user, boardName, setPostInfo]);
 
   useEffect(() => {
     if (titleRef) {

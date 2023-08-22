@@ -22,9 +22,9 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/boards" element={<Boards />} />
         <Route path="/boards/:boardName" element={<Board />} />
-        <Route path="/boards/:boardName/post/:postId" element={<Post />} />
+        <Route path="/boards/:boardName/post/:index/:postId" element={<Post />} />
         <Route path="/boards/:boardName/post/new" element={<NewPost />} />
-        <Route path="/boards/:boardName/post/:postId/edit" element={<EditPost />} />
+        <Route path="/boards/:boardName/post/:index/:postId/edit" element={<EditPost />} />
         <Route path="/" element={<Navigate replace to="/login" />} />
       </Routes>
     </div>
