@@ -87,7 +87,6 @@ function MainDos() {
     if (labelMessage) {
       if (command === "y") {
         if (labelMessage.endsWith("?")) {
-          console.log(postId);
           await fetchDeletePost(postId);
         }
 

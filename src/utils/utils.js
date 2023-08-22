@@ -71,7 +71,6 @@ export function useHandlePostCommand(setCommand, handleAddContent, titleRef, vid
         break;
 
       case "edit":
-        console.log("is editing");
         editPost();
         break;
 

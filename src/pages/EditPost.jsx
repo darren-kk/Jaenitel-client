@@ -93,7 +93,6 @@ function EditPost() {
   }
 
   function handleContentChange(event, index, contentType) {
-    console.log(event.files, "<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<");
     const newContents = [...postInfo.contents];
 
     if (contentType === "imageContent" || contentType === "videoContent") {
@@ -111,8 +110,6 @@ function EditPost() {
     textarea.style.height = "auto";
     textarea.style.height = textarea.scrollHeight + "px";
   }
-
-  console.log(postInfo);
 
   return (
     <div className="flex-center pt-5">
