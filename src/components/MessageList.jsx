@@ -28,9 +28,16 @@ function MessageList({ type }) {
         {messages &&
           (type === "received" ? messages.receivedMessages : messages.sendedMessages).map((message, index) => (
             <div key={message._id}>
-              <span className="text-lg mb-2 mr-4">{message.index}.</span>
+              <span className="text-xl mb-2 mr-4">{message.index}.</span>
               <span className="text-lg mb-2 mr-4">{getDisplayText(message)}</span>
               <span className="text-lg mb-2">##{message.nickname}</span>
+              {type === "received" && (
+                <img
+                  className="inline w-6 h-6 ml-2"
+                  src={`/assests/message_${message.read ? "open" : "closed"}.png`}
+                  alt="message image"
+                />
+              )}
             </div>
           ))}
       </div>
