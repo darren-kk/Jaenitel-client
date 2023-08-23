@@ -114,7 +114,7 @@ function NewPost() {
         </div>
       </header>
       <div className="bg-white w-full h-1 mb-2"></div>
-      <main ref={scrollRef} className="flex-start w-full h-60vh px-10 py-4 overflow-auto">
+      <main ref={scrollRef} className="w-full h-60vh px-10 py-4 overflow-auto">
         <div className="flex flex-col m-2">
           <label>
             글 제목:

@@ -44,7 +44,7 @@ function Post() {
         </div>
       </header>
       <div className="bg-white w-full h-1 mb-2"></div>
-      <main ref={scrollRef} className="flex-start w-full h-65vh px-4 py-4 overflow-auto">
+      <main ref={scrollRef} className="w-full h-65vh px-4 py-4 overflow-auto">
         {post?.contents.map((content, index) => {
           if (content.textContent) {
             return (

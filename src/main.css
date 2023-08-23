@@ -28,7 +28,7 @@ body {
   .flex-between {
     @apply flex flex-col justify-between items-center;
   }
-  .flext-start {
+  .flex-start {
     @apply flex flex-col justify-start items-center;
   }
   .flex-items-start {
