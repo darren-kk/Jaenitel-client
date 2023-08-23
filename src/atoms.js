@@ -23,3 +23,7 @@ export const postInfoAtom = atom({
 export const postsAtom = atom(null);
 
 export const messagesAtom = atom(null);
+export const modalStateAtom = atom({
+  isOpen: false,
+  messageId: null,
+});

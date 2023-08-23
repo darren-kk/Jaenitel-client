@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
 import { commandList, boardsNumberList } from "../constants";
 import {
@@ -11,6 +11,7 @@ import {
   postsAtom,
   userAtom,
   messagesAtom,
+  modalStateAtom,
 } from "../atoms";
 import Input from "./shared/Input";
 
@@ -30,6 +31,7 @@ function MainDos() {
   const posts = useAtomValue(postsAtom);
   const user = useAtomValue(userAtom);
   const messages = useAtomValue(messagesAtom);
+  const [modalState, setModalState] = useAtom(modalStateAtom);
 
   const commandInputRef = useRef(null);
 
@@ -131,7 +133,10 @@ function MainDos() {
       }
 
       if (path[2] === "messages") {
-        navigate(`/boards/messages/${number}/${messages[number].messageId}`);
+        setModalState((prevState) => ({
+          isOpen: true,
+          messageId: messages[number].messageId,
+        }));
       }
     }
 
@@ -192,6 +197,10 @@ function MainDos() {
   }
 
   function handleKeyDown(event) {
+    if (modalState.isOpen) {
+      event.preventDefault();
+    }
+
     if (event.key === "Enter") {
       handleCommand();
     }
