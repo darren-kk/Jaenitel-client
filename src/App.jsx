@@ -8,6 +8,7 @@ import Board from "./pages/Board";
 import Post from "./pages/Post";
 import NewPost from "./pages/NewPost";
 import EditPost from "./pages/EditPost";
+import Messages from "./pages/Messages";
 
 import { userAtom, isNewPostAtom } from "./atoms";
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/boards" element={<Boards />} />
+        <Route path="/boards/messages" element={<Messages />} />
         <Route path="/boards/:boardName" element={<Board />} />
         <Route path="/boards/:boardName/post/:index/:postId" element={<Post />} />
         <Route path="/boards/:boardName/post/new" element={<NewPost />} />
