@@ -32,7 +32,7 @@ function VideoRef({ className, src }, ref) {
   }, [ref, src]);
 
   return (
-    <div className="flex-center w-96 h-fit bg-gray-bg border-2 mb-8 p-1">
+    <div className="flex-center w-80 h-fit bg-gray-bg border-2 mb-8 p-1">
       <div className="flex justify-between items-center text-sm bg-gradient-to-r from-gradient-blue-start to-gradient-blue-end border-b-2 border-gray-bg border-0 w-full px-2">
         <div className="flex justify-start">
           <img className="w-5 h-5 mr-1" src="/assests/mediaPlayer.png" alt="media player" />
