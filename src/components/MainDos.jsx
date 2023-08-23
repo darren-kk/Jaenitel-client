@@ -3,7 +3,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAtomValue, useSetAtom } from "jotai";
 
 import { commandList, boardsNumberList } from "../constants";
-import { currentPageAtom, totalPageAtom, scrollRefAtom, videoRefAtom, postsAtom, userAtom } from "../atoms";
+import {
+  currentPageAtom,
+  totalPageAtom,
+  scrollRefAtom,
+  videoRefAtom,
+  postsAtom,
+  userAtom,
+  messagesAtom,
+} from "../atoms";
 import Input from "./shared/Input";
 
 import usePostLogout from "../apis/postLogout";
@@ -21,6 +29,7 @@ function MainDos() {
   const videoRef = useAtomValue(videoRefAtom);
   const posts = useAtomValue(postsAtom);
   const user = useAtomValue(userAtom);
+  const messages = useAtomValue(messagesAtom);
 
   const commandInputRef = useRef(null);
 
@@ -114,7 +123,16 @@ function MainDos() {
         return;
       }
 
-      navigate(`/boards/${boardName}/post/${number}/${posts[number].postId}`);
+      if (["greetings", "free", "humor"].includes(boardName)) {
+        navigate(`/boards/${boardName}/post/${number}/${posts[number].postId}`);
+        setCommand("");
+
+        return;
+      }
+
+      if (path[2] === "messages") {
+        navigate(`/boards/messages/${number}/${messages[number].messageId}`);
+      }
     }
 
     if (command === "delete" && postId) {

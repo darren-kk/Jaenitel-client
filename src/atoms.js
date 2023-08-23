@@ -20,4 +20,6 @@ export const postInfoAtom = atom({
   contents: [{ textContent: "" }],
 });
 
-export const postsAtom = atom([]);
+export const postsAtom = atom(null);
+
+export const messagesAtom = atom(null);
