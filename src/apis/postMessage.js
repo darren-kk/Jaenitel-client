@@ -39,7 +39,7 @@ function usePostMessage(messageInfo) {
       navigate(`/boards/messages`);
     },
     onError: (result) => {
-      const error = new Error(result.response.data.message);
+      const error = new Error(result.response.data.error);
       error.status = result.response.status;
 
       throw error;

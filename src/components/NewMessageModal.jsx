@@ -14,6 +14,7 @@ function NewMessageModal() {
     sendTo: "",
     contents: [{ textContent: "" }],
   });
+  const [errorMessage, setErrorMessage] = useState("");
   const postMessage = usePostMessage(messageInfo);
 
   const setModalState = useSetAtom(modalStateAtom);
@@ -49,7 +50,7 @@ function NewMessageModal() {
   }, [messageInfo?.contents?.length]);
 
   useEffect(() => {
-    const handleKeydown = (event) => {
+    async function handleKeydown(event) {
       if (event.key === "ArrowDown") {
         scrollRef.current.scrollTo({
           top: scrollRef.current.scrollTop + 30,
@@ -100,16 +101,22 @@ function NewMessageModal() {
       }
 
       if ((event.metaKey || event.ctrlKey) && event.key === "o") {
-        postMessage();
+        try {
+          await postMessage();
+        } catch (error) {
+          if (error.message.startsWith("Receiver")) {
+            setErrorMessage("닉네임이 일치하지 않습니다.");
+          }
+        }
       }
-    };
+    }
 
     window.addEventListener("keydown", handleKeydown);
 
     return () => {
       window.removeEventListener("keydown", handleKeydown);
     };
-  }, [setModalState]);
+  }, [postMessage, setModalState]);
 
   function handleAddContent(contentType) {
     setMessageInfo((prev) => ({
@@ -168,10 +175,9 @@ function NewMessageModal() {
                 switch (contentType) {
                   case "textContent":
                     return (
-                      <div className="flex w-full my-2">
+                      <div key={index} className="flex w-full my-2">
                         <span className="text-black mr-2">{index + 1}</span>
                         <textarea
-                          key={index}
                           className="w-full max-h-40vh text-black mb-8"
                           value={content.textContent}
                           ref={(el) => (contentRefs.current[index] = el)}
@@ -225,6 +231,7 @@ function NewMessageModal() {
             </div>
           </div>
           <div className="absolute flex bottom-0 right-0 text-black mb-3 mr-4">
+            <span className="text-red-600 mt-2 mr-4">{errorMessage}</span>
             <Button className={`border-button w-24 m-1`}>취소</Button>
             <Button className={`border-button w-24 m-1`}>전송</Button>
           </div>
