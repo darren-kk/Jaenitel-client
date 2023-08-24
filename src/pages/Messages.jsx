@@ -2,6 +2,7 @@ import { useAtomValue } from "jotai";
 
 import MessageList from "../components/MessageList";
 import MessageModal from "../components/MessageModl";
+import NewMessageModal from "../components/NewMessageModal";
 
 import { modalStateAtom } from "../atoms";
 
@@ -13,7 +14,7 @@ function Messages() {
       <main className="flex justify-between items-center w-4/5 p-10">
         <MessageList type="received" />
         <MessageList type="sended" />
-        {showMessageModal.isOpen && <MessageModal />}
+        {showMessageModal.isOpen && (showMessageModal.messageId === "new" ? <NewMessageModal /> : <MessageModal />)}
       </main>
     </div>
   );

@@ -69,7 +69,7 @@ function MessageModal() {
 
   return (
     <Modal title="쪽지">
-      <div className="w-96 h-75vh py-10 px-4">
+      <div className="w-96 h-80vh py-10 px-4">
         <div className="flex-items-start mt-2 mb-4">
           <span className="text-black mb-2">보낸 사람 :</span>
           <span className="flex-items-start bg-white text-black w-full h-6 pl-2 border-input">
@@ -104,12 +104,12 @@ function MessageModal() {
             })}
           </div>
         </div>
-        <div className="text-black mt-3">
+        <div className="text-black mt-2">
           <span className="mr-1">재생(p)</span>
           <span className="mr-1">일시정지(s)</span>
           <span>일시정지(q)</span>
         </div>
-        <div className="absolute flex bottom-0 right-0 text-black mb-3 mr-4">
+        <div className="absolute flex bottom-0 right-0 text-black mr-4">
           <Button className={`border-button w-24 m-1`}>확인(O)</Button>
         </div>
       </div>

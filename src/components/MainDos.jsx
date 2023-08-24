@@ -133,10 +133,10 @@ function MainDos() {
       }
 
       if (path[2] === "messages") {
-        setModalState((prevState) => ({
+        setModalState({
           isOpen: true,
           messageId: messages[number].messageId,
-        }));
+        });
       }
     }
 
@@ -157,8 +157,17 @@ function MainDos() {
       setLabelMessage("해당 게시글을 삭제하시겠습니까?");
     }
 
-    if (command === "new" && ["humor", "greetings", "free"].includes(boardName)) {
-      navigate(`/boards/${boardName}/post/new`);
+    if (command === "new") {
+      if (["humor", "greetings", "free"].includes(boardName)) {
+        navigate(`/boards/${boardName}/post/new`);
+      }
+
+      if (path[2] === "messages") {
+        setModalState({
+          isOpen: true,
+          messageId: "new",
+        });
+      }
     }
 
     if (command === "edit" && postId) {
