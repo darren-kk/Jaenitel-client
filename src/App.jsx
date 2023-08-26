@@ -9,6 +9,8 @@ import Post from "./pages/Post";
 import NewPost from "./pages/NewPost";
 import EditPost from "./pages/EditPost";
 import Messages from "./pages/Messages";
+import ChatRooms from "./pages/ChatRooms";
+import ChatRoom from "./pages/ChatRoom";
 
 import { userAtom, isNewPostAtom } from "./atoms";
 
@@ -23,6 +25,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/boards" element={<Boards />} />
         <Route path="/boards/messages" element={<Messages />} />
+        <Route path="/boards/chatRooms" element={<ChatRooms />} />
+        <Route path="/boards/chatRooms/:index/:roomId" element={<ChatRoom />} />
         <Route path="/boards/:boardName" element={<Board />} />
         <Route path="/boards/:boardName/post/:index/:postId" element={<Post />} />
         <Route path="/boards/:boardName/post/new" element={<NewPost />} />

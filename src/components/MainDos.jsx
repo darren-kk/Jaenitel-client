@@ -12,6 +12,7 @@ import {
   userAtom,
   messagesAtom,
   modalStateAtom,
+  chatRoomsAtom,
 } from "../atoms";
 import Input from "./shared/Input";
 
@@ -31,6 +32,7 @@ function MainDos() {
   const posts = useAtomValue(postsAtom);
   const user = useAtomValue(userAtom);
   const messages = useAtomValue(messagesAtom);
+  const chatRooms = useAtomValue(chatRoomsAtom);
   const [modalState, setModalState] = useAtom(modalStateAtom);
 
   const commandInputRef = useRef(null);
@@ -137,6 +139,13 @@ function MainDos() {
           isOpen: true,
           messageId: messages[number].messageId,
         });
+      }
+
+      if (path[2] === "chatrooms") {
+        navigate(`/boards/chatrooms/${number}/${chatRooms[number].roomId}`);
+        setCommand("");
+
+        return;
       }
     }
 
