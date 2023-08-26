@@ -5,7 +5,7 @@ export const isSignupAtom = atom(false);
 export const userAtom = atom(null);
 
 export const currentPageAtom = atom(1);
-export const totalPageAtom = atom(0);
+export const totalPageAtom = atom(1);
 export const postsPerPageAtom = atom(10);
 
 export const scrollRefAtom = atom(null);
@@ -27,3 +27,5 @@ export const modalStateAtom = atom({
   isOpen: false,
   messageId: null,
 });
+
+export const chatRoomsAtom = atom(null);
