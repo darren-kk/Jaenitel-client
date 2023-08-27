@@ -175,6 +175,7 @@ function MainDos() {
 
     if (command === "new") {
       if (["humor", "greetings", "free"].includes(boardName)) {
+        setShowMainDos(false);
         navigate(`/boards/${boardName}/post/new`);
       }
 
@@ -198,6 +199,7 @@ function MainDos() {
         return;
       }
 
+      setShowMainDos(false);
       navigate(`/boards/${boardName}/post/${index}/${postId}/edit`);
     }
 

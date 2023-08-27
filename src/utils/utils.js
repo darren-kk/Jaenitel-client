@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { useSetAtom } from "jotai";
+import { showMainDosAtom } from "../atoms";
 
 export function checkInputValidation(loginInfo) {
   const { email, password, reWrittenPassword, nickname } = loginInfo;
@@ -30,6 +32,7 @@ export function checkInputValidation(loginInfo) {
 
 export function useHandlePostCommand(setCommand, handleAddContent, titleRef, videoRef, refs, createPost, editPost) {
   const navigate = useNavigate();
+  const setShowMainDos = useSetAtom(showMainDosAtom);
 
   function executeCommand(command) {
     switch (command) {
@@ -50,6 +53,7 @@ export function useHandlePostCommand(setCommand, handleAddContent, titleRef, vid
         break;
 
       case "t":
+        setShowMainDos(true);
         navigate("/boards");
         break;
 
@@ -67,10 +71,12 @@ export function useHandlePostCommand(setCommand, handleAddContent, titleRef, vid
         break;
 
       case "submit":
+        setShowMainDos(true);
         createPost();
         break;
 
       case "edit":
+        setShowMainDos(true);
         editPost();
         break;
 
