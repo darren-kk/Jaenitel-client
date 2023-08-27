@@ -211,6 +211,10 @@ function MainDos() {
       setCurrentPage((old) => (old === 1 ? old : old - 1));
     }
 
+    if (command === "b") {
+      navigate(-1);
+    }
+
     if (command === "play") {
       videoRef.current.play();
     }

@@ -48,6 +48,12 @@ function ChatRoomDos() {
         return;
       }
 
+      if (chat === "$ back") {
+        navigate(-1);
+
+        return;
+      }
+
       if (chat === "$ delete") {
         await deleteChatRoom(roomId);
 

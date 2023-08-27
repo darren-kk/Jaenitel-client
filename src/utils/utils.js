@@ -57,6 +57,11 @@ export function useHandlePostCommand(setCommand, handleAddContent, titleRef, vid
         navigate("/boards");
         break;
 
+      case "b":
+        setShowMainDos(true);
+        navigate(-1);
+        break;
+
       case "play":
         videoRef.current.play();
         break;
