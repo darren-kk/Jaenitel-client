@@ -40,7 +40,7 @@ function ChatRooms() {
   }
 
   return (
-    <div className="flex-center pt-5">
+    <div className="flex-center pt-5 slide-fade-in">
       <header className="flex-center w-full h-20vh pt-5">
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-12">실시간 대화방</div>
         <div className="flex justify-start w-full pl-8 pb-2">

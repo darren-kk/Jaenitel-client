@@ -43,7 +43,7 @@ function VideoRef({ className, src }, ref) {
         </div>
       </div>
 
-      <div className="flex justify-center bg-black w-full">
+      <div className="flex justify-center bg-black w-full slide-fade-in-video">
         <video ref={ref} className={`w-fit max-h-40vh ${className}`}>
           <source src={src} type="video/mp4" />
         </video>
@@ -75,7 +75,7 @@ function VideoRef({ className, src }, ref) {
         </div>
 
         <div className="flex items-center">
-          <span>Volume:</span>
+          <span className="text-black">Volume:</span>
           <input type="range" min="0" max="1" step="0.1" className="ml-2" disabled />
         </div>
       </div>

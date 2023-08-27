@@ -8,6 +8,7 @@ import { scrollRefAtom, videoRefAtom } from "../atoms";
 import { boardNames } from "../constants";
 
 import Video from "../components/shared/Video";
+import Image from "../components/shared/Image";
 
 function Post() {
   const { boardName, postId } = useParams();
@@ -17,7 +18,7 @@ function Post() {
   const scrollRef = useRef(null);
   const videoRef = useRef(null);
 
-  const { post } = useGetPost(postId);
+  const { post, isLoading } = useGetPost(postId);
 
   useEffect(() => {
     if (videoRef) {
@@ -30,7 +31,7 @@ function Post() {
   }, [setScrollRef, setVideoRef]);
 
   return (
-    <div className="flex-center pt-5">
+    <div className={`flex-center pt-5 ${isLoading ? "" : "slide-fade-in"}`}>
       <header className="flex-center w-full h-20vh pt-5 mb-4">
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">{boardNames[boardName]}</div>
         <div className="w-full pl-4">
@@ -44,7 +45,7 @@ function Post() {
         </div>
       </header>
       <div className="bg-white w-full h-1 mb-2"></div>
-      <main ref={scrollRef} className="w-full h-65vh px-4 py-4 overflow-auto">
+      <main ref={scrollRef} className="w-full h-60vh px-4 py-4 overflow-auto">
         {post?.contents.map((content, index) => {
           if (content.textContent) {
             return (
@@ -55,7 +56,12 @@ function Post() {
           }
           if (content.imageContent) {
             return (
-              <img className="max-h-40vh mb-8" key={content._id} src={content.imageContent} alt={`Content ${index}`} />
+              <Image
+                className="max-h-40vh mb-8"
+                key={content._id}
+                src={content.imageContent}
+                alt={`Content ${index}`}
+              />
             );
           }
           if (content.videoContent) {

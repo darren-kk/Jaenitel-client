@@ -5,6 +5,7 @@ import Modal from "./shared/Modal";
 import Button from "./shared/Button";
 import Video from "./shared/Video";
 import Input from "./shared/Input";
+import Image from "./shared/Image";
 
 import { modalStateAtom, videoRefAtom, scrollRefAtom, titleRefAtom } from "../atoms";
 import usePostMessage from "../apis/postMessage";
@@ -200,11 +201,7 @@ function NewMessageModal() {
                           onChange={(event) => handleContentChange(event, index, "imageContent")}
                         />
                         {content.imageContent && (
-                          <img
-                            className="max-h-30vh mb-8"
-                            src={URL.createObjectURL(content.imageContent)}
-                            alt="Preview"
-                          />
+                          <Image className="max-h-30vh" src={URL.createObjectURL(content.imageContent)} alt="Preview" />
                         )}
                       </div>
                     );

@@ -4,6 +4,7 @@ import { useAtom, useSetAtom } from "jotai";
 import Modal from "./shared/Modal";
 import Button from "./shared/Button";
 import Video from "./shared/Video";
+import Image from "./shared/Image";
 
 import { modalStateAtom, videoRefAtom, scrollRefAtom } from "../atoms";
 import useGetMessage from "../apis/getMessage";
@@ -77,7 +78,7 @@ function MessageModal() {
           </span>
         </div>
 
-        <div className="flex-items-start h-5/6">
+        <div className="flex-items-start h-5/6 slide-fade-in">
           <span className="text-black mb-2">메시지 내용:</span>
           <div ref={scrollRef} className="bg-white w-full h-full p-2 border-input overflow-auto">
             {message?.contents.map((content, index) => {
@@ -90,8 +91,8 @@ function MessageModal() {
               }
               if (content.imageContent) {
                 return (
-                  <img
-                    className="max-h-30vh mb-8"
+                  <Image
+                    className="max-h-30vh"
                     key={content._id + index}
                     src={content.imageContent}
                     alt={`Content ${index}`}
@@ -107,7 +108,7 @@ function MessageModal() {
         <div className="text-black mt-2">
           <span className="mr-1">재생(p)</span>
           <span className="mr-1">일시정지(s)</span>
-          <span>일시정지(q)</span>
+          <span>정지(q)</span>
         </div>
         <div className="absolute flex bottom-0 right-0 text-black mr-4">
           <Button className={`border-button w-24 m-1`}>확인(O)</Button>

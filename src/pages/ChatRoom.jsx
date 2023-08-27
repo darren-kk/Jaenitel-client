@@ -24,6 +24,12 @@ function ChatRoom() {
     return data.data.chatRoom;
   }
 
+  const scrollToBottom = () => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  };
+
   const { data: chatRoom } = useQuery(["chatRoom", roomId], fetchGetChatRoom, {
     keepPreviousData: true,
     onError: (result) => {
@@ -37,8 +43,10 @@ function ChatRoom() {
   useEffect(() => {
     if (scrollRef) {
       setScrollRef(scrollRef);
+
+      scrollToBottom();
     }
-  }, [setScrollRef]);
+  }, [setScrollRef, chatRoom?.chats]);
 
   useEffect(() => {
     const socket = io("http://localhost:3000");
@@ -81,6 +89,8 @@ function ChatRoom() {
           chats: [...oldData.chats, newChat],
         };
       });
+
+      scrollToBottom();
     });
 
     return () => {
@@ -96,34 +106,38 @@ function ChatRoom() {
   }, [roomId, queryClient, user._id, user.nickname, user]);
 
   return (
-    <div className="flex-center pt-5">
-      <header className="flex-center w-full h-20vh pt-5">
-        <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">실시간 대화방</div>
-        <div className="flex w-full pl-4">
-          <span className="text-lg w-3/12">방 이름: {chatRoom?.title}</span>
-          <span className="text-lg w-2/12">참여인원: {chatRoom?.users.length}</span>
-          <div className="text-lg">
-            참여유저:
-            {chatRoom?.users.map((user) => (
-              <span key={user._id} className="text-lg w-2/12 mx-2">
-                {user.nickname}
-              </span>
-            ))}
+    <>
+      <div className="flex-center pt-5 slide-fade-in">
+        <header className="flex-center w-full h-20vh pt-5">
+          <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">실시간 대화방</div>
+          <div className="flex w-full pl-4">
+            <span className="text-lg w-3/12">방 이름: {chatRoom?.title}</span>
+            <span className="text-lg w-2/12">참여인원: {chatRoom?.users.length}</span>
+            <div className="text-lg">
+              참여유저:
+              {chatRoom?.users.map((user) => (
+                <span key={user._id} className="text-lg w-2/12 mx-2">
+                  {user.nickname}
+                </span>
+              ))}
+            </div>
           </div>
-        </div>
-      </header>
-      <div className="bg-white w-full h-1 mb-2"></div>
-      <main ref={scrollRef} className="flex flex-col justify-end items-start w-full h-65vh px-4 py-4 overflow-auto">
-        {chatRoom?.chats?.map((chat) => {
-          return (
-            <pre className="font-dung-guen-mo max-h-40vh mb-2" key={chat._id}>
-              {">>"} {chat.isSystem ? "SYSTEM" : chat.writer?.nickname}: {chat.content}
-            </pre>
-          );
-        })}
-      </main>
+        </header>
+        <div className="bg-white w-full h-1 mb-2"></div>
+        <main ref={scrollRef} className="w-full h-65vh px-4 py-4 overflow-auto">
+          <div className="flex flex-col justify-end items-start w-full">
+            {chatRoom?.chats?.map((chat) => {
+              return (
+                <pre className="font-dung-guen-mo max-h-40vh mb-2" key={chat._id}>
+                  {">>"} {chat.isSystem ? "SYSTEM" : chat.writer?.nickname}: {chat.content}
+                </pre>
+              );
+            })}
+          </div>
+        </main>
+      </div>
       <ChatRoomDos />
-    </div>
+    </>
   );
 }
 
