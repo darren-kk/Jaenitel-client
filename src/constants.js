@@ -2,10 +2,16 @@ export const commandList = [
   { commandName: "h", commandValue: "명령어 모음" },
   { commandName: "[번호] go", commandValue: "[번호] 페이지 이동" },
   { commandName: "t", commandValue: "초기 화면" },
+  { commandName: "b", commandValue: "뒤로 가기" },
   { commandName: "x", commandValue: "로그아웃 / 종료" },
-  { commandName: "next", commandValue: "다음 페이지" },
-  { commandName: "prev", commandValue: "이전 페이지" },
-  { commandName: "new", commandValue: "글쓰기" },
+  { commandName: "n", commandValue: "다음 페이지" },
+  { commandName: "p", commandValue: "이전 페이지" },
+  { commandName: "new", commandValue: "글 쓰기" },
+  { commandName: "edit", commandValue: "글 수정" },
+  { commandName: "delete", commandValue: "글 삭제" },
+  { commandName: "play", commandValue: "동영상 재생" },
+  { commandName: "pause", commandValue: "동영상 일시정지" },
+  { commandName: "stop", commandValue: "동영상 중지" },
 ];
 
 export const boardsNumberList = {

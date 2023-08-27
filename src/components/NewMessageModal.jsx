@@ -64,7 +64,7 @@ function NewMessageModal() {
         });
       }
 
-      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "0") {
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "'") {
         handleAddContent("textContent");
       }
 
@@ -234,18 +234,21 @@ function NewMessageModal() {
           </div>
         </div>
       </Modal>
-      <div className="absolute left-[66%] top-28 flex flex-col bg-gray-bg w-55vh text-black p-4">
-        <h1 className="text-xl mb-4">명령어 모음</h1>
-        <span>글 첨부(컨트롤 + 쉬프트 + 숫자 0)</span>
-        <span>사진 첨부(컨트롤 + 쉬프트 + {">"})</span>
-        <span>동영상 첨부(컨트롤 + 쉬프트 + {"<"})</span>
-        <span className="mb-4">수정 (컨트롤 + 쉬프트 + 번호)</span>
-        <span>재생(컨트롤 + 쉬프트 + p)</span>
-        <span>일시정지(컨트롤 + 쉬프트 + s)</span>
-        <span className="mb-4">정지(컨트롤 + 쉬프트 + x)</span>
-        <span>취소(컨트롤 + 쉬프트 + u)</span>
-        <span>전송(컨트롤 + 쉬프트 + o)</span>
-      </div>
+      <Modal>
+        <div className="fixed left-[66%] top-[12%] flex flex-col bg-gray-bg w-55vh text-black p-4">
+          <h1 className="text-xl mb-4">명령어 모음</h1>
+          <span>글 첨부(컨트롤 + 쉬프트 + 따옴표)</span>
+          <span>사진 첨부(컨트롤 + 쉬프트 + {">"})</span>
+          <span className="mb-4">동영상 첨부(컨트롤 + 쉬프트 + {"<"})</span>
+          <span>보낼 사람 수정(컨트롤 + 쉬프트 + 숫자(0))</span>
+          <span className="mb-4">수정 (컨트롤 + 쉬프트 + 번호)</span>
+          <span>재생(컨트롤 + 쉬프트 + p)</span>
+          <span>일시정지(컨트롤 + 쉬프트 + s)</span>
+          <span className="mb-4">정지(컨트롤 + 쉬프트 + x)</span>
+          <span>취소(컨트롤 + 쉬프트 + u)</span>
+          <span>전송(컨트롤 + 쉬프트 + o)</span>
+        </div>
+      </Modal>
     </div>
   );
 }

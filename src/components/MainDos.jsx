@@ -203,11 +203,11 @@ function MainDos() {
       navigate(`/boards/${boardName}/post/${index}/${postId}/edit`);
     }
 
-    if (command === "next") {
+    if (command === "n") {
       setCurrentPage((old) => (old === totalPage ? old : old + 1));
     }
 
-    if (command === "prev") {
+    if (command === "p") {
       setCurrentPage((old) => (old === 1 ? old : old - 1));
     }
 
@@ -258,7 +258,7 @@ function MainDos() {
   return showCreateChatRoomDos ? (
     <CreateChatRoomDos />
   ) : (
-    <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
+    <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh z-10">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
         <span>## 명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x) dos(컨트롤 + 쉬프트 + k(케이))</span>
@@ -277,9 +277,9 @@ function MainDos() {
         </div>
         {showCommandList
           ? commandList.map((item) => (
-              <pre key={item.commandName}>
+              <span key={item.commandName}>
                 {item.commandName}: {item.commandValue}
-              </pre>
+              </span>
             ))
           : ""}
       </div>
