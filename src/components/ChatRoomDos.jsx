@@ -7,14 +7,19 @@ import io from "socket.io-client";
 import Input from "./shared/Input";
 import { userAtom, showMainDosAtom, showCreateChatRoomAtom } from "../atoms";
 
+import useDeleteChatRoom from "../apis/deleteChatRoom";
+
 function ChatRoomDos() {
   const [chat, setChat] = useState("");
-  const queryClient = useQueryClient();
   const chatInputRef = useRef(null);
   const socketRef = useRef();
 
+  const queryClient = useQueryClient();
+
   const { roomId } = useParams();
   const navigate = useNavigate();
+
+  const deleteChatRoom = useDeleteChatRoom();
 
   const user = useAtomValue(userAtom);
   const setShowMainDos = useSetAtom(showMainDosAtom);
@@ -28,7 +33,7 @@ function ChatRoomDos() {
     };
   }, [roomId, user._id, user.nickname]);
 
-  function handleSendChat(event) {
+  async function handleSendChat(event) {
     if (event.nativeEvent.isComposing) {
       return;
     }
@@ -43,9 +48,7 @@ function ChatRoomDos() {
       }
 
       if (chat === "$ delete") {
-        setShowMainDos(true);
-        setShowCreateChatRoomDos(false);
-        navigate("/boards/chatrooms");
+        await deleteChatRoom(roomId);
 
         return;
       }
