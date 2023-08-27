@@ -64,6 +64,7 @@ function ChatRoom() {
       queryClient.setQueryData(["chatRoom", roomId], (oldData) => {
         return {
           ...oldData,
+          users: oldData.users.filter((user) => user._id !== message.writer._id),
           chats: [...oldData.chats, message],
         };
       });
@@ -98,18 +99,16 @@ function ChatRoom() {
     <div className="flex-center pt-5">
       <header className="flex-center w-full h-20vh pt-5">
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">실시간 대화방</div>
-        <div className="flex-items-start w-full pl-4">
-          <span className="text-lg w-5/12">방 이름: {chatRoom?.title}</span>
-          <div className="flex w-full justify-start">
-            <span className="text-lg w-1/12 mr-8">참여인원: {chatRoom?.users.length}</span>
-            <div className="text-lg">
-              참여:
-              {chatRoom?.users.map((user) => (
-                <span key={user._id} className="text-lg w-5/12 mx-2">
-                  {user.nickname}
-                </span>
-              ))}
-            </div>
+        <div className="flex w-full pl-4">
+          <span className="text-lg w-3/12">방 이름: {chatRoom?.title}</span>
+          <span className="text-lg w-2/12">참여인원: {chatRoom?.users.length}</span>
+          <div className="text-lg">
+            참여유저:
+            {chatRoom?.users.map((user) => (
+              <span key={user._id} className="text-lg w-2/12 mx-2">
+                {user.nickname}
+              </span>
+            ))}
           </div>
         </div>
       </header>
