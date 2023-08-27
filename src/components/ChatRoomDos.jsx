@@ -5,7 +5,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import io from "socket.io-client";
 
 import Input from "./shared/Input";
-import { userAtom, showMainDosAtom, showCreateChatRoomAtom } from "../atoms";
+import { userAtom, showMainDosAtom, showCreateChatRoomAtom, scrollRefAtom } from "../atoms";
 
 import useDeleteChatRoom from "../apis/deleteChatRoom";
 
@@ -22,6 +22,7 @@ function ChatRoomDos() {
   const deleteChatRoom = useDeleteChatRoom();
 
   const user = useAtomValue(userAtom);
+  const scrollRef = useAtomValue(scrollRefAtom);
   const setShowMainDos = useSetAtom(showMainDosAtom);
   const setShowCreateChatRoomDos = useSetAtom(showCreateChatRoomAtom);
 
@@ -70,6 +71,20 @@ function ChatRoomDos() {
       socketRef.current.emit("send-chat", newChat);
       setChat("");
     }
+
+    if (event.key === "ArrowDown") {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollTop + 30,
+        behavior: "smooth",
+      });
+    }
+
+    if (event.key === "ArrowUp") {
+      scrollRef.current.scrollTo({
+        top: scrollRef.current.scrollTop - 30,
+        behavior: "smooth",
+      });
+    }
   }
 
   useEffect(() => {
@@ -91,7 +106,7 @@ function ChatRoomDos() {
   }, []);
 
   return (
-    <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
+    <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh z-10">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-4 py-3">
         <span>## 채팅(Enter) 채팅창(컨트롤 + 쉬프트 + k(케이)) 나가기($ home)</span>
