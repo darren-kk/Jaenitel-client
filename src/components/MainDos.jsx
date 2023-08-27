@@ -14,6 +14,7 @@ import {
   modalStateAtom,
   chatRoomsAtom,
   showMainDosAtom,
+  showCreateChatRoomAtom,
 } from "../atoms";
 import Input from "./shared/Input";
 import CreateChatRoomDos from "./createChatRoomDos";
@@ -25,7 +26,6 @@ function MainDos() {
   const [command, setCommand] = useState("");
   const [showCommandList, setShowCommandList] = useState(false);
   const [labelMessage, setLabelMessage] = useState("");
-  const [showCreateChatRoomDos, setShowCreateChatRoomDos] = useState(false);
 
   const setCurrentPage = useSetAtom(currentPageAtom);
   const setShowMainDos = useSetAtom(showMainDosAtom);
@@ -37,7 +37,9 @@ function MainDos() {
   const user = useAtomValue(userAtom);
   const messages = useAtomValue(messagesAtom);
   const chatRooms = useAtomValue(chatRoomsAtom);
+
   const [modalState, setModalState] = useAtom(modalStateAtom);
+  const [showCreateChatRoomDos, setShowCreateChatRoomDos] = useAtom(showCreateChatRoomAtom);
 
   const commandInputRef = useRef(null);
 
@@ -247,7 +249,9 @@ function MainDos() {
     }
   }
 
-  return (
+  return showCreateChatRoomDos ? (
+    <CreateChatRoomDos />
+  ) : (
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
@@ -265,7 +269,6 @@ function MainDos() {
             />
           </label>
         </div>
-        {showCreateChatRoomDos && <CreateChatRoomDos />}
         {showCommandList
           ? commandList.map((item) => (
               <pre key={item.commandName}>

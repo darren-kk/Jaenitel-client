@@ -29,3 +29,4 @@ export const modalStateAtom = atom({
 });
 
 export const chatRoomsAtom = atom(null);
+export const showCreateChatRoomAtom = atom(false);

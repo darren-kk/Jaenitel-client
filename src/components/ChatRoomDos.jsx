@@ -5,7 +5,7 @@ import { useAtomValue, useSetAtom } from "jotai";
 import io from "socket.io-client";
 
 import Input from "./shared/Input";
-import { userAtom, showMainDosAtom } from "../atoms";
+import { userAtom, showMainDosAtom, showCreateChatRoomAtom } from "../atoms";
 
 function ChatRoomDos() {
   const [chat, setChat] = useState("");
@@ -18,6 +18,7 @@ function ChatRoomDos() {
 
   const user = useAtomValue(userAtom);
   const setShowMainDos = useSetAtom(showMainDosAtom);
+  const setShowCreateChatRoomDos = useSetAtom(showCreateChatRoomAtom);
 
   useEffect(() => {
     socketRef.current = io("http://localhost:3000");
@@ -35,14 +36,16 @@ function ChatRoomDos() {
     if (event.key === "Enter" && chat.trim()) {
       if (chat === "$ home") {
         setShowMainDos(true);
+        setShowCreateChatRoomDos(false);
         navigate("/boards");
 
-        socketRef.current.emit("leave-room", {
-          roomId: roomId,
-          writer: { _id: user._id, nickname: user.nickname },
-          content: `${user.nickname}님이 퇴장하셨습니다.`,
-          isSystem: true,
-        });
+        return;
+      }
+
+      if (chat === "$ delete") {
+        setShowMainDos(true);
+        setShowCreateChatRoomDos(false);
+        navigate("/boards/chatrooms");
 
         return;
       }
