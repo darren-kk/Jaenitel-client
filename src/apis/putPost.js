@@ -4,12 +4,12 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, isNewPostAtom, postInfoAtom } from "../atoms";
+import { userAtom, showMainDosAtom, postInfoAtom } from "../atoms";
 
 function usePutPost(postInfo) {
   const navigate = useNavigate();
   const user = useAtomValue(userAtom);
-  const setIsNewPost = useSetAtom(isNewPostAtom);
+  const setShowMainDos = useSetAtom(showMainDosAtom);
   const setPostInfo = useSetAtom(postInfoAtom);
 
   async function handleFetchPost() {
@@ -37,7 +37,7 @@ function usePutPost(postInfo) {
 
   const { mutateAsync: fetchPutPost } = useMutation(handleFetchPost, {
     onSuccess: () => {
-      setIsNewPost(false);
+      setShowMainDos(true);
       setPostInfo({
         title: "",
         category: "",

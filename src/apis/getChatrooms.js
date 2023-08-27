@@ -20,7 +20,7 @@ function useGetChatRooms(page, limit) {
       const chatRoomsWithIndex = {};
 
       result.data.chatRooms.forEach((chatRoom) => {
-        chatRoomsWithIndex[chatRoom.index] = { roomId: chatRoom._id, madeBy: chatRoom.madeBy._id };
+        chatRoomsWithIndex[chatRoom.index] = { roomId: chatRoom._id, madeBy: chatRoom.madeBy };
       });
 
       setChatRooms(chatRoomsWithIndex);

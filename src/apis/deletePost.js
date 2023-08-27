@@ -1,14 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import { useMutation } from "@tanstack/react-query";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom } from "../atoms";
+import { userAtom, showMainDosAtom } from "../atoms";
 
 function useDeletePost(category) {
-  const user = useAtomValue(userAtom);
   const navigate = useNavigate();
+
+  const user = useAtomValue(userAtom);
+  const setShowMainDos = useSetAtom(showMainDosAtom);
 
   async function handleDeletePost(postId) {
     return await fetchData("DELETE", `/users/${user._id}/posts/${postId}`);
@@ -17,6 +19,7 @@ function useDeletePost(category) {
   const { mutateAsync: fetchDelete } = useMutation(handleDeletePost, {
     keepPreviousData: true,
     onSuccess: () => {
+      setShowMainDos(true);
       navigate(`/boards/${category}`);
     },
     onError: (result) => {

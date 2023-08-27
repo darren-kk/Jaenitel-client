@@ -12,15 +12,15 @@ import Messages from "./pages/Messages";
 import ChatRooms from "./pages/ChatRooms";
 import ChatRoom from "./pages/ChatRoom";
 
-import { userAtom, isNewPostAtom } from "./atoms";
+import { userAtom, showMainDosAtom } from "./atoms";
 
 function App() {
   const user = useAtomValue(userAtom);
-  const isNewPost = useAtomValue(isNewPostAtom);
+  const showMainDos = useAtomValue(showMainDosAtom);
 
   return (
     <div className="bg-blue-bg w-screen h-screen">
-      {user && !isNewPost && <MainDos />}
+      {user && showMainDos && <MainDos />}
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/boards" element={<Boards />} />

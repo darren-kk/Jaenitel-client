@@ -13,8 +13,10 @@ import {
   messagesAtom,
   modalStateAtom,
   chatRoomsAtom,
+  showMainDosAtom,
 } from "../atoms";
 import Input from "./shared/Input";
+import CreateChatRoomDos from "./createChatRoomDos";
 
 import usePostLogout from "../apis/postLogout";
 import useDeletePost from "../apis/deletePost";
@@ -23,8 +25,10 @@ function MainDos() {
   const [command, setCommand] = useState("");
   const [showCommandList, setShowCommandList] = useState(false);
   const [labelMessage, setLabelMessage] = useState("");
+  const [showCreateChatRoomDos, setShowCreateChatRoomDos] = useState(false);
 
   const setCurrentPage = useSetAtom(currentPageAtom);
+  const setShowMainDos = useSetAtom(showMainDosAtom);
 
   const totalPage = useAtomValue(totalPageAtom);
   const scrollRef = useAtomValue(scrollRefAtom);
@@ -94,6 +98,7 @@ function MainDos() {
     }
 
     if (command === "t") {
+      setShowMainDos(true);
       navigate("/boards");
     }
 
@@ -177,6 +182,10 @@ function MainDos() {
           messageId: "new",
         });
       }
+
+      if (path[2] === "chatrooms") {
+        setShowCreateChatRoomDos(true);
+      }
     }
 
     if (command === "edit" && postId) {
@@ -256,6 +265,7 @@ function MainDos() {
             />
           </label>
         </div>
+        {showCreateChatRoomDos && <CreateChatRoomDos />}
         {showCommandList
           ? commandList.map((item) => (
               <pre key={item.commandName}>
