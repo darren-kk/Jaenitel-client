@@ -31,3 +31,55 @@ export const boardNames = {
   greetings: "가입 인사",
   special: "special",
 };
+
+export const asciiArts = {
+  githubClient: `
+   _____  _____  _____  _   _  _   _ ______        _____  _      _____  _____  _   _  _____
+  |  __ \\|_   _||_   _|| | | || | | || ___ \\      /  __ \\| |    |_   _||  ___|| \\ | ||_   _|
+  | |  \\/  | |    | |  | |_| || | | || |_/ /      | /  \\/| |      | |  | |__  |  \\| |  | |
+  | | __   | |    | |  |  _  || | | || ___ \\      | |    | |      | |  |  __| |     |  | |
+  | |_\\ \\ _| |_   | |  | | | || |_| || |_/ /      | \\__/\\| |____ _| |_ | |___ |  |\\ |  | |
+   \\____/ \\___/   \\_/  \\_| |_/ \\___/ \\____/        \\____/\\_____/ \\___/ \\____/ \\_| \\_/  \\_/
+  `,
+  githubServer: `
+   _____  _____  _____  _   _  _   _ ______      _____  _____ ______  _   _  _____ ______
+  |  __ \\|_   _||_   _|| | | || | | || ___ \\    /  ___||  ___|| ___ \\| | | ||  ___|| ___ \\
+  | |  \\/  | |    | |  | |_| || | | || |_/ /     \\ --. | |__  | |_/ /| | | || |__  | |_/ /
+  | | __   | |    | |  |  _  || | | || ___ \\      --. \\|  __| |    / | | | ||  __| |    /
+  | |_\\ \\ _| |_   | |  | | | || |_| || |_/ /    /\\__/ /| |___ | |\\ \\ \\ \\_/ /| |___ | |\\ \\
+   \\____/ \\___/   \\_/  \\_| |_/ \\___/ \\____/     \\____/ \\____/ \\_| \\_| \\___/ \\____/ \\_| \\_|
+  `,
+  errorOccured: `
+   _____ ______ ______  _____ ______    _____  _____  _____  _   _ ______  _____ ______
+  |  ___|| ___ \\| ___ \\|  _  || ___\\   |  _  |/  __ \\/  __ \\| | | || ___ \\|  ___||  _  \\
+  | |__  | |_/ /| |_/ /| | | || |_/ /  | | | || /  \\/| /  \\/| | | || |_/ /| |__  | | | |
+  |  __| |    / |    / | | | ||    /   | | | || |    | |    | | | ||    / |  __| | | | |
+  | |___ | |\\ \\ | |\\ \\ \\ \\_/ /|  |\\ \\  \\ \\_/ /| \\__/\\| \\__/\\| |_| || |\\ \\ | |___ | |/  /
+  \\____/ \\_| \\_|\\_| \\_| \\___/ \\ _| \\_|  \\___/  \\____/ \\____/ \\___/ \\_| \\_|\\____/ |____/
+  `,
+  selfie: `
+  XXXXXXXXXXXXXXXXXXXKK0000KXXXXXXXXXXXXXX
+  XXXXXXXXXXXXXXKKKKKOxxddddkKXNXXXXXXXXXX
+  XXXXXXXXXXK0xol::cc:;,''''',cxKNXXXXXXXX
+  XXXXXXXX0xc'.    ..',,'....  .,o0XXXXXXX
+  XXXXXXKd:'.    .',.........    .,xXNXXXX
+  XXXXXXx,..   .;oxl'.....        .'xXNXXX
+  KXXXXKo..   .cdOOd,..            .,ONNXX
+  KXXXXXo.   .:xO00Ol.              .xNNNX
+  KKXXXXx.   ,oxkkkxl.              .kNNNX
+  KKKKXXKc  .,;:clcc;'....   .......lXNNNX
+  KKKKXXO:.,;:,'',;'';;;'..'..;coo;:0NNNNN
+  KKKKXXXxloc,,;,;d:':lc:;::;cdxxxldKNNNNN
+  KKKKXXXKkdxdoccxOd::cloolcoxxxxxx0NNNNNN
+  KKKKXXXX0xolcclolc:;,;:clooddddxOXNNXXXX
+  KKKKKXXXOolc:lc:::::::c::cccllox0XNXXXXX
+  KKKKKKXXOo::::lllc::::;:cccclldOXNXXXXXX
+  KKKKKKKXXkolclollccccllllllllod0XXXXXXXX
+  KKKKKKKXXXOoloddollooodolccclloloOXXXXXX
+  KKKKKKKKXXX0xdxdddoooooolccccloo:lxOKXXX
+  KKKKKKKKKKXX0xolcccccccc::::loddllodO00K
+  KKKKKKKKKKK0Okxxlc::::;;;::loxxooodxkxkx
+  OKKXXKKK000OkxOOxolccc:ccldkOxooddxOkodo
+  OXK00Oo:ck0OOKNXKOkkkxxkk0K0kddddc;lollo
+  KX0OK0l;lOOO0XWWNXXXXXKKKXXOdddxx,.;c:co`,
+};

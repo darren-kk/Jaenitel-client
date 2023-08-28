@@ -2,15 +2,10 @@ import { useEffect } from "react";
 
 import PropTypes from "prop-types";
 
+import { asciiArts } from "../constants";
+
 function ErrorPage({ error, resetErrorBoundary }) {
-  const asciiArt = `
-   _____ ______ ______  _____ ______    _____  _____  _____  _   _ ______  _____ ______
-  |  ___|| ___ \\| ___ \\|  _  || ___\\   |  _  |/  __ \\/  __ \\| | | || ___ \\|  ___||  _  \\
-  | |__  | |_/ /| |_/ /| | | || |_/ /  | | | || /  \\/| /  \\/| | | || |_/ /| |__  | | | |
-  |  __| |    / |    / | | | ||    /   | | | || |    | |    | | | ||    / |  __| | | | |
-  | |___ | |\\ \\ | |\\ \\ \\ \\_/ /|  |\\ \\  \\ \\_/ /| \\__/\\| \\__/\\| |_| || |\\ \\ | |___ | |/  /
-  \\____/ \\_| \\_|\\_| \\_| \\___/ \\ _| \\_|  \\___/  \\____/ \\____/ \\___/ \\_| \\_|\\____/ |____/
-  `;
+  const errorOccured = asciiArts.errorOccured;
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -26,11 +21,9 @@ function ErrorPage({ error, resetErrorBoundary }) {
     };
   }, [resetErrorBoundary]);
 
-  console.log(error);
-
   return (
     <div className="flex-center w-full h-4/5 p-10 slide-fade-in">
-      <pre className="mb-10">{asciiArt}</pre>
+      <pre className="mb-10">{errorOccured}</pre>
       <header className="flex-between border border-4 border-white w-4/5 h-96 mb-10 p-10">
         <h1 className="text-3xl mb-20">통신 장애가 발생 했습니다!</h1>
         <div className="flex flex-col">
