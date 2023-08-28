@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
@@ -8,7 +8,7 @@ import { isSignupAtom } from "../atoms";
 
 function usePostSignup() {
   const navigate = useNavigate();
-  const [, setIsSignup] = useAtom(isSignupAtom);
+  const setIsSignup = useSetAtom(isSignupAtom);
 
   async function handleSignup(loginInfo) {
     return await fetchData("POST", "/auth/signup", loginInfo);

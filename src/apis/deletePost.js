@@ -17,16 +17,10 @@ function useDeletePost(category) {
   }
 
   const { mutateAsync: fetchDelete } = useMutation(handleDeletePost, {
-    keepPreviousData: true,
+    useErrorBoundary: true,
     onSuccess: () => {
       setShowMainDos(true);
       navigate(`/boards/${category}`);
-    },
-    onError: (result) => {
-      const error = new Error(result.response.data.message);
-      error.status = result.response.status;
-
-      throw error;
     },
   });
 

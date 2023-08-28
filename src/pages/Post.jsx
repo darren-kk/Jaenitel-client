@@ -18,7 +18,7 @@ function Post() {
   const scrollRef = useRef(null);
   const videoRef = useRef(null);
 
-  const { post, isLoading } = useGetPost(postId);
+  const { post } = useGetPost(postId);
 
   useEffect(() => {
     if (videoRef) {
@@ -31,7 +31,7 @@ function Post() {
   }, [setScrollRef, setVideoRef]);
 
   return (
-    <div className={`flex-center pt-5 ${isLoading ? "" : "slide-fade-in"}`}>
+    <div className="flex-center pt-5 slide-fade-in">
       <header className="flex-center w-full h-20vh pt-5 mb-4">
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">{boardNames[boardName]}</div>
         <div className="w-full pl-4">

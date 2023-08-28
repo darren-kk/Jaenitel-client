@@ -15,7 +15,7 @@ function useGetChatRooms(page, limit) {
   }
 
   const queryInfo = useQuery(["chatRooms", page, limit], fetchGetChatRooms, {
-    keepPreviousData: true,
+    useErrorBoundary: true,
     onSuccess: (result) => {
       const chatRoomsWithIndex = {};
 
@@ -26,20 +26,11 @@ function useGetChatRooms(page, limit) {
       setChatRooms(chatRoomsWithIndex);
       setTotalPage(result.data.totalPages);
     },
-    onError: (result) => {
-      const error = new Error(result.response.data.message);
-      error.status = result.response.status;
-
-      throw error;
-    },
   });
 
   return {
     chatRooms: queryInfo.data?.data.chatRooms,
     totalChatRooms: queryInfo.data?.data.totalChatRooms,
-    isLoading: queryInfo.isLoading,
-    isError: queryInfo.isError,
-    error: queryInfo.error,
   };
 }
 

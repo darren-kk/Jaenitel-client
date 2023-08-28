@@ -92,11 +92,7 @@ function MainDos() {
     }
 
     if (command === "x") {
-      try {
-        fetchLogout();
-      } catch (error) {
-        console.error(error);
-      }
+      fetchLogout();
     }
 
     if (command === "t") {

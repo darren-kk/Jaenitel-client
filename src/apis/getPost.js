@@ -13,20 +13,12 @@ function useGetPost(postId) {
   }
 
   const queryInfo = useQuery(["post", postId], fetchPost, {
-    keepPreviousData: true,
-    onError: (result) => {
-      const error = new Error(result.response.data.message);
-      error.status = result.response.status;
-
-      throw error;
-    },
+    useErrorBoundary: true,
+    retry: 1,
   });
 
   return {
     post: queryInfo.data?.data.post,
-    isLoading: queryInfo.isLoading,
-    isError: queryInfo.isError,
-    error: queryInfo.error,
   };
 }
 

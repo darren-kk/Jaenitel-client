@@ -36,6 +36,7 @@ function useCreatePost(postInfo) {
   }
 
   const { mutateAsync: fetchPost } = useMutation(handleFetchPost, {
+    useErrorBoundary: true,
     onSuccess: () => {
       setShowMainDos(true);
       setPostInfo({
@@ -45,12 +46,6 @@ function useCreatePost(postInfo) {
         contents: [{ textContent: "" }],
       });
       navigate(`/boards/${postInfo.category}`);
-    },
-    onError: (result) => {
-      const error = new Error(result.response.data.message);
-      error.status = result.response.status;
-
-      throw error;
     },
   });
 

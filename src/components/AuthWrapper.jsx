@@ -1,4 +1,3 @@
-import { Navigate } from "react-router-dom";
 import { useAtomValue } from "jotai";
 import { userAtom } from "../atoms";
 

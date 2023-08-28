@@ -14,7 +14,7 @@ function useGetMessages() {
   }
 
   const queryInfo = useQuery(["messages"], fetchGetMessages, {
-    keepPreviousData: true,
+    useErrorBoundary: true,
     onSuccess: ({ data: { messages } }) => {
       const messagesWithIndex = {};
 
@@ -26,19 +26,10 @@ function useGetMessages() {
 
       setMessages(messagesWithIndex);
     },
-    onError: (result) => {
-      const error = new Error(result.response.data.message);
-      error.status = result.response.status;
-
-      throw error;
-    },
   });
 
   return {
     messages: queryInfo.data?.data.messages,
-    isLoading: queryInfo.isLoading,
-    isError: queryInfo.isError,
-    error: queryInfo.error,
   };
 }
 

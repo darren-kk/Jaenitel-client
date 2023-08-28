@@ -15,7 +15,7 @@ function useGetPosts(category, page, limit) {
   }
 
   const queryInfo = useQuery(["posts", category, page, limit], fetchPosts, {
-    keepPreviousData: true,
+    useErrorBoundary: true,
     onSuccess: (result) => {
       const postsWithIndex = {};
       result.data.posts.forEach((post) => {
@@ -25,19 +25,10 @@ function useGetPosts(category, page, limit) {
       setPosts(postsWithIndex);
       setTotalPage(result.data.totalPages);
     },
-    onError: (result) => {
-      const error = new Error(result.response.data.message);
-      error.status = result.response.status;
-
-      throw error;
-    },
   });
 
   return {
     posts: queryInfo.data?.data.posts,
-    isLoading: queryInfo.isLoading,
-    isError: queryInfo.isError,
-    error: queryInfo.error,
   };
 }
 

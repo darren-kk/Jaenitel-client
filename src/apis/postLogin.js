@@ -1,13 +1,13 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
 import { userAtom } from "../atoms";
 
 function usePostLogin() {
-  const [, setUser] = useAtom(userAtom);
+  const setUser = useSetAtom(userAtom);
   const navigate = useNavigate();
 
   async function handleLogin(loginInfo) {

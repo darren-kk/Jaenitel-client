@@ -70,7 +70,7 @@ body {
 }
 
 .slide-fade-in {
-  animation: drawFromTop 1s steps(4) forwards;
+  animation: drawFromTop 2s steps(4) forwards;
 }
 
 .slide-fade-in-image {
