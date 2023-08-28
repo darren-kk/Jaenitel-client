@@ -9,6 +9,8 @@ import { userAtom, showMainDosAtom, showCreateChatRoomAtom, scrollRefAtom } from
 
 import useDeleteChatRoom from "../apis/deleteChatRoom";
 
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 function ChatRoomDos() {
   const [chat, setChat] = useState("");
   const chatInputRef = useRef(null);
@@ -27,7 +29,7 @@ function ChatRoomDos() {
   const setShowCreateChatRoomDos = useSetAtom(showCreateChatRoomAtom);
 
   useEffect(() => {
-    socketRef.current = io("http://localhost:3000");
+    socketRef.current = io(baseURL);
 
     return () => {
       socketRef.current.disconnect();

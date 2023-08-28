@@ -9,6 +9,8 @@ import ChatRoomDos from "../components/ChatRoomDos";
 import fetchData from "../apis/axios";
 import { userAtom, scrollRefAtom } from "../atoms";
 
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 function ChatRoom() {
   const scrollRef = useRef(null);
   const queryClient = useQueryClient();
@@ -49,7 +51,7 @@ function ChatRoom() {
   }, [setScrollRef, chatRoom?.chats]);
 
   useEffect(() => {
-    const socket = io("http://localhost:3000");
+    const socket = io(baseURL);
 
     socket.emit("join-room", {
       roomId: roomId,
