@@ -17,7 +17,7 @@ import {
   showCreateChatRoomAtom,
 } from "../atoms";
 import Input from "./shared/Input";
-import CreateChatRoomDos from "./createChatRoomDos";
+import CreateChatRoomDos from "./CreateChatRoomDos";
 
 import usePostLogout from "../apis/postLogout";
 import useDeletePost from "../apis/deletePost";
