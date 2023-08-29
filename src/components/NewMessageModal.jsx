@@ -77,6 +77,10 @@ function NewMessageModal() {
         handleAddContent("videoContent");
       }
 
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "0") {
+        titleRef.current.focus();
+      }
+
       if (event.metaKey && event.shiftKey && !isNaN(event.key) && Number(event.key) >= 0) {
         const index = Number(event.key) - 1;
 
@@ -154,7 +158,12 @@ function NewMessageModal() {
   }
 
   function handleKeyDown(event) {
+    if (event.nativeEvent.isComposing) {
+      return;
+    }
+
     if (event.key === "Enter") {
+      event.preventDefault();
       contentRefs.current[0].focus();
     }
   }

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useLocation, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useSetAtom, useAtom } from "jotai";
 
 import Input from "../components/shared/Input";
@@ -19,10 +19,7 @@ function EditPost() {
   const setTitleRef = useSetAtom(titleRefAtom);
   const [postInfo, setPostInfo] = useAtom(postInfoAtom);
 
-  const location = useLocation("");
   const { boardName, postId } = useParams();
-  const path = location.pathname.split("/");
-  const boardState = path[path.length - 1];
 
   const { post } = useGetPost(postId);
 
@@ -69,7 +66,12 @@ function EditPost() {
   }, [postInfo?.contents?.length]);
 
   function handleKeyDown(event) {
+    if (event.nativeEvent.isComposing) {
+      return;
+    }
+
     if (event.key === "Enter") {
+      event.preventDefault();
       contentRefs.current[0].focus();
     }
 
@@ -127,7 +129,7 @@ function EditPost() {
         <header className="flex-center w-full h-20vh pt-5">
           <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-12">{boardNames[boardName]}</div>
           <div className="flex justify-between w-full pl-8 pb-2">
-            <span className="text-xl w-2/12">{boardState === "new" ? "게시글 쓰기" : "게시글 수정"}</span>
+            <span className="text-xl w-2/12">게시글 수정</span>
           </div>
         </header>
         <div className="bg-white w-full h-1 mb-2"></div>

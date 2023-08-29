@@ -46,7 +46,12 @@ function PostDos({ handleAddContent, contentRefs }) {
   }, []);
 
   async function handleKeyDown(event) {
+    if (event.nativeEvent.isComposing) {
+      return;
+    }
+
     if (event.key === "Enter") {
+      event.preventDefault();
       executeCommand(command);
     }
 
@@ -69,7 +74,9 @@ function PostDos({ handleAddContent, contentRefs }) {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>## 글(text) 사진(image) 동영상(video) 이동(번호 / go) 돌아오기(컨트롤 + 쉬프트 + k(케이))</span>
+        <span>
+          ## 제목(title) 글(text) 사진(image) 동영상(video) 이동(번호 / go) 돌아오기(컨트롤 + 쉬프트 + k(케이))
+        </span>
         <div>
           <label>
             명렁어 {">>"}
