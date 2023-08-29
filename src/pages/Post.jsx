@@ -49,7 +49,7 @@ function Post() {
         {post?.contents.map((content, index) => {
           if (content.textContent) {
             return (
-              <pre className="font-dung-guen-mo max-h-40vh mb-8" key={content._id}>
+              <pre className="font-dung-guen-mo mb-8" key={content._id}>
                 {content.textContent}
               </pre>
             );

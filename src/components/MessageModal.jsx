@@ -84,7 +84,7 @@ function MessageModal() {
             {message?.contents.map((content, index) => {
               if (content.textContent) {
                 return (
-                  <pre className="font-dung-guen-mo max-h-40vh text-black mb-8" key={content._id + index}>
+                  <pre className="font-dung-guen-mo text-black mb-8" key={content._id + index}>
                     {content.textContent}
                   </pre>
                 );

@@ -130,7 +130,7 @@ function ChatRoom() {
           <div className="flex flex-col justify-end items-start w-full">
             {chatRoom?.chats?.map((chat) => {
               return (
-                <pre className="font-dung-guen-mo max-h-40vh mb-2" key={chat._id}>
+                <pre className="font-dung-guen-mo mb-2" key={chat._id}>
                   {">>"} {chat.isSystem ? "SYSTEM" : chat.writer?.nickname}: {chat.content}
                 </pre>
               );

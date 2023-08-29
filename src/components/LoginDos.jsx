@@ -97,7 +97,7 @@ function LoginDos() {
               <Input
                 ref={passwordInputRef}
                 className="ml-2 outline-none w-4/5"
-                type="text"
+                type="password"
                 value={loginInfo.password}
                 onChange={(event) => setLoginInfo({ ...loginInfo, password: event.target.value })}
                 onKeyDown={handlePassswordKeyDown}
