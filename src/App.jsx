@@ -12,6 +12,7 @@ import EditPost from "./pages/EditPost";
 import Messages from "./pages/Messages";
 import ChatRooms from "./pages/ChatRooms";
 import ChatRoom from "./pages/ChatRoom";
+import Special from "./pages/Special";
 import AuthWrapper from "./components/AuthWrapper";
 import ErrorPage from "./pages/ErrorPage";
 
@@ -94,6 +95,14 @@ function App() {
             element={
               <AuthWrapper>
                 <EditPost />
+              </AuthWrapper>
+            }
+          />
+          <Route
+            path="/boards/special"
+            element={
+              <AuthWrapper>
+                <Special />
               </AuthWrapper>
             }
           />
