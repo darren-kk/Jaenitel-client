@@ -8,6 +8,7 @@ import Input from "./shared/Input";
 import Image from "./shared/Image";
 
 import { modalStateAtom, videoRefAtom, scrollRefAtom, titleRefAtom } from "../atoms";
+import { maxfileSizes } from "../constants";
 import usePostMessage from "../apis/postMessage";
 
 function NewMessageModal() {
@@ -130,7 +131,14 @@ function NewMessageModal() {
     const newContents = [...messageInfo.contents];
 
     if (contentType === "imageContent" || contentType === "videoContent") {
+      if (event.target.files[0].size > maxfileSizes[contentType]) {
+        setErrorMessage("파일 크기가 너무 큽니다! 최대 파일 크기(사진: 5mb / 동영상: 100mb)");
+
+        return;
+      }
+
       newContents[index][contentType] = event.target.files[0];
+      setErrorMessage("");
     }
 
     if (contentType === "textContent") {
@@ -234,7 +242,7 @@ function NewMessageModal() {
           </div>
         </div>
       </Modal>
-      <Modal>
+      <Modal title="">
         <div className="fixed left-[66%] top-[12%] flex flex-col bg-gray-bg w-55vh text-black p-4">
           <h1 className="text-xl mb-4">명령어 모음</h1>
           <span>글 첨부(컨트롤 + 쉬프트 + 따옴표)</span>

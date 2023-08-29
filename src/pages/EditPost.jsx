@@ -1,4 +1,4 @@
-import { useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useSetAtom, useAtom } from "jotai";
 
@@ -7,11 +7,13 @@ import Video from "../components/shared/Video";
 import Image from "../components/shared/Image";
 import PostDos from "../components/PostDos";
 
-import { boardNames } from "../constants";
+import { boardNames, maxfileSizes } from "../constants";
 import { videoRefAtom, scrollRefAtom, postInfoAtom, titleRefAtom } from "../atoms";
 import useGetPost from "../apis/getPost";
 
 function EditPost() {
+  const [fileSizeMessage, setFileSizeMessage] = useState("");
+
   const setVideoRef = useSetAtom(videoRefAtom);
   const setScrollRef = useSetAtom(scrollRefAtom);
   const setTitleRef = useSetAtom(titleRefAtom);
@@ -97,7 +99,14 @@ function EditPost() {
     const newContents = [...postInfo.contents];
 
     if (contentType === "imageContent" || contentType === "videoContent") {
+      if (event.target.files[0].size > maxfileSizes[contentType]) {
+        setFileSizeMessage("파일 크기가 너무 큽니다! 최대 파일 크기(사진: 5mb / 동영상: 100mb)");
+
+        return;
+      }
+
       newContents[index][contentType] = event.target.files[0];
+      setFileSizeMessage("");
     }
 
     if (contentType === "textContent") {
@@ -168,6 +177,7 @@ function EditPost() {
                         ref={(el) => (contentRefs.current[index] = el)}
                         onChange={(event) => handleContentChange(event, index, "imageContent")}
                       />
+                      <span className="block">{fileSizeMessage}</span>
                       {content.imageContent && (
                         <Image
                           className="max-h-40vh mb-8"
@@ -191,6 +201,7 @@ function EditPost() {
                         ref={(el) => (contentRefs.current[index] = el)}
                         onChange={(event) => handleContentChange(event, index, "videoContent")}
                       />
+                      <span className="block">{fileSizeMessage}</span>
                       {content.videoContent && (
                         <Video
                           key={content.videoContent}
