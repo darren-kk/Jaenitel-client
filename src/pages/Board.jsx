@@ -50,9 +50,9 @@ function Board() {
       <header className="flex-center w-full h-20vh pt-5">
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-12">{boardNames[boardName]}</div>
         <div className="flex justify-between w-full pl-8 pb-2">
-          <span className="text-xl w-2/12">번호</span>
-          <span className="text-xl w-3/12">이름</span>
-          <span className="text-xl w-4/12">날짜</span>
+          <span className="text-xl w-1/12">번호</span>
+          <span className="text-xl w-2/12">이름</span>
+          <span className="text-xl w-2/12">날짜</span>
           <span className="text-xl w-5/12">제목</span>
         </div>
       </header>
@@ -60,9 +60,9 @@ function Board() {
       <main ref={mainRef} className="flex-start w-full h-60vh px-10 py-4">
         {posts?.map((post) => (
           <div key={post._id} className="flex justify-between w-full h-7 mb-4">
-            <span className="text-xl w-2/12">{post.index}</span>
-            <span className="text-xl w-3/12">{post.madeBy.nickname}</span>
-            <span className="text-xl w-4/12">{post.createdDate.split("T")[0]}</span>
+            <span className="text-xl w-1/12">{post.index}</span>
+            <span className="text-xl w-2/12">{post.madeBy.nickname}</span>
+            <span className="text-xl w-2/12">{post.createdDate.split("T")[0]}</span>
             <span className="text-xl w-5/12 pl-4">{post.title}</span>
           </div>
         ))}

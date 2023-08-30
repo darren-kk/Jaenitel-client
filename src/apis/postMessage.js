@@ -1,4 +1,4 @@
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { useAtomValue, useSetAtom } from "jotai";
 
@@ -10,6 +10,8 @@ function usePostMessage(messageInfo) {
   const navigate = useNavigate();
   const user = useAtomValue(userAtom);
   const setModalState = useSetAtom(modalStateAtom);
+
+  const queryClient = useQueryClient();
 
   async function handleFetchPost() {
     const formData = new FormData();
@@ -36,6 +38,7 @@ function usePostMessage(messageInfo) {
   const { mutateAsync: fetchPost } = useMutation(handleFetchPost, {
     onSuccess: () => {
       setModalState({ isOpen: false, messageId: null });
+      queryClient.refetchQueries(["messages"]);
       navigate(`/boards/messages`);
     },
     onError: (result) => {

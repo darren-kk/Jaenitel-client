@@ -76,12 +76,10 @@ export function useHandlePostCommand(setCommand, handleAddContent, titleRef, vid
         break;
 
       case "submit":
-        setShowMainDos(true);
         createPost();
         break;
 
       case "edit":
-        setShowMainDos(true);
         editPost();
         break;
 

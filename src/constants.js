@@ -34,7 +34,7 @@ export const boardNames = {
 
 export const maxfileSizes = {
   imageContent: 5 * 1024 * 1024,
-  videoContent: 100 * 1024 * 1024,
+  videoContent: 50 * 1024 * 1024,
 };
 
 export const asciiArts = {
