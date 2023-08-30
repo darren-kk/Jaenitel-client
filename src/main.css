@@ -19,6 +19,7 @@
 body {
   color: white;
   font-family: "DungGeunMo", sans-serif;
+  cursor: none;
 }
 
 @layer components {
