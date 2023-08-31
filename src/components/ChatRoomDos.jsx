@@ -8,6 +8,7 @@ import Input from "./shared/Input";
 import { userAtom, showMainDosAtom, showCreateChatRoomAtom, scrollRefAtom } from "../atoms";
 
 import useDeleteChatRoom from "../apis/deleteChatRoom";
+import usePostChat from "../apis/postChat";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 
@@ -22,6 +23,7 @@ function ChatRoomDos() {
   const navigate = useNavigate();
 
   const deleteChatRoom = useDeleteChatRoom();
+  const postChat = usePostChat();
 
   const user = useAtomValue(userAtom);
   const scrollRef = useAtomValue(scrollRefAtom);
@@ -51,6 +53,8 @@ function ChatRoomDos() {
       }
 
       if (chat === "$ back") {
+        setShowMainDos(true);
+        setShowCreateChatRoomDos(false);
         navigate(-1);
 
         return;
@@ -77,6 +81,7 @@ function ChatRoomDos() {
       });
 
       socketRef.current.emit("send-chat", newChat);
+      await postChat(newChat);
       setChat("");
     }
 
