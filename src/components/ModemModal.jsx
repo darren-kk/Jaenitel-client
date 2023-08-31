@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import { useSetAtom } from "jotai";
 
 import Modal from "./shared/Modal";
@@ -9,6 +10,8 @@ import { showModalAtom } from "../atoms";
 
 function ModemModal() {
   const setShowModal = useSetAtom(showModalAtom);
+
+  const navigate = useNavigate();
 
   const [modemInput, setModemInput] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -43,6 +46,7 @@ function ModemModal() {
 
     const handleAudioEnd = () => {
       setShowModal(false);
+      navigate("/login");
     };
 
     if (!isMuted && isConnecting) {
@@ -56,7 +60,7 @@ function ModemModal() {
     return () => {
       audioElement.removeEventListener("ended", handleAudioEnd);
     };
-  }, [isConnecting, isMuted, setShowModal]);
+  }, [isConnecting, isMuted, navigate, setShowModal]);
 
   useEffect(() => {
     const handleKeyPress = (event) => {
@@ -80,7 +84,9 @@ function ModemModal() {
             <img className="w-10 h-10 mr-10" src="/assests/modemDial.png" alt="modem Dial" />
             <span className="text-black">01410에 전화 거는 중...</span>
           </div>
-          <Button className="border-button w-24 text-black mt-2">{isMuted ? "재생(m)" : "일시정지(m)"}</Button>
+          <Button className="border-button w-24 text-black mt-2" type="button" onClick={() => setIsMuted(!isMuted)}>
+            {isMuted ? "재생(m)" : "일시정지(m)"}
+          </Button>
         </div>
       ) : (
         <div className="px-14 py-9">

@@ -3,6 +3,7 @@ import { useAtomValue } from "jotai";
 import { ErrorBoundary } from "react-error-boundary";
 
 import MainDos from "./components/MainDos";
+import Introduction from "./pages/Introduction";
 import Login from "./pages/Login";
 import Boards from "./pages/Boards";
 import Board from "./pages/Board";
@@ -33,6 +34,7 @@ function App() {
       >
         {user && showMainDos && <MainDos />}
         <Routes>
+          <Route path="/introduction" element={<Introduction />} />
           <Route path="/login" element={<Login />} />
           <Route
             path="/boards"
@@ -106,7 +108,7 @@ function App() {
               </AuthWrapper>
             }
           />
-          <Route path="/" element={<Navigate replace to="/login" />} />
+          <Route path="/" element={<Navigate replace to="/introduction" />} />
         </Routes>
       </ErrorBoundary>
     </div>

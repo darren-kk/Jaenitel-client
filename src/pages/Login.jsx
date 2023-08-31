@@ -2,12 +2,10 @@ import { useAtomValue } from "jotai";
 
 import LoginDos from "../components/LoginDos";
 import SignupDos from "../components/SignupDos";
-import ModemModal from "../components/ModemModal";
 
-import { showModalAtom, isSignupAtom } from "../atoms";
+import { isSignupAtom } from "../atoms";
 
 function Login() {
-  const showModal = useAtomValue(showModalAtom);
   const isSignup = useAtomValue(isSignupAtom);
 
   return (
@@ -23,7 +21,6 @@ function Login() {
         </div>
       </div>
       {isSignup ? <SignupDos /> : <LoginDos />}
-      {showModal && <ModemModal />}
     </>
   );
 }

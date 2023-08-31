@@ -38,15 +38,15 @@ module.exports = {
           "50%": { borderColor: "black" },
         },
         drawFromTop: {
-          "0%": { clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)" },
+          "0%": { opacity: "100", clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)" },
           "25%": { clipPath: "polygon(0 0, 100% 0, 100% 25%, 0 25%)" },
           "50%": { clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 50%)" },
           "75%": { clipPath: "polygon(0 0, 100% 0, 100% 75%, 0 75%)" },
-          "100%": { clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" },
+          "100%": { opacity: "100", clipPath: "polygon(0 0, 100% 0, 100% 100%, 0 100%)" },
         },
       },
       animation: {
-        typewriter: "typewriter 5s steps(40, end) forwards, blink .75s step-end infinite",
+        typewriter: "typewriter 5s steps(70, end) forwards, blink .75s step-end infinite",
         slideFadeIn: "drawFromTop 2s steps(4) forwards",
         slideFadeInImage: "drawFromTop 4s steps(4) forwards",
         slideFadeInVideo: "drawFromTop 6s steps(4) forwards",
