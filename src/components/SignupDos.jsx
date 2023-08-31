@@ -1,8 +1,12 @@
 import { useState, useRef, useEffect } from "react";
+import { useSetAtom } from "jotai";
 
 import Input from "./shared/Input";
+
 import { checkInputValidation } from "../utils/utils";
 import usePostSignup from "../apis/postSignup";
+
+import { isSignupAtom } from "../atoms";
 
 let focusedIndex = 0;
 
@@ -20,6 +24,8 @@ function SignupDos() {
   const reWrittenPasswordInputRef = useRef(null);
   const nicknmaeInputRef = useRef(null);
 
+  const setIsSignup = useSetAtom(isSignupAtom);
+
   const fetchSignup = usePostSignup();
 
   const inputRefs = [idInputRef, passwordInputRef, reWrittenPasswordInputRef, nicknmaeInputRef];
@@ -28,7 +34,24 @@ function SignupDos() {
     if (idInputRef.current) {
       idInputRef.current.focus();
     }
-  }, []);
+
+    const handleKeyDown = (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
+        idInputRef.current.focus();
+      }
+
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "b") {
+        event.preventDefault();
+        setIsSignup(false);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [setIsSignup]);
 
   function moveFocus(event) {
     if (event.key === "Enter" || event.key === "Tab" || event.key === "ArrowDown") {
@@ -82,6 +105,8 @@ function SignupDos() {
         <span className="mb-1">※※※※ 회원가입 ※※※※</span>
         <span>## 비밀번호는 6자 이상 20자 이하 여야 합니다.</span>
         <span>## 닉네임은 2자 이상 8자 이하 여야 합니다.</span>
+        <span>## 이메일 창으로 돌아가기: (ctrl + shift + k)</span>
+        <span>## 로그인으로 돌아가기: (ctrl + shift + b)</span>
         <span>## 이동 : Enter / Tab / 방향키</span>
         <span>## 제출 : Enter</span>
         <form className="flex flex-col m-2">

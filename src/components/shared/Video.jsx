@@ -43,7 +43,7 @@ function VideoRef({ className, src }, ref) {
         </div>
       </div>
 
-      <div className="flex justify-center bg-black w-full slide-fade-in-video">
+      <div className="flex justify-center bg-black w-full animate-slideFadeInVideo">
         <video ref={ref} className={`w-fit max-h-40vh ${className}`}>
           <source src={src} type="video/mp4" />
         </video>

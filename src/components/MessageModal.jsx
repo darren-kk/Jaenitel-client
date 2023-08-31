@@ -78,7 +78,7 @@ function MessageModal() {
           </span>
         </div>
 
-        <div className="flex-items-start h-5/6 slide-fade-in">
+        <div className="flex-items-start h-5/6 animate-slideFadeIn">
           <span className="text-black mb-2">메시지 내용:</span>
           <div ref={scrollRef} className="bg-white w-full h-full p-2 border-input overflow-auto">
             {message?.contents.map((content, index) => {

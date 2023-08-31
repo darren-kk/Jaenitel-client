@@ -1,6 +1,6 @@
 function Boards() {
   return (
-    <div className="flex-center p-5  slide-fade-in">
+    <div className="flex-center p-5  animate-slideFadeIn">
       <header className="flex-center border-menu shadow-lg text-4xl w-4/5 h-20 mb-12">메인 메뉴</header>
       <main className="flex justify-between items-center w-4/5 p-10">
         <section className="w-fit h-48">

@@ -125,7 +125,7 @@ function EditPost() {
 
   return (
     <>
-      <div className="flex-center pt-5 slide-fade-in">
+      <div className="flex-center pt-5 animate-slideFadeIn">
         <header className="flex-center w-full h-20vh pt-5">
           <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-12">{boardNames[boardName]}</div>
           <div className="flex justify-between w-full pl-8 pb-2">

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useAtom } from "jotai";
+import { useSetAtom } from "jotai";
 
 import Modal from "./shared/Modal";
 import Input from "./shared/Input";
@@ -8,7 +8,7 @@ import Button from "./shared/Button";
 import { showModalAtom } from "../atoms";
 
 function ModemModal() {
-  const [, setShowModal] = useAtom(showModalAtom);
+  const setShowModal = useSetAtom(showModalAtom);
 
   const [modemInput, setModemInput] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);

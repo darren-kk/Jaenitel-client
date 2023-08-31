@@ -1,4 +1,4 @@
-import { useAtom } from "jotai";
+import { useAtomValue } from "jotai";
 
 import LoginDos from "../components/LoginDos";
 import SignupDos from "../components/SignupDos";
@@ -7,12 +7,12 @@ import ModemModal from "../components/ModemModal";
 import { showModalAtom, isSignupAtom } from "../atoms";
 
 function Login() {
-  const [showModal] = useAtom(showModalAtom);
-  const [isSignup] = useAtom(isSignupAtom);
+  const showModal = useAtomValue(showModalAtom);
+  const isSignup = useAtomValue(isSignupAtom);
 
   return (
     <>
-      <div className="flex-center w-full h-4/5 p-10 slide-fade-in">
+      <div className="flex-center w-full h-4/5 p-10 animate-slideFadeIn">
         <header className="flex-between border border-4 border-white w-3/5 h-96 mb-10 py-10">
           <h1 className="text-5xl font-press-start">WELCOME!!</h1>
           <span className="text-2xl font-press-start">※※※※※ PC JAENITEL ※※※※※</span>

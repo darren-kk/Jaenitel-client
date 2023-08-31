@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 function Image({ className, src, alt }) {
-  return <img className={`mb-8 slide-fade-in-image ${className}`} src={src} alt={alt} />;
+  return <img className={`mb-8 animate-slideFadeInImage ${className}`} src={src} alt={alt} />;
 }
 
 Image.propTypes = {

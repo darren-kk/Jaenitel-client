@@ -22,7 +22,7 @@ function ErrorPage({ error, resetErrorBoundary }) {
   }, [resetErrorBoundary]);
 
   return (
-    <div className="flex-center w-full h-4/5 p-10 slide-fade-in">
+    <div className="flex-center w-full h-4/5 p-10 animate-slideFadeIn">
       <pre className="mb-10">{errorOccured}</pre>
       <header className="flex-between border border-4 border-white w-4/5 h-96 mb-10 p-10">
         <h1 className="text-3xl mb-20">통신 장애가 발생 했습니다!</h1>

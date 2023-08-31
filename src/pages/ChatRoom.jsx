@@ -109,7 +109,7 @@ function ChatRoom() {
 
   return (
     <>
-      <div className="flex-center pt-5 slide-fade-in">
+      <div className="flex-center pt-5 animate-slideFadeIn">
         <header className="flex-center w-full h-20vh pt-5">
           <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">실시간 대화방</div>
           <div className="flex w-full pl-4">

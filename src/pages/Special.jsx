@@ -4,7 +4,7 @@ function Special() {
   const selfie = asciiArts.selfie;
 
   return (
-    <div className="flex-center pt-5 slide-fade-in">
+    <div className="flex-center pt-5 animate-slideFadeIn">
       <header className="flex-center w-full h-10vh pt-5 mb-4">
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">스페-샬</div>
       </header>
@@ -13,7 +13,7 @@ function Special() {
         <div className="w-full p-4">
           <h1 className="w-full text-center text-6xl mb-8">안녕하세요, 김재환입니다.</h1>
           <div className="flex justify-center items-start w-full px-10">
-            <pre className="flex justify-end text-xs w-2/6 pr-10 slide-fade-in">{selfie}</pre>
+            <pre className="flex justify-end text-xs w-2/6 pr-10 animate-slideFadeIn">{selfie}</pre>
             <div className="flex-items-start w-4/6 pt-4">
               <h2 className="text-4xl pl-1 mb-4">연락처</h2>
               <span className="text-xl mb-2">전화번호: +82 010 2702 8138</span>

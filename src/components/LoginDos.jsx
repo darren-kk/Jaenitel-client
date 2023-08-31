@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useAtom } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 
 import usePostLogin from "../apis/postLogin";
 import Input from "./shared/Input";
@@ -17,8 +17,8 @@ function LoginDos() {
   const idInputRef = useRef(null);
   const passwordInputRef = useRef(null);
 
-  const [, setIsSignup] = useAtom(isSignupAtom);
-  const [showModal] = useAtom(showModalAtom);
+  const setIsSignup = useSetAtom(isSignupAtom);
+  const showModal = useAtomValue(showModalAtom);
 
   const fetchLogin = usePostLogin();
 
@@ -26,6 +26,18 @@ function LoginDos() {
     if (idInputRef.current) {
       idInputRef.current.focus();
     }
+
+    const handleKeyDown = (event) => {
+      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
+        idInputRef.current.focus();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
   }, []);
 
   useEffect(() => {
@@ -78,6 +90,7 @@ function LoginDos() {
       <div className="bg-white w-full h-1 mb-2"></div>
       <div className="flex flex-col px-16 py-5">
         <span>## 이용자 ID가 없거나 신규/무료가입을 하시려면 guest를 입력 하십시오.</span>
+        <span>## 이메일 창으로 돌아가기: (ctrl + shift + k)</span>
         <span>## 입력 : Enter</span>
         <form className="flex flex-col">
           <label>
