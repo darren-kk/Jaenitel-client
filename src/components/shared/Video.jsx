@@ -4,6 +4,31 @@ import PropTypes from "prop-types";
 function VideoRef({ className, src }, ref) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
+  const [volume, setVolume] = useState(0.5);
+
+  useEffect(() => {
+    const videoRef = ref.current;
+
+    const handleVolumeChange = (event) => {
+      if (event.key === "ArrowRight" && volume < 1) {
+        setVolume((prevVolume) => Math.min(prevVolume + 0.1, 1));
+      }
+
+      if (event.key === "ArrowLeft" && volume > 0) {
+        setVolume((prevVolume) => Math.max(prevVolume - 0.1, 0));
+      }
+    };
+
+    if (videoRef) {
+      videoRef.volume = volume;
+
+      document.addEventListener("keydown", handleVolumeChange);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleVolumeChange);
+    };
+  }, [ref, volume]);
 
   useEffect(() => {
     const videoRef = ref.current;
@@ -75,8 +100,16 @@ function VideoRef({ className, src }, ref) {
         </div>
 
         <div className="flex items-center">
-          <span className="text-black">Volume:</span>
-          <input type="range" min="0" max="1" step="0.1" className="ml-2" disabled />
+          <img className="w-5 h-5" src="/assests/speaker.png" alt="volume" />
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.1"
+            className="accent-gray-400 ml-2"
+            value={volume}
+            onChange={(e) => setVolume(e.target.value)}
+          />
         </div>
       </div>
     </div>
