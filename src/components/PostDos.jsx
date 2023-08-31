@@ -1,17 +1,23 @@
 import { useState, useRef, useEffect } from "react";
-import { useAtomValue } from "jotai";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useAtomValue, useSetAtom } from "jotai";
 import PropTypes from "prop-types";
 
 import Input from "./shared/Input";
 
-import { videoRefAtom, scrollRefAtom, titleRefAtom, postInfoAtom } from "../atoms";
+import { videoRefAtom, scrollRefAtom, titleRefAtom, postInfoAtom, showMainDosAtom } from "../atoms";
 import useCreatePost from "../apis/createPost";
 import usePutPost from "../apis/putPost";
-import { useHandlePostCommand } from "../utils/utils";
 
 function PostDos({ handleAddContent, contentRefs }) {
   const [command, setCommand] = useState("");
   const commandInputRef = useRef(null);
+
+  const navigate = useNavigate();
+  const setShowMainDos = useSetAtom(showMainDosAtom);
+
+  const param = useLocation();
+  const postMode = param.pathname.split("/").at(-1);
 
   const scrollRef = useAtomValue(scrollRefAtom);
   const videoRef = useAtomValue(videoRefAtom);
@@ -20,16 +26,6 @@ function PostDos({ handleAddContent, contentRefs }) {
 
   const createPost = useCreatePost(postInfo);
   const editPost = usePutPost(postInfo);
-
-  const { executeCommand } = useHandlePostCommand(
-    setCommand,
-    handleAddContent,
-    titleRef,
-    videoRef,
-    contentRefs,
-    createPost,
-    editPost,
-  );
 
   useEffect(() => {
     const handleKeyDown = (event) => {
@@ -44,6 +40,67 @@ function PostDos({ handleAddContent, contentRefs }) {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, []);
+
+  function executeCommand(command) {
+    switch (command) {
+      case "text":
+        handleAddContent("textContent");
+        break;
+
+      case "image":
+        handleAddContent("imageContent");
+        break;
+
+      case "video":
+        handleAddContent("videoContent");
+        break;
+
+      case "title":
+        titleRef.current.focus();
+        break;
+
+      case "t":
+        setShowMainDos(true);
+        navigate("/boards");
+        break;
+
+      case "b":
+        setShowMainDos(true);
+        navigate(-1);
+        break;
+
+      case "play":
+        videoRef.current.play();
+        break;
+
+      case "pause":
+        videoRef.current.pause();
+        break;
+
+      case "stop":
+        videoRef.current.pause();
+        videoRef.current.currentTime = 0;
+        break;
+
+      case "submit":
+        if (postMode === "edit") {
+          editPost();
+        }
+
+        if (postMode === "new") {
+          createPost();
+        }
+        break;
+
+      default:
+        if (command.endsWith(" go")) {
+          const number = command.split(" ")[0];
+          contentRefs.current[number - 1].focus();
+        }
+    }
+
+    setCommand("");
+  }
 
   async function handleKeyDown(event) {
     if (event.nativeEvent.isComposing) {
@@ -75,14 +132,15 @@ function PostDos({ handleAddContent, contentRefs }) {
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
         <span>
-          ## 제목(title) 글(text) 사진(image) 동영상(video) 이동(번호 / go) 돌아오기(컨트롤 + 쉬프트 + k(케이))
+          ## 제출(submit) 제목(title) 글(text) 사진(image) 동영상(video) 이동(번호 / go) 돌아오기(ctrl + shift +
+          k(케이))
         </span>
-        <div>
+        <div className="mt-2">
           <label>
             명렁어 {">>"}
             <Input
               ref={commandInputRef}
-              className="ml-2 mb-2 outline-none w-4/5"
+              className="ml-2 outline-none w-4/5"
               type="text"
               value={command}
               onChange={(event) => setCommand(event.target.value)}

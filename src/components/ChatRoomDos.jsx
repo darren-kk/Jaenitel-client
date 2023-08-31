@@ -122,7 +122,7 @@ function ChatRoomDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh z-10">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-4 py-3">
-        <span>## 채팅(Enter) 채팅창(컨트롤 + 쉬프트 + k(케이)) 나가기($ home)</span>
+        <span>## 채팅(Enter) 채팅창(ctrl + shift + k(케이)) 나가기($ home)</span>
         <div>
           <label>
             {">>"}

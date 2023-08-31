@@ -84,11 +84,7 @@ function MainDos() {
     }
 
     if (command === "h") {
-      setShowCommandList(true);
-    }
-
-    if (command !== "h" && showCommandList) {
-      setShowCommandList(false);
+      setShowCommandList(!showCommandList);
     }
 
     if (command === "x") {
@@ -120,8 +116,8 @@ function MainDos() {
       }
     }
 
-    if (command.endsWith(" go")) {
-      const number = command.split(" ")[0];
+    if (command.endsWith("go")) {
+      const number = command.split("g")[0].trim();
 
       if (path[path.length - 1] === "boards") {
         navigate(`${boardsNumberList[number]}`);
@@ -257,8 +253,10 @@ function MainDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh z-10">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>## 명령어 안내(h) 이동(번호/go) 초기화면(t) 종료(x) dos(컨트롤 + 쉬프트 + k(케이))</span>
-        <div className="flex">
+        <span>
+          ## 명령어 안내 켜기/끄기(h) 이동(번호 go) 뒤로가기(b) 초기화면(t) 종료(x) dos(ctrl + shift + k(케이))
+        </span>
+        <div className="flex mt-2">
           <label>
             {labelMessage ? `${labelMessage} 확인(y) 취소(n)` : `선택 >>`}
             <Input

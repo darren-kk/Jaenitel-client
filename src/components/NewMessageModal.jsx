@@ -254,16 +254,16 @@ function NewMessageModal() {
       <Modal title="">
         <div className="fixed left-[66%] top-[12%] flex flex-col bg-gray-bg w-55vh text-black p-4">
           <h1 className="text-xl mb-4">명령어 모음</h1>
-          <span>글 첨부(컨트롤 + 쉬프트 + 따옴표)</span>
-          <span>사진 첨부(컨트롤 + 쉬프트 + {">"})</span>
-          <span className="mb-4">동영상 첨부(컨트롤 + 쉬프트 + {"<"})</span>
-          <span>보낼 사람 수정(컨트롤 + 쉬프트 + 숫자(0))</span>
-          <span className="mb-4">수정 (컨트롤 + 쉬프트 + 번호)</span>
-          <span>재생(컨트롤 + 쉬프트 + p)</span>
-          <span>일시정지(컨트롤 + 쉬프트 + s)</span>
-          <span className="mb-4">정지(컨트롤 + 쉬프트 + x)</span>
-          <span>취소(컨트롤 + 쉬프트 + u)</span>
-          <span>전송(컨트롤 + 쉬프트 + o)</span>
+          <span>글 첨부(ctrl + shift + 따옴표)</span>
+          <span>사진 첨부(ctrl + shift + {">"})</span>
+          <span className="mb-4">동영상 첨부(ctrl + shift + {"<"})</span>
+          <span>보낼 사람 수정(ctrl + shift + 숫자(0))</span>
+          <span className="mb-4">수정 (ctrl + shift + 번호)</span>
+          <span>재생(ctrl + shift + p)</span>
+          <span>일시정지(ctrl + shift + s)</span>
+          <span className="mb-4">정지(ctrl + shift + x)</span>
+          <span>취소(ctrl + shift + u)</span>
+          <span>전송(ctrl + shift + o)</span>
         </div>
       </Modal>
     </div>

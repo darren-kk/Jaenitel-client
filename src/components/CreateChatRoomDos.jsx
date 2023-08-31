@@ -57,7 +57,7 @@ function CreateChatRoomDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>## 대화실 생성(Enter) 취소($ c) 돌아오기(컨트롤 + 쉬프트 + t(티))</span>
+        <span>## 대화실 생성(Enter) 취소($ c) 돌아오기(ctrl + shift + t(티))</span>
         <div>
           <label>
             {">>"}

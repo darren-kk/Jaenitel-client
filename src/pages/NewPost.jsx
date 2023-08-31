@@ -123,7 +123,7 @@ function NewPost() {
         <header className="flex-center w-full h-20vh pt-5">
           <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-12">{boardNames[boardName]}</div>
           <div className="flex justify-between w-full pl-8 pb-2">
-            <span className="text-xl w-2/12">게시글 쓰기</span>
+            <span className="text-xl w-2/12 ml-4">게시글 쓰기</span>
           </div>
         </header>
         <div className="bg-white w-full h-1 mb-2"></div>

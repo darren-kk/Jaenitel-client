@@ -1,7 +1,3 @@
-import { useNavigate } from "react-router-dom";
-import { useSetAtom } from "jotai";
-import { showMainDosAtom } from "../atoms";
-
 export function checkInputValidation(loginInfo) {
   const { email, password, reWrittenPassword, nickname } = loginInfo;
 
@@ -28,70 +24,4 @@ export function checkInputValidation(loginInfo) {
     default:
       return true;
   }
-}
-
-export function useHandlePostCommand(setCommand, handleAddContent, titleRef, videoRef, refs, createPost, editPost) {
-  const navigate = useNavigate();
-  const setShowMainDos = useSetAtom(showMainDosAtom);
-
-  function executeCommand(command) {
-    switch (command) {
-      case "text":
-        handleAddContent("textContent");
-        break;
-
-      case "image":
-        handleAddContent("imageContent");
-        break;
-
-      case "video":
-        handleAddContent("videoContent");
-        break;
-
-      case "title":
-        titleRef.current.focus();
-        break;
-
-      case "t":
-        setShowMainDos(true);
-        navigate("/boards");
-        break;
-
-      case "b":
-        setShowMainDos(true);
-        navigate(-1);
-        break;
-
-      case "play":
-        videoRef.current.play();
-        break;
-
-      case "pause":
-        videoRef.current.pause();
-        break;
-
-      case "stop":
-        videoRef.current.pause();
-        videoRef.current.currentTime = 0;
-        break;
-
-      case "submit":
-        createPost();
-        break;
-
-      case "edit":
-        editPost();
-        break;
-
-      default:
-        if (command.endsWith(" go")) {
-          const number = command.split(" ")[0];
-          refs.current[number - 1].focus();
-        }
-    }
-
-    setCommand("");
-  }
-
-  return { executeCommand };
 }
