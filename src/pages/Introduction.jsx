@@ -13,7 +13,7 @@ function Introduction() {
   }
 
   return (
-    <>
+    <div className="cursor-default">
       <div className="flex flex-col justify-start items-start w-full h-3/5 p-10">
         <p className="text-xl w-0 overflow-hidden whitespace-nowrap mb-8 animate-typewriter">
           안녕하세요! 재니텔에 방문해 주셔서 감사드립니다.
@@ -56,7 +56,7 @@ function Introduction() {
         </Button>
       </div>
       {showModal && <ModemModal />}
-    </>
+    </div>
   );
 }
 

@@ -4,6 +4,7 @@ import { forwardRef } from "react";
 function InputRef({ className, type, value, readOnly = false, accept, onChange, onKeyDown }, ref) {
   return (
     <input
+      autoComplete="off"
       ref={ref}
       className={`bg-transparent ${className}`}
       type={type}

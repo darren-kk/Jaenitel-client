@@ -79,7 +79,7 @@ function ModemModal() {
   return (
     <Modal title="재니텔에 연결">
       {isConnecting ? (
-        <div className="flex flex-col items-center w-96 h-32 p-10">
+        <div className="flex flex-col items-center w-96 h-32 p-10 cursor-default">
           <div className="flex justify-start items-center w-full">
             <img className="w-10 h-10 mr-10" src="/assests/modemDial.png" alt="modem Dial" />
             <span className="text-black">01410에 전화 거는 중...</span>
@@ -89,7 +89,7 @@ function ModemModal() {
           </Button>
         </div>
       ) : (
-        <div className="px-14 py-9">
+        <div className="px-14 py-9 cursor-default">
           <img className="pt-5" src="/assests/modemImage.png" alt="modem Image" />
           <div className="flex flex-col w-full">
             <label className="text-black">
