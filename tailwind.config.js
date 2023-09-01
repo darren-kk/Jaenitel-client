@@ -39,6 +39,8 @@ module.exports = {
         },
         drawFromTop: {
           "0%": { opacity: "100", clipPath: "polygon(0 0, 100% 0, 100% 0%, 0 0%)" },
+          "5%": { clipPath: "polygon(0 0, 100% 0, 100% 5%, 0 5%)" },
+          "10%": { clipPath: "polygon(0 0, 100% 0, 100% 10%, 0 10%)" },
           "25%": { clipPath: "polygon(0 0, 100% 0, 100% 25%, 0 25%)" },
           "50%": { clipPath: "polygon(0 0, 100% 0, 100% 50%, 0 50%)" },
           "75%": { clipPath: "polygon(0 0, 100% 0, 100% 75%, 0 75%)" },
@@ -48,7 +50,7 @@ module.exports = {
       animation: {
         typewriter: "typewriter 5s steps(70, end) forwards, blink .75s step-end infinite",
         slideFadeIn: "drawFromTop 2s steps(4) forwards",
-        slideFadeInImage: "drawFromTop 4s steps(4) forwards",
+        slideFadeInImage: "drawFromTop 6s steps(6) forwards",
         slideFadeInVideo: "drawFromTop 6s steps(4) forwards",
       },
     },

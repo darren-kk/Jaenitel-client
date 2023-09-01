@@ -232,18 +232,20 @@ function MainDos() {
       handleCommand();
     }
 
-    if (event.key === "ArrowDown") {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollTop + 30,
-        behavior: "smooth",
-      });
-    }
+    if (scrollRef) {
+      if (event.key === "ArrowDown") {
+        scrollRef.current.scrollTo({
+          top: scrollRef.current.scrollTop + 30,
+          behavior: "smooth",
+        });
+      }
 
-    if (event.key === "ArrowUp") {
-      scrollRef.current.scrollTo({
-        top: scrollRef.current.scrollTop - 30,
-        behavior: "smooth",
-      });
+      if (event.key === "ArrowUp") {
+        scrollRef.current.scrollTo({
+          top: scrollRef.current.scrollTop - 30,
+          behavior: "smooth",
+        });
+      }
     }
   }
 

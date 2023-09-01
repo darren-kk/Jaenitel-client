@@ -110,9 +110,7 @@ function NewMessageModal() {
         try {
           await postMessage();
         } catch (error) {
-          if (error.message.startsWith("Receiver")) {
-            setErrorMessage("닉네임이 일치하지 않습니다.");
-          }
+          setErrorMessage(error.message);
         }
       }
     }

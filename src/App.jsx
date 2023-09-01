@@ -16,6 +16,7 @@ import ChatRoom from "./pages/ChatRoom";
 import Special from "./pages/Special";
 import AuthWrapper from "./components/AuthWrapper";
 import ErrorPage from "./pages/ErrorPage";
+import SocketMessageWrapper from "./components/SocketMessageWrapper";
 
 import { userAtom, showMainDosAtom } from "./atoms";
 
@@ -33,83 +34,85 @@ function App() {
         }}
       >
         {user && showMainDos && <MainDos />}
-        <Routes>
-          <Route path="/introduction" element={<Introduction />} />
-          <Route path="/login" element={<Login />} />
-          <Route
-            path="/boards"
-            element={
-              <AuthWrapper>
-                <Boards />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/messages"
-            element={
-              <AuthWrapper>
-                <Messages />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/chatRooms"
-            element={
-              <AuthWrapper>
-                <ChatRooms />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/chatRooms/:index/:roomId"
-            element={
-              <AuthWrapper>
-                <ChatRoom />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/:boardName"
-            element={
-              <AuthWrapper>
-                <Board />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/:boardName/post/:index/:postId"
-            element={
-              <AuthWrapper>
-                <Post />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/:boardName/post/new"
-            element={
-              <AuthWrapper>
-                <NewPost />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/:boardName/post/:index/:postId/edit"
-            element={
-              <AuthWrapper>
-                <EditPost />
-              </AuthWrapper>
-            }
-          />
-          <Route
-            path="/boards/special"
-            element={
-              <AuthWrapper>
-                <Special />
-              </AuthWrapper>
-            }
-          />
-          <Route path="/" element={<Navigate replace to="/introduction" />} />
-        </Routes>
+        <SocketMessageWrapper>
+          <Routes>
+            <Route path="/introduction" element={<Introduction />} />
+            <Route path="/login" element={<Login />} />
+            <Route
+              path="/boards"
+              element={
+                <AuthWrapper>
+                  <Boards />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/messages"
+              element={
+                <AuthWrapper>
+                  <Messages />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/chatRooms"
+              element={
+                <AuthWrapper>
+                  <ChatRooms />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/chatRooms/:index/:roomId"
+              element={
+                <AuthWrapper>
+                  <ChatRoom />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/:boardName"
+              element={
+                <AuthWrapper>
+                  <Board />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/:boardName/post/:index/:postId"
+              element={
+                <AuthWrapper>
+                  <Post />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/:boardName/post/new"
+              element={
+                <AuthWrapper>
+                  <NewPost />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/:boardName/post/:index/:postId/edit"
+              element={
+                <AuthWrapper>
+                  <EditPost />
+                </AuthWrapper>
+              }
+            />
+            <Route
+              path="/boards/special"
+              element={
+                <AuthWrapper>
+                  <Special />
+                </AuthWrapper>
+              }
+            />
+            <Route path="/" element={<Navigate replace to="/introduction" />} />
+          </Routes>
+        </SocketMessageWrapper>
       </ErrorBoundary>
     </div>
   );

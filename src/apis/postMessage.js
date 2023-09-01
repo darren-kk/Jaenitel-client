@@ -1,10 +1,13 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import io from "socket.io-client";
 import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
 import { userAtom, modalStateAtom } from "../atoms";
+
+const baseURL = import.meta.env.VITE_BASE_URL;
 
 function usePostMessage(messageInfo) {
   const navigate = useNavigate();
@@ -37,12 +40,15 @@ function usePostMessage(messageInfo) {
 
   const { mutateAsync: fetchPost } = useMutation(handleFetchPost, {
     onSuccess: () => {
+      const socket = io(baseURL);
+      socket.emit("sendMessageNotification", { sendFrom: user.nickname, sendTo: messageInfo.sendTo });
+
       setModalState({ isOpen: false, messageId: null });
       queryClient.refetchQueries(["messages"]);
       navigate(`/boards/messages`);
     },
     onError: (result) => {
-      const error = new Error(result.response.data.error);
+      const error = new Error(result.response.data.message);
       error.status = result.response.status;
 
       throw error;

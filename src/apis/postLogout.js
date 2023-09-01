@@ -1,13 +1,16 @@
 import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
-import { useSetAtom } from "jotai";
+import io from "socket.io-client";
+import { useAtom } from "jotai";
 
 import fetchData from "./axios";
 
 import { userAtom } from "../atoms";
 
+const baseURL = import.meta.env.VITE_BASE_URL;
+
 function usePostLogout() {
-  const setUser = useSetAtom(userAtom);
+  const [user, setUser] = useAtom(userAtom);
   const navigate = useNavigate();
 
   async function handleLogout() {
@@ -17,6 +20,11 @@ function usePostLogout() {
   const { mutateAsync: fetchLogout } = useMutation(handleLogout, {
     useErrorBoundary: true,
     onSuccess: () => {
+      const socket = io(baseURL);
+      socket.emit("leave-message", user.nickname);
+      socket.off("messageNotification");
+      socket.disconnect();
+
       setUser("");
       navigate("/login");
     },
