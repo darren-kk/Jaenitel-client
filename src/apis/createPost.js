@@ -4,7 +4,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, showMainDosAtom, postInfoAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
+import { showMainDosAtom, postInfoAtom } from "../atoms/postAtoms";
 
 function useCreatePost(postInfo) {
   const navigate = useNavigate();

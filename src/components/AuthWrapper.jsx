@@ -1,7 +1,7 @@
 import { useAtomValue } from "jotai";
-import { userAtom } from "../atoms";
-
 import PropTypes from "prop-types";
+
+import { userAtom } from "../atoms/userAtom";
 
 import useGetAuthCheck from "../apis/getAuthCheck";
 

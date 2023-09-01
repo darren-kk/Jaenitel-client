@@ -5,7 +5,8 @@ import MessageList from "../components/MessageList";
 import MessageModal from "../components/MessageModal";
 import NewMessageModal from "../components/NewMessageModal";
 
-import { modalStateAtom, scrollRefAtom } from "../atoms";
+import { modalStateAtom } from "../atoms/messageAtoms";
+import { scrollRefAtom } from "../atoms/refAtoms";
 
 function Messages() {
   const scrollRef = useRef(null);

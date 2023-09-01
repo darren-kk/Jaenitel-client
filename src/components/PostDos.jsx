@@ -5,7 +5,9 @@ import PropTypes from "prop-types";
 
 import Input from "./shared/Input";
 
-import { videoRefAtom, scrollRefAtom, titleRefAtom, postInfoAtom, showMainDosAtom } from "../atoms";
+import { videoRefAtom, scrollRefAtom, titleRefAtom } from "../atoms/refAtoms";
+import { postInfoAtom, showMainDosAtom } from "../atoms/postAtoms";
+
 import useCreatePost from "../apis/createPost";
 import usePutPost from "../apis/putPost";
 

@@ -7,7 +7,9 @@ import io from "socket.io-client";
 import ChatRoomDos from "../components/ChatRoomDos";
 
 import fetchData from "../apis/axios";
-import { userAtom, scrollRefAtom } from "../atoms";
+
+import { userAtom } from "../atoms/userAtom";
+import { scrollRefAtom } from "../atoms/refAtoms";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 

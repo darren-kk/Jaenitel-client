@@ -4,7 +4,8 @@ import { useSetAtom } from "jotai";
 import Input from "./shared/Input";
 
 import usePostChatRoom from "../apis/createChatRoom";
-import { showCreateChatRoomAtom } from "../atoms";
+
+import { showCreateChatRoomAtom } from "../atoms/chatRoomAtoms";
 
 function CreateChatRoomDos() {
   const [title, setTitle] = useState("");

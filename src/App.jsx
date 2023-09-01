@@ -18,7 +18,8 @@ import AuthWrapper from "./components/AuthWrapper";
 import ErrorPage from "./pages/ErrorPage";
 import SocketMessageWrapper from "./components/SocketMessageWrapper";
 
-import { userAtom, showMainDosAtom } from "./atoms";
+import { userAtom } from "./atoms/userAtom";
+import { showMainDosAtom } from "./atoms/postAtoms";
 
 function App() {
   const user = useAtomValue(userAtom);

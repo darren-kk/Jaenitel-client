@@ -8,7 +8,10 @@ import Image from "../components/shared/Image";
 import PostDos from "../components/PostDos";
 
 import { boardNames, maxfileSizes } from "../constants";
-import { videoRefAtom, scrollRefAtom, postInfoAtom, titleRefAtom } from "../atoms";
+
+import { videoRefAtom, scrollRefAtom, titleRefAtom } from "../atoms/refAtoms";
+import { postInfoAtom } from "../atoms/postAtoms";
+
 import useGetPost from "../apis/getPost";
 
 function EditPost() {

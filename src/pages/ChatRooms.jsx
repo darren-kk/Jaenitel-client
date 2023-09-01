@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 
 import useGetChatRooms from "../apis/getChatrooms";
 
-import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms";
+import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms/pageAtoms";
 
 function ChatRooms() {
   const [currentPage] = useAtom(currentPageAtom);

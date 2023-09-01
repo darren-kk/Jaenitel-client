@@ -5,7 +5,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, modalStateAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
+import { modalStateAtom } from "../atoms/messageAtoms";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 

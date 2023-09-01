@@ -5,7 +5,7 @@ import { useAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 

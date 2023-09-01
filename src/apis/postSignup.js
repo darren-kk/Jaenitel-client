@@ -4,7 +4,7 @@ import { useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { isSignupAtom } from "../atoms";
+import { isSignupAtom } from "../atoms/loginAtoms";
 
 function usePostSignup() {
   const navigate = useNavigate();

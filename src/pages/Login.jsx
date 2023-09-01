@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 import LoginDos from "../components/LoginDos";
 import SignupDos from "../components/SignupDos";
 
-import { isSignupAtom } from "../atoms";
+import { isSignupAtom } from "../atoms/loginAtoms";
 
 function Login() {
   const isSignup = useAtomValue(isSignupAtom);

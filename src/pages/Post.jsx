@@ -2,13 +2,13 @@ import { useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useSetAtom } from "jotai";
 
-import useGetPost from "../apis/getPost";
-
-import { scrollRefAtom, videoRefAtom } from "../atoms";
-import { boardNames } from "../constants";
-
 import Video from "../components/shared/Video";
 import Image from "../components/shared/Image";
+
+import useGetPost from "../apis/getPost";
+
+import { scrollRefAtom, videoRefAtom } from "../atoms/refAtoms";
+import { boardNames } from "../constants";
 
 function Post() {
   const { boardName, postId } = useParams();

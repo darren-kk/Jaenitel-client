@@ -5,7 +5,11 @@ import { useAtomValue, useSetAtom } from "jotai";
 import io from "socket.io-client";
 
 import Input from "./shared/Input";
-import { userAtom, showMainDosAtom, showCreateChatRoomAtom, scrollRefAtom } from "../atoms";
+
+import { userAtom } from "../atoms/userAtom";
+import { showMainDosAtom } from "../atoms/postAtoms";
+import { showCreateChatRoomAtom } from "../atoms/chatRoomAtoms";
+import { scrollRefAtom } from "../atoms/refAtoms";
 
 import useDeleteChatRoom from "../apis/deleteChatRoom";
 import usePostChat from "../apis/postChat";

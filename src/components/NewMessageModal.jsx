@@ -7,8 +7,10 @@ import Video from "./shared/Video";
 import Input from "./shared/Input";
 import Image from "./shared/Image";
 
-import { modalStateAtom, videoRefAtom, scrollRefAtom, titleRefAtom } from "../atoms";
 import { maxfileSizes } from "../constants";
+import { scrollRefAtom, titleRefAtom, videoRefAtom } from "../atoms/refAtoms";
+import { modalStateAtom } from "../atoms/messageAtoms";
+
 import usePostMessage from "../apis/postMessage";
 
 function NewMessageModal() {

@@ -4,9 +4,11 @@ import io from "socket.io-client";
 import { useAtom, useAtomValue } from "jotai";
 import PropTypes from "prop-types";
 
-import { userAtom, messageNotificationAtom } from "../atoms";
 import Modal from "./shared/Modal";
 import Button from "./shared/Button";
+
+import { userAtom } from "../atoms/userAtom";
+import { messageNotificationAtom } from "../atoms/messageAtoms";
 
 const baseURL = import.meta.env.VITE_BASE_URL;
 

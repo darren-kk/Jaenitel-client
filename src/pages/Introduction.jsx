@@ -3,7 +3,7 @@ import { useAtom } from "jotai";
 import Button from "../components/shared/Button";
 import ModemModal from "../components/ModemModal";
 
-import { showModalAtom } from "../atoms";
+import { showModalAtom } from "../atoms/loginAtoms";
 
 function Introduction() {
   const [showModal, setShowModal] = useAtom(showModalAtom);

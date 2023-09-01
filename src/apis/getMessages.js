@@ -3,7 +3,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, messagesAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
+import { messagesAtom } from "../atoms/messageAtoms";
 
 function useGetMessages() {
   const user = useAtomValue(userAtom);

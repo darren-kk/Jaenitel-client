@@ -4,7 +4,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, showMainDosAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
+import { showMainDosAtom } from "../atoms/postAtoms";
 
 function usePostChatRoom(title) {
   const navigate = useNavigate();

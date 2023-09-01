@@ -8,7 +8,10 @@ import Image from "../components/shared/Image";
 import PostDos from "../components/PostDos";
 
 import { boardNames, maxfileSizes } from "../constants";
-import { userAtom, videoRefAtom, scrollRefAtom, postInfoAtom, titleRefAtom } from "../atoms";
+
+import { userAtom } from "../atoms/userAtom";
+import { postInfoAtom } from "../atoms/postAtoms";
+import { videoRefAtom, scrollRefAtom, titleRefAtom } from "../atoms/refAtoms";
 
 function NewPost() {
   const [fileSizeMessage, setFileSizeMessage] = useState("");

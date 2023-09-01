@@ -2,22 +2,17 @@ import { useState, useRef, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 
-import { commandList, boardsNumberList } from "../constants";
-import {
-  currentPageAtom,
-  totalPageAtom,
-  scrollRefAtom,
-  videoRefAtom,
-  postsAtom,
-  userAtom,
-  messagesAtom,
-  modalStateAtom,
-  chatRoomsAtom,
-  showMainDosAtom,
-  showCreateChatRoomAtom,
-} from "../atoms";
 import Input from "./shared/Input";
 import CreateChatRoomDos from "./CreateChatRoomDos";
+
+import { commandList, boardsNumberList } from "../constants";
+
+import { currentPageAtom, totalPageAtom } from "../atoms/pageAtoms";
+import { scrollRefAtom, videoRefAtom } from "../atoms/refAtoms";
+import { postsAtom, showMainDosAtom } from "../atoms/postAtoms";
+import { userAtom } from "../atoms/userAtom";
+import { messagesAtom, modalStateAtom } from "../atoms/messageAtoms";
+import { chatRoomsAtom, showCreateChatRoomAtom } from "../atoms/chatRoomAtoms";
 
 import usePostLogout from "../apis/postLogout";
 import useDeletePost from "../apis/deletePost";

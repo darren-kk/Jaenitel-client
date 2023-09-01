@@ -6,7 +6,7 @@ import Modal from "./shared/Modal";
 import Input from "./shared/Input";
 import Button from "./shared/Button";
 
-import { showModalAtom } from "../atoms";
+import { showModalAtom } from "../atoms/loginAtoms";
 
 function ModemModal() {
   const setShowModal = useSetAtom(showModalAtom);

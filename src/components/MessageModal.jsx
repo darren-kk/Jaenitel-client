@@ -6,7 +6,8 @@ import Button from "./shared/Button";
 import Video from "./shared/Video";
 import Image from "./shared/Image";
 
-import { modalStateAtom, videoRefAtom, scrollRefAtom } from "../atoms";
+import { videoRefAtom, scrollRefAtom } from "../atoms/refAtoms";
+import { modalStateAtom } from "../atoms/messageAtoms";
 import useGetMessage from "../apis/getMessage";
 
 function MessageModal() {

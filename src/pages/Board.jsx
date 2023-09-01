@@ -4,7 +4,7 @@ import { useAtom } from "jotai";
 
 import useGetPosts from "../apis/getPosts";
 
-import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms";
+import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms/pageAtoms";
 
 import { boardNames } from "../constants";
 

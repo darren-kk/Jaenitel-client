@@ -3,7 +3,9 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, totalPageAtom, chatRoomsAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
+import { totalPageAtom } from "../atoms/pageAtoms";
+import { chatRoomsAtom } from "../atoms/chatRoomAtoms";
 
 function useGetChatRooms(page, limit) {
   const user = useAtomValue(userAtom);

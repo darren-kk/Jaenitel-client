@@ -3,7 +3,9 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, totalPageAtom, postsAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
+import { totalPageAtom } from "../atoms/pageAtoms";
+import { postsAtom } from "../atoms/postAtoms";
 
 function useGetPosts(category, page, limit) {
   const user = useAtomValue(userAtom);

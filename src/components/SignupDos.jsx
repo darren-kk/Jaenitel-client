@@ -6,7 +6,7 @@ import Input from "./shared/Input";
 import { checkInputValidation } from "../utils/utils";
 import usePostSignup from "../apis/postSignup";
 
-import { isSignupAtom } from "../atoms";
+import { isSignupAtom } from "../atoms/loginAtoms";
 
 let focusedIndex = 0;
 

@@ -4,7 +4,9 @@ import { useAtomValue, useSetAtom } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom, showMainDosAtom, showCreateChatRoomAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
+import { showMainDosAtom } from "../atoms/postAtoms";
+import { showCreateChatRoomAtom } from "../atoms/chatRoomAtoms";
 
 function useDeleteChatRoom() {
   const navigate = useNavigate();

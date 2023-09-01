@@ -3,7 +3,7 @@ import { useAtomValue } from "jotai";
 
 import fetchData from "./axios";
 
-import { userAtom } from "../atoms";
+import { userAtom } from "../atoms/userAtom";
 
 function useGetChatRoom(roomId) {
   const user = useAtomValue(userAtom);
