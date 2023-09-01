@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import { useSetAtom } from "jotai";
 
 import { currentPageAtom, totalPageAtom } from "../atoms/pageAtoms";
