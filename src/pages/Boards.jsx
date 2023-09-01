@@ -1,4 +1,18 @@
+import { useEffect } from "react";
+
+import { useSetAtom } from "jotai";
+
+import { currentPageAtom, totalPageAtom } from "../atoms/pageAtoms";
+
 function Boards() {
+  const setCurrentPage = useSetAtom(currentPageAtom);
+  const setTotalPage = useSetAtom(totalPageAtom);
+
+  useEffect(() => {
+    setCurrentPage(1);
+    setTotalPage(1);
+  }, [setCurrentPage, setTotalPage]);
+
   return (
     <div className="flex-center p-5  animate-slideFadeIn">
       <header className="flex-center border-menu shadow-lg text-4xl w-4/5 h-20 mb-12">메인 메뉴</header>
