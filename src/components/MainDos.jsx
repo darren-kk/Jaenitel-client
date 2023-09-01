@@ -83,7 +83,7 @@ function MainDos() {
     }
 
     if (command === "x") {
-      fetchLogout();
+      setLabelMessage("종료하고 로그인 화면으로 돌아가시겠습니까?");
     }
 
     if (command === "t") {
@@ -93,8 +93,12 @@ function MainDos() {
 
     if (labelMessage) {
       if (command === "y") {
-        if (labelMessage.endsWith("?")) {
+        if (labelMessage.includes("삭제")) {
           await fetchDeletePost(postId);
+        }
+
+        if (labelMessage.includes("종료")) {
+          fetchLogout();
         }
 
         setCommand("");

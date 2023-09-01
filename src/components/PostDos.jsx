@@ -139,7 +139,7 @@ function PostDos({ handleAddContent, contentRefs }) {
         </span>
         <div className="mt-2">
           <label>
-            명렁어 {">>"}
+            명령어 {">>"}
             <Input
               ref={commandInputRef}
               className="ml-2 outline-none w-4/5"
