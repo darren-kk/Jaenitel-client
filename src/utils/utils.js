@@ -11,6 +11,8 @@ export function checkInputValidation(loginInfo) {
     email.trim() !== "" && password.trim() !== "" && reWrittenPassword.trim() !== "" && nickname.trim() !== "";
 
   switch (true) {
+    case !areFieldsNotEmpty:
+      return "모든 입력 필드를 채워주세요.";
     case !isValidEmailFormat:
       return "이메일 형식이 올바르지 않습니다.";
     case !isValidPasswordLength:
@@ -19,8 +21,6 @@ export function checkInputValidation(loginInfo) {
       return "비밀번호와 비밀번호 확인이 일치하지 않습니다.";
     case !isValidNicknameLength:
       return "닉네임은 2자 이상 8자 이하이어야 합니다.";
-    case !areFieldsNotEmpty:
-      return "모든 입력 필드를 채워주세요.";
     default:
       return true;
   }
