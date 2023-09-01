@@ -128,9 +128,9 @@ function ChatRoom() {
         <div className="bg-white w-full h-1 mb-2"></div>
         <main ref={scrollRef} className="w-full h-65vh px-4 py-4 overflow-auto">
           <div className="flex flex-col justify-end items-start w-full">
-            {chatRoom?.chats?.map((chat) => {
+            {chatRoom?.chats?.map((chat, index) => {
               return (
-                <pre className="font-dung-guen-mo mb-2" key={chat._id}>
+                <pre className="font-dung-guen-mo mb-2" key={chat._id + index.toString()}>
                   {">>"} {chat.isSystem ? "SYSTEM" : chat.writer?.nickname}: {chat.content}
                 </pre>
               );

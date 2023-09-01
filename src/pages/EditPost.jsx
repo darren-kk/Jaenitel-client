@@ -154,10 +154,9 @@ function EditPost() {
               switch (contentType) {
                 case "textContent":
                   return (
-                    <div className="flex w-full my-2">
+                    <div key={index} className="flex w-full my-2">
                       <span className="mr-2">{index + 1}</span>
                       <textarea
-                        key={index}
                         className="bg-blue-bg w-full h-fit"
                         value={content.textContent}
                         ref={(el) => (contentRefs.current[index] = el)}
