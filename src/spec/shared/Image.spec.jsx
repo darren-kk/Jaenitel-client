@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 
-import Image from "../components/shared/Image";
+import Image from "../../components/shared/Image";
 
 describe("Image component", () => {
   it("renders without crashing", () => {

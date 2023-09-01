@@ -7,7 +7,7 @@ function VideoRef({ className, src }, ref) {
   const [volume, setVolume] = useState(0.5);
 
   useEffect(() => {
-    const videoRef = ref.current;
+    const videoRef = ref?.current;
 
     const handleVolumeChange = (event) => {
       if (event.key === "ArrowRight" && volume < 1) {
@@ -31,7 +31,7 @@ function VideoRef({ className, src }, ref) {
   }, [ref, volume]);
 
   useEffect(() => {
-    const videoRef = ref.current;
+    const videoRef = ref?.current;
 
     if (videoRef) {
       videoRef.load();
@@ -70,7 +70,7 @@ function VideoRef({ className, src }, ref) {
 
       <div className="flex justify-center bg-black w-full animate-slideFadeInVideo">
         <video ref={ref} className={`w-fit max-h-40vh ${className}`}>
-          <source src={src} type="video/mp4" />
+          <source src={src} type="video/mp4" data-testid="video-element" />
         </video>
       </div>
 
