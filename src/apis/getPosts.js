@@ -30,6 +30,7 @@ function useGetPosts(category, page, limit) {
   });
 
   return {
+    error: queryInfo.error,
     posts: queryInfo.data?.data.posts,
   };
 }
