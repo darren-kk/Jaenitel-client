@@ -18,6 +18,7 @@ function useGetPost(postId) {
   });
 
   return {
+    error: queryInfo.error,
     post: queryInfo.data?.data.post,
   };
 }
