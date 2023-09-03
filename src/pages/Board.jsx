@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 
 import useGetPosts from "../apis/getPosts";
 
@@ -9,8 +9,8 @@ import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms/pageA
 import { boardNames } from "../constants";
 
 function Board() {
-  const [currentPage] = useAtom(currentPageAtom);
-  const [totalPage] = useAtom(totalPageAtom);
+  const currentPage = useAtomValue(currentPageAtom);
+  const totalPage = useAtomValue(totalPageAtom);
   const [postsPerPage, setPostsPerPage] = useAtom(postsPerPageAtom);
 
   const mainRef = useRef(null);

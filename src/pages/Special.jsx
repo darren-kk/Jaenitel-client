@@ -24,25 +24,6 @@ function Special() {
                 <span className="text-xl mb-2">클라이언트: https://github.com/darren-kk/Jaenitel-client</span>
                 <span className="text-xl mb-2">써버: https://github.com/darren-kk/Jaenitel-server</span>
               </div>
-              <div className="flex-items-start w-4/6 pt-4">
-                <h2 className="text-4xl pl-1 mb-4">주요 기술-목록</h2>
-                <span className="text-xl mb-2">클라이언트: </span>
-                <ul className="mb-4">
-                  <li>리액트</li>
-                  <li>리액트-쿼리</li>
-                  <li>죠타이</li>
-                  <li>소켓-아이오</li>
-                  <li>테일-윈드</li>
-                </ul>
-                <span className="text-xl mb-2">써버: </span>
-                <ul className="mb-4">
-                  <li>노드</li>
-                  <li>익스프레스</li>
-                  <li>몽고 디-비</li>
-                  <li>소켓-아이오</li>
-                  <li>아마존 에스 쓰리</li>
-                </ul>
-              </div>
             </div>
           </div>
         </div>
