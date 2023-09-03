@@ -99,7 +99,7 @@ function NewPost() {
 
     if (contentType === "imageContent" || contentType === "videoContent") {
       if (event.target.files[0].size > maxfileSizes[contentType]) {
-        setFileSizeMessage("파일 크기가 너무 큽니다! 최대 파일 크기(사진: 5mb / 동영상: 100mb)");
+        setFileSizeMessage("파일 크기가 너무 큽니다! 최대 파일 크기(사진: 5mb / 동영상: 50mb)");
 
         return;
       }
@@ -158,7 +158,7 @@ function NewPost() {
                         value={content.textContent}
                         ref={(el) => (contentRefs.current[index] = el)}
                         onChange={(event) => {
-                          handleContentChange(event, index, "textContent");
+                          handleContentChange(event, index, contentType);
                           autoResizeTextarea(event.target);
                         }}
                       ></textarea>
@@ -167,14 +167,16 @@ function NewPost() {
                 case "imageContent":
                   return (
                     <div key={index} className="flex-col">
-                      <span className="mr-2">{index + 1}</span>
-                      <Input
-                        type="file"
-                        accept="image/*"
-                        className="mb-4"
-                        ref={(el) => (contentRefs.current[index] = el)}
-                        onChange={(event) => handleContentChange(event, index, "imageContent")}
-                      />
+                      <label>
+                        {index + 1}
+                        <Input
+                          type="file"
+                          accept="image/*"
+                          className="mb-4 ml-2"
+                          ref={(el) => (contentRefs.current[index] = el)}
+                          onChange={(event) => handleContentChange(event, index, "imageContent")}
+                        />
+                      </label>
                       <span className="block">{fileSizeMessage}</span>
                       {content.imageContent && (
                         <Image className="max-h-40vh" src={URL.createObjectURL(content.imageContent)} alt="Preview" />
@@ -184,19 +186,20 @@ function NewPost() {
                 case "videoContent":
                   return (
                     <div key={index} className="flex-col">
-                      <span className="mr-2">{index + 1}</span>
-                      <Input
-                        type="file"
-                        accept="video/*"
-                        ref={(el) => (contentRefs.current[index] = el)}
-                        onChange={(event) => handleContentChange(event, index, "videoContent")}
-                      />
+                      <label>
+                        {index + 1}
+                        <Input
+                          type="file"
+                          accept="video/*"
+                          className="mb-4 ml-2"
+                          ref={(el) => (contentRefs.current[index] = el)}
+                          onChange={(event) => handleContentChange(event, index, "videoContent")}
+                        />
+                      </label>
                       <span className="block">{fileSizeMessage}</span>
                       {content.videoContent && <Video ref={videoRef} src={URL.createObjectURL(content.videoContent)} />}
                     </div>
                   );
-                default:
-                  return null;
               }
             })}
           </div>
