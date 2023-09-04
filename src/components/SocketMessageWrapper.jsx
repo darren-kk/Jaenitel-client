@@ -24,6 +24,7 @@ function SocketMessageWrapper({ children }) {
         setMessageNotification(null);
       }
       if (event.key === "g" || event.key === "G" || event.key === "ㅎ") {
+        event.preventDefault();
         setMessageNotification(null);
         navigate("boards/messages");
       }
