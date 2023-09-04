@@ -30,16 +30,22 @@ function PostDos({ handleAddContent, contentRefs }) {
   const editPost = usePutPost(postInfo);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    function handleKeyDown(event) {
       if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
         commandInputRef.current.focus();
       }
-    };
+    }
+
+    function handleOnClick() {
+      commandInputRef.current.focus();
+    }
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleOnClick);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("click", handleOnClick);
     };
   }, []);
 
@@ -95,8 +101,9 @@ function PostDos({ handleAddContent, contentRefs }) {
         break;
 
       default:
-        if (command.endsWith(" go")) {
-          const number = command.split(" ")[0];
+        if (command.endsWith("go")) {
+          const number = command.split("g")[0].trim();
+
           contentRefs.current[number - 1].focus();
         }
     }
@@ -133,10 +140,15 @@ function PostDos({ handleAddContent, contentRefs }) {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
+        <span>## 수정/생성 완료(submit)</span>
         <span>
-          ## 제출(submit) 제목(title) 글(text) 사진(image) 동영상(video) 이동(번호 / go) 돌아오기(ctrl + shift +
-          k(케이))
+          {`## 취소(b) 제목 수정(title) 새 글 단락 추가(text) ${
+            postMode === "new" ? "사진 첨부" : "사진 추가"
+          }(image) ${
+            postMode === "new" ? "동영상 첨부" : "동영상 추가"
+          }(video) 요소 수정(번호 go) 명령어입력창(ctrl + shift + k(케이))`}
         </span>
+
         <div className="mt-2">
           <label>
             명령어 {">>"}

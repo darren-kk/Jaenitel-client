@@ -109,24 +109,30 @@ function ChatRoomDos() {
       chatInputRef.current.focus();
     }
 
-    const handleKeyDown = (event) => {
+    function handleKeyDown(event) {
       if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
         chatInputRef.current.focus();
       }
-    };
+    }
+
+    function handleOnClick() {
+      chatInputRef.current.focus();
+    }
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleOnClick);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("click", handleOnClick);
     };
   }, []);
 
   return (
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh z-10">
       <div className="bg-white w-full h-1"></div>
-      <div className="flex flex-col px-4 py-3">
-        <span>## 채팅(Enter) 채팅창(ctrl + shift + k(케이)) 나가기($ home)</span>
+      <div className="flex flex-col px-16 py-3">
+        <span>## 채팅(Enter) 채팅창(ctrl + shift + k(케이)) 나가기($ back)</span>
         <div>
           <label>
             {">>"}

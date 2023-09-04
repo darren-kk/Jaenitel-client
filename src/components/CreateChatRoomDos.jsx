@@ -21,16 +21,22 @@ function CreateChatRoomDos() {
       titleInputRef.current.focus();
     }
 
-    const handleKeyDown = (event) => {
+    function handleKeyDown(event) {
       if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "t") {
         titleInputRef.current.focus();
       }
-    };
+    }
+
+    function handleOnClick() {
+      titleInputRef.current.focus();
+    }
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleOnClick);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("click", handleOnClick);
     };
   }, []);
 

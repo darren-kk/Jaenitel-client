@@ -21,6 +21,7 @@ function MainDos() {
   const [command, setCommand] = useState("");
   const [showCommandList, setShowCommandList] = useState(false);
   const [labelMessage, setLabelMessage] = useState("");
+  const [isVideoExist, setIsVideoExist] = useState(false);
 
   const setCurrentPage = useSetAtom(currentPageAtom);
   const setShowMainDos = useSetAtom(showMainDosAtom);
@@ -46,20 +47,36 @@ function MainDos() {
   const fetchDeletePost = useDeletePost(path[2]);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
+    if (videoRef?.current) {
+      setIsVideoExist(true);
+    }
+
+    if (!videoRef?.current) {
+      setIsVideoExist(false);
+    }
+  }, [videoRef]);
+
+  useEffect(() => {
+    function handleKeyDown(event) {
       if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
         commandInputRef.current.focus();
       }
-    };
+    }
+
+    function handleOnClick() {
+      commandInputRef.current.focus();
+    }
 
     if (commandInputRef.current) {
       commandInputRef.current.focus();
     }
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleOnClick);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("click", handleOnClick);
     };
   }, []);
 
@@ -203,6 +220,10 @@ function MainDos() {
     }
 
     if (command === "b") {
+      if (path.length === 2) {
+        return;
+      }
+
       navigate(-1);
     }
 
@@ -254,9 +275,23 @@ function MainDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh z-10">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
+        <span>## 명령어 안내 켜기/끄기(h)</span>
         <span>
-          ## 명령어 안내 켜기/끄기(h) 이동(번호 go) 뒤로가기(b) 초기화면(t) 종료(x) dos(ctrl + shift + k(케이))
+          {path.length === 2
+            ? "## 게시판 이동(번호 go) 초기화면(t) 종료(x)"
+            : path.length === 3 && path[path.length - 1] === "messages"
+            ? "## 쪽지 확인(번호 go) 스크롤(방향키 위 아래) 새 쪽지 쓰기(new) 뒤로가기(b) 초기화면(t) 종료(x)"
+            : path.length === 3 && path[path.length - 1] === "chatrooms"
+            ? "## 대화방 입장(번호 go) 다음 페이지(n) 이전 페이지(P) 새 대화방 생성(new) 뒤로가기(b) 초기화면(t) 종료(x)"
+            : path.length === 3
+            ? "## 게시글 이동(번호 go) 다음 페이지(n) 이전 페이지(P) 새 게시글 쓰기(new) 뒤로가기(b) 초기화면(t) 종료(x)"
+            : path.length === 6
+            ? "## 스크롤(방향키 위 아래) 게시글 수정(edit) 게시글 삭제(delete) 새 게시글 쓰기(new) 뒤로가기(b) 초기화면(t) 종료(x)"
+            : ""}
         </span>
+        {path.length === 6 && isVideoExist && (
+          <span>## 동영상(재생: play, 일시정지: pause, 정지: stop 볼륨: 방향키 좌 우)</span>
+        )}
         <div className="flex mt-2">
           <label>
             {labelMessage ? `${labelMessage} 확인(y) 취소(n)` : `선택 >>`}

@@ -28,7 +28,7 @@ function ErrorPage({ error, resetErrorBoundary }) {
         <h1 className="text-3xl mb-20">통신 장애가 발생 했습니다!</h1>
         <div className="flex flex-col">
           <h2 className="text-2xl mb-10">
-            {error?.response.status} :{error?.response.statusText}
+            {error?.response ? `${error.response.status} : ${error.response.statusText}` : ""}
           </h2>
           <h2 className="text-2xl">t를 입력해 처음 화면으로 돌아갈 수 있습니다.</h2>
         </div>

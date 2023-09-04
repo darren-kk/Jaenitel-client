@@ -174,7 +174,7 @@ function NewMessageModal() {
         <div className="w-55vh h-75vh py-10 px-4">
           <div className="flex flex-col h-full m-2">
             <label className="text-black mb-2">
-              보낼 사람:
+              보낼 사람(닉네임):
               <Input
                 ref={titleRef}
                 className="flex-items-start bg-white text-black w-full h-6 pl-2 border-input"

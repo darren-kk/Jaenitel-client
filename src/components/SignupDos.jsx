@@ -35,7 +35,7 @@ function SignupDos() {
       idInputRef.current.focus();
     }
 
-    const handleKeyDown = (event) => {
+    function handleKeyDown(event) {
       if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
         idInputRef.current.focus();
       }
@@ -44,12 +44,18 @@ function SignupDos() {
         event.preventDefault();
         setIsSignup(false);
       }
-    };
+    }
+
+    function handleOnClick() {
+      idInputRef.current.focus();
+    }
 
     window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("click", handleOnClick);
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("click", handleOnClick);
     };
   }, [setIsSignup]);
 
