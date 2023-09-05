@@ -9,5 +9,9 @@ export default defineConfig({
     environment: "jsdom",
     setupFiles: "./src/setupTests.js",
     testMatch: ["./src/spec/*.spec.jsx"],
+    coverage: {
+      all: true,
+      exclude: ["*.config.js", "*.cjs", "**/atoms/**"],
+    },
   },
 });

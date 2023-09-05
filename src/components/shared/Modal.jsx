@@ -5,7 +5,7 @@ import Button from "./Button";
 
 function Modal({ children, title }) {
   return createPortal(
-    <div className="fixed flex-center left-0 right-0 top-0 bottom-0 bg-opacity-50 z-1">
+    <div className="fixed flex-center left-0 right-0 top-0 bottom-0 bg-opacity-50 z-50">
       <div className="flex-center relative h-auto w-auto bg-gray-bg border-2 overflow-auto">
         <div className="absolute top-0 flex justify-between text-sm bg-gradient-to-r from-gradient-blue-start to-gradient-blue-end w-full pl-4 pr-2 py-1">
           {title}
