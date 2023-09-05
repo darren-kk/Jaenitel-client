@@ -11,7 +11,7 @@ export default defineConfig({
     testMatch: ["./src/spec/*.spec.jsx"],
     coverage: {
       all: true,
-      exclude: ["*.config.js", "*.cjs", "**/atoms/**"],
+      exclude: ["*.config.js", "*.cjs", "**/atoms/**", "**/main.jsx"],
     },
   },
 });
