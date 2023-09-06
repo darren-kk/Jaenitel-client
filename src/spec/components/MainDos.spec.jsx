@@ -8,7 +8,8 @@ import MainDos from "../../components/MainDos";
 import { showCreateChatRoomAtom } from "../../atoms/chatRoomAtoms";
 import { modalStateAtom } from "../../atoms/messageAtoms";
 import { userAtom } from "../../atoms/userAtom";
-import { currentPageAtom, showMainDosAtom } from "../../atoms/pageAtoms";
+import { currentPageAtom } from "../../atoms/pageAtoms";
+import { showMainDosAtom } from "../../atoms/postAtoms";
 
 const mocks = vi.hoisted(() => {
   return {
@@ -86,6 +87,7 @@ describe("MainDos Component", () => {
 
   afterEach(() => {
     mocks.setShowMainDos.mockClear();
+    mocks.setCurrentPage.mockClear();
   });
 
   it("renders correctly", () => {
@@ -107,6 +109,7 @@ describe("MainDos Component", () => {
     expect(screen.getByText(/종료하고 로그인 화면으로 돌아가시겠습니까?/i)).toBeInTheDocument();
 
     changeCommand("t");
+    expect(mocks.setShowMainDos).toHaveBeenCalledWith(true);
     expect(mocks.navigate).toHaveBeenCalledWith("/boards");
 
     changeCommand("1 go");
@@ -114,6 +117,12 @@ describe("MainDos Component", () => {
 
     changeCommand("b");
     expect(mocks.navigate).toHaveBeenCalled();
+
+    changeCommand("p");
+    expect(mocks.setCurrentPage).toHaveBeenCalled();
+
+    changeCommand("n");
+    expect(mocks.setCurrentPage).toHaveBeenCalled();
   });
 
   it("should render createChatRoom Dos when showCreateChatRoom is true", () => {
