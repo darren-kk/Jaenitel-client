@@ -209,14 +209,16 @@ function NewMessageModal() {
                   case "imageContent":
                     return (
                       <div key={index} className="flex-col">
-                        <span className="mr-2">{index + 1}</span>
-                        <Input
-                          type="file"
-                          accept="image/*"
-                          className="text-sm h-8"
-                          ref={(el) => (contentRefs.current[index] = el)}
-                          onChange={(event) => handleContentChange(event, index, "imageContent")}
-                        />
+                        <label>
+                          {index + 1}
+                          <Input
+                            type="file"
+                            accept="image/*"
+                            className="text-sm h-8 ml-2"
+                            ref={(el) => (contentRefs.current[index] = el)}
+                            onChange={(event) => handleContentChange(event, index, "imageContent")}
+                          />
+                        </label>
                         {content.imageContent && (
                           <Image className="max-h-30vh" src={URL.createObjectURL(content.imageContent)} alt="Preview" />
                         )}
@@ -225,14 +227,16 @@ function NewMessageModal() {
                   case "videoContent":
                     return (
                       <div key={index} className="flex-col">
-                        <span className="mr-2">{index + 1}</span>
-                        <Input
-                          type="file"
-                          accept="video/*"
-                          className="text-sm h-8"
-                          ref={(el) => (contentRefs.current[index] = el)}
-                          onChange={(event) => handleContentChange(event, index, "videoContent")}
-                        />
+                        <label>
+                          {index + 1}
+                          <Input
+                            type="file"
+                            accept="video/*"
+                            className="text-sm h-8 ml-2"
+                            ref={(el) => (contentRefs.current[index] = el)}
+                            onChange={(event) => handleContentChange(event, index, "videoContent")}
+                          />
+                        </label>
                         {content.videoContent && (
                           <Video ref={videoRef} src={URL.createObjectURL(content.videoContent)} />
                         )}
