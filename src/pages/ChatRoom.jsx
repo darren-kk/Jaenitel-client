@@ -22,23 +22,23 @@ function ChatRoom() {
 
   const user = useAtomValue(userAtom);
 
+  function scrollToBottom() {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }
+
   async function fetchGetChatRoom() {
     const data = await fetchData("GET", `/users/${user._id}/chat-rooms/${roomId}`);
 
     return data.data.chatRoom;
   }
 
-  const scrollToBottom = () => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
-    }
-  };
-
   const { data: chatRoom } = useQuery(["chatRoom", roomId], fetchGetChatRoom, {
     keepPreviousData: true,
     onError: (result) => {
-      const error = new Error(result.response.data.message);
-      error.status = result.response.status;
+      const error = new Error(result.response?.data.message);
+      error.status = result.response?.status;
 
       throw error;
     },
