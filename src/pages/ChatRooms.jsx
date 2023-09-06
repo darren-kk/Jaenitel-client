@@ -1,13 +1,13 @@
 import { useEffect, useRef } from "react";
-import { useAtom } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 
 import useGetChatRooms from "../apis/getChatrooms";
 
 import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms/pageAtoms";
 
 function ChatRooms() {
-  const [currentPage] = useAtom(currentPageAtom);
-  const [totalPage] = useAtom(totalPageAtom);
+  const currentPage = useAtomValue(currentPageAtom);
+  const totalPage = useAtomValue(totalPageAtom);
   const [postsPerPage, setPostsPerPage] = useAtom(postsPerPageAtom);
 
   const mainRef = useRef(null);
