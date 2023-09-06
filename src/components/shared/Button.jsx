@@ -1,8 +1,8 @@
 import PropTypes from "prop-types";
 
-function Button({ className, type, children, onClick, style }) {
+function Button({ className, type, children, onClick }) {
   return (
-    <button type={type} className={className} onClick={onClick} style={style}>
+    <button type={type} className={className} onClick={onClick}>
       {children}
     </button>
   );
@@ -14,7 +14,6 @@ Button.propTypes = {
   children: PropTypes.any,
   disabled: PropTypes.bool,
   onClick: PropTypes.func,
-  style: PropTypes.object,
 };
 
 export default Button;

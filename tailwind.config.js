@@ -3,6 +3,14 @@
 module.exports = {
   content: ["./index.html", "./src/**/*.{js,jsx}"],
   theme: {
+    animationDelay: {
+      2: "2000ms",
+      4.5: "4500ms",
+      7.5: "7500ms",
+      11: "11000ms",
+      14.5: "14500ms",
+      18.5: "18500ms",
+    },
     extend: {
       colors: {
         "blue-bg": "#000080",
@@ -55,5 +63,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animation-delay")],
 };
