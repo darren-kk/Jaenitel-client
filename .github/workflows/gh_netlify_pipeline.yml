@@ -4,7 +4,7 @@ on: push
 
 jobs:
   test:
-    name: Test lint, tsc, build
+    name: Test lint, test, build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2

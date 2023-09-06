@@ -57,10 +57,10 @@ vi.mock("socket.io-client", () => ({
   default: () => ({ emit: vi.fn(), disconnect: vi.fn() }),
 }));
 
-vi.mock("../apis/deleteChatRoom", () => ({
+vi.mock("../../apis/deleteChatRoom", () => ({
   default: () => mocks.deleteChatRoom,
 }));
-vi.mock("../apis/postChat", () => ({
+vi.mock("../../apis/postChat", () => ({
   default: () => mocks.postChat,
 }));
 
