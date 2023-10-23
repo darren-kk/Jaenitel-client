@@ -1,7 +1,36 @@
+import { useEffect, useRef } from "react";
+import { useSetAtom } from "jotai";
+
+import { scrollRefAtom } from "../atoms/refAtoms";
 import { asciiArts } from "../constants";
 
 function Special() {
+  const setScrollRef = useSetAtom(scrollRefAtom);
+  const scrollRef = useRef(null);
+
   const selfie = asciiArts.selfie;
+
+  useEffect(() => {
+    if (scrollRef) {
+      setScrollRef(scrollRef);
+    }
+  }, [setScrollRef]);
+
+  // function handleKeyDown(event) {
+  //   if (event.key === "ArrowDown") {
+  //     scrollRef.current.scrollTo({
+  //       top: scrollRef.current.scrollTop + 30,
+  //       behavior: "smooth",
+  //     });
+  //   }
+
+  //   if (event.key === "ArrowUp") {
+  //     scrollRef.current.scrollTo({
+  //       top: scrollRef.current.scrollTop - 30,
+  //       behavior: "smooth",
+  //     });
+  //   }
+  // }
 
   return (
     <div className="flex-center pt-5 animate-slideFadeIn">
@@ -9,7 +38,7 @@ function Special() {
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">안녕하세요, 김재환입니다.</div>
       </header>
       <div className="bg-white w-full h-1 mb-2"></div>
-      <main className="flex-row-start w-full h-65vh overflow-auto">
+      <main ref={scrollRef} className="flex-row-start w-full h-65vh overflow-auto">
         <div className="w-full p-4">
           <div className="flex justify-center items-start w-full px-10">
             <pre className="flex justify-end text-xs w-2/6 pr-10 animate-slideFadeIn">{selfie}</pre>

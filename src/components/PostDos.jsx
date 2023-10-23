@@ -111,7 +111,7 @@ function PostDos({ handleAddContent, contentRefs }) {
     setCommand("");
   }
 
-  async function handleKeyDown(event) {
+  function handleKeyDown(event) {
     if (event.nativeEvent.isComposing) {
       return;
     }
