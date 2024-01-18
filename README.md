@@ -1,6 +1,20 @@
 # 📺 JAENITEL
 
-### 예전 PC 통신 시절 천리안, 하이텔, 나우누리 등의 프로그램을 재해석 및 재구현한 웹 어플리케이션입니다. <br></br> 다양한 글과 사진, 동영상을 게시판에 업로드 할 수 있으며, 쪽지와 실시간 대화방을 이용해 다른 사용자와 소통 할 수 있습니다.
+<img width="1440" alt="스크린샷 2024-01-18 오후 9 35 25" src="https://github.com/darren-kk/Jaenitel-client/assets/111283378/43d260c2-d7f5-4495-b191-ee150c791a88">
+
+<p align="center">
+   예전 PC 통신 시절 천리안, 하이텔, 나우누리 등의 프로그램을 재해석 및 재구현한 웹 어플리케이션입니다. <br></br> 다양한 글과 사진, 동영상을 게시판에 업로드 할 수 있으며, 쪽지와 실시간 대화방을 이용해 다른 사용자와 소통 할 수 있습니다.
+</p>
+
+# **🔗 Links**
+
+<p align="center">
+  <a href="https://web.jaenitel.com">Deployed website</a>
+  <span> | </span>
+  <a href="https://github.com/darren-kk/Jaenitel-client">Frontend Repository</a>
+  <span> | </span>
+  <a href="https://github.com/darren-kk/Jaenitel-server">Backend Repository</a>
+</p>
 
 <br></br>
 
