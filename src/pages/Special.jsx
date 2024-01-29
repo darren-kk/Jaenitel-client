@@ -16,22 +16,6 @@ function Special() {
     }
   }, [setScrollRef]);
 
-  // function handleKeyDown(event) {
-  //   if (event.key === "ArrowDown") {
-  //     scrollRef.current.scrollTo({
-  //       top: scrollRef.current.scrollTop + 30,
-  //       behavior: "smooth",
-  //     });
-  //   }
-
-  //   if (event.key === "ArrowUp") {
-  //     scrollRef.current.scrollTo({
-  //       top: scrollRef.current.scrollTop - 30,
-  //       behavior: "smooth",
-  //     });
-  //   }
-  // }
-
   return (
     <div className="flex-center pt-5 animate-slideFadeIn">
       <header className="flex-center w-full h-10vh pt-5 mb-4">
