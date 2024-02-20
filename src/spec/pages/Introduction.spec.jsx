@@ -11,6 +11,10 @@ const mocks = vi.hoisted(() => {
   };
 });
 
+vi.mock("react-router-dom", () => ({
+  useNavigate: () => vi.fn(),
+}));
+
 vi.mock("../../components/ModemModal", () => ({
   default: () => {
     return <div data-testid="modem-modal">Mocked ModemModal</div>;
