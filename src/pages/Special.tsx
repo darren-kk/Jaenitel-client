@@ -12,7 +12,7 @@ function Special() {
 
   useEffect(() => {
     if (scrollRef) {
-      setScrollRef(scrollRef);
+      setScrollRef(scrollRef.current);
     }
   }, [setScrollRef]);
 
@@ -22,7 +22,7 @@ function Special() {
         <div className="flex-center border-menu shadow-lg text-4xl w-4/5 mb-6">안녕하세요, 김재환입니다.</div>
       </header>
       <div className="bg-white w-full h-1 mb-2"></div>
-      <main ref={scrollRef} className="flex-row-start w-full h-65vh overflow-auto">
+      <main ref={scrollRef.current} className="flex-row-start w-full h-65vh overflow-auto">
         <div className="w-full p-4">
           <div className="flex justify-center items-start w-full px-10">
             <pre className="flex justify-end text-xs w-2/6 pr-10 animate-slideFadeIn">{selfie}</pre>
