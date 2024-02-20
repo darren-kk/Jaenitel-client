@@ -1,4 +1,5 @@
 import { useAtom } from "jotai";
+import { useNavigate } from "react-router-dom";
 
 import Button from "../components/shared/Button";
 import ModemModal from "../components/ModemModal";
@@ -8,6 +9,7 @@ import { useMediaQuery } from "react-responsive";
 
 function Introduction() {
   const [showModal, setShowModal] = useAtom(showModalAtom);
+  const navigate = useNavigate();
   const isMobile = useMediaQuery({ query: "(max-width:1023px)" });
 
   function handleClick() {
@@ -56,6 +58,13 @@ function Introduction() {
   return (
     <div className="cursor-default">
       <div className="flex flex-col justify-start items-start w-full h-3/5 p-10">
+        <Button
+          className="border-button mb-10 px-2 py-1 bg-gray-bg text-xl text-black"
+          type="button"
+          onClick={() => navigate("/login")}
+        >
+          건너뛰고 로그인하러 가기
+        </Button>
         <p className="text-xl w-0 overflow-hidden whitespace-nowrap mb-8 animate-typewriter">
           안녕하세요! 재니텔에 방문해 주셔서 감사드립니다.
         </p>

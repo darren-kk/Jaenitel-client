@@ -24,6 +24,11 @@ function ModemModal() {
   const modemDialNumber = "00410";
   const interval = 500;
 
+  const handleAudioEnd = () => {
+    setShowModal(false);
+    navigate("/login");
+  };
+
   useEffect(() => {
     if (currentIndex < modemDialNumber.length) {
       const timer = setTimeout(() => {
@@ -43,11 +48,6 @@ function ModemModal() {
 
   useEffect(() => {
     const audioElement = audioElementRef.current;
-
-    const handleAudioEnd = () => {
-      setShowModal(false);
-      navigate("/login");
-    };
 
     if (!isMuted && isConnecting) {
       audioElement.play();
@@ -84,9 +84,14 @@ function ModemModal() {
             <img className="w-10 h-10 mr-10" src="/assests/modemDial.png" alt="modem Dial" />
             <span className="text-black">01410에 전화 거는 중...</span>
           </div>
-          <Button className="border-button w-24 text-black mt-2" type="button" onClick={() => setIsMuted(!isMuted)}>
-            {isMuted ? "재생(m)" : "일시정지(m)"}
-          </Button>
+          <div>
+            <Button className="border-button w-24 text-black mt-2" type="button" onClick={() => setIsMuted(!isMuted)}>
+              {isMuted ? "재생(m)" : "일시정지(m)"}
+            </Button>
+            <Button className="border-button w-24 text-black ml-4" type="button" onClick={() => handleAudioEnd()}>
+              건너뛰기
+            </Button>
+          </div>
         </div>
       ) : (
         <div className="px-14 py-9 cursor-default">
