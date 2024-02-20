@@ -27,7 +27,7 @@ function LoginDos() {
     }
 
     function handleKeyDown(event) {
-      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
+      if (event.key === "Escape") {
         idInputRef.current.focus();
       }
     }
@@ -91,7 +91,7 @@ function LoginDos() {
       <div className="bg-white w-full h-1 mb-2"></div>
       <div className="flex flex-col px-16 py-5">
         <span>## 이용자 ID가 없거나 신규/무료가입을 하시려면 guest를 입력 하십시오.</span>
-        <span>## 이메일 창으로 돌아가기: (ctrl + shift + k)</span>
+        <span>## 이메일 창으로 돌아가기: (esc / Escape)</span>
         <span>## 입력 : Enter</span>
         <form className="flex flex-col">
           <label>
