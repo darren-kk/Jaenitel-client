@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, KeyboardEvent } from "react";
 import { useSetAtom } from "jotai";
 
 import usePostLogin from "../apis/postLogin";
@@ -6,16 +6,21 @@ import Input from "./shared/Input";
 
 import { isSignupAtom } from "../atoms/loginAtoms";
 
+interface LoginInfo {
+  email: string;
+  password: string;
+}
+
 function LoginDos() {
-  const [loginInfo, setLoginInfo] = useState({
+  const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     email: "",
     password: "",
   });
   const [showPasswordInput, setShowPasswordInput] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
-  const idInputRef = useRef(null);
-  const passwordInputRef = useRef(null);
+  const idInputRef = useRef<HTMLInputElement>(null);
+  const passwordInputRef = useRef<HTMLInputElement>(null);
 
   const setIsSignup = useSetAtom(isSignupAtom);
 
@@ -26,21 +31,21 @@ function LoginDos() {
       idInputRef.current.focus();
     }
 
-    function handleKeyDown(event) {
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        idInputRef.current.focus();
+        idInputRef.current?.focus();
       }
     }
 
     function handleOnClick() {
-      idInputRef.current.focus();
+      idInputRef.current?.focus();
     }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown as unknown as EventListener);
     window.addEventListener("click", handleOnClick);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown as unknown as EventListener);
       window.removeEventListener("click", handleOnClick);
     };
   }, []);
@@ -51,14 +56,14 @@ function LoginDos() {
     }
   }, [showPasswordInput]);
 
-  function handleIdKeyDown(event) {
+  function handleIdKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.nativeEvent.isComposing) {
       return;
     }
 
     if (showPasswordInput) {
       if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-        passwordInputRef.current.focus();
+        passwordInputRef.current?.focus();
       }
     }
 
@@ -72,16 +77,20 @@ function LoginDos() {
     }
   }
 
-  async function handlePassswordKeyDown(event) {
+  async function handlePassswordKeyDown(event: KeyboardEvent<HTMLInputElement>) {
     if (event.key === "ArrowDown" || event.key === "ArrowUp") {
-      idInputRef.current.focus();
+      idInputRef.current?.focus();
     }
 
     if (event.key === "Enter") {
       try {
         await fetchLogin(loginInfo);
-      } catch (error) {
-        setErrorMessage(error.message);
+      } catch (error: unknown) {
+        if (error instanceof Error) {
+          setErrorMessage(error.message);
+        } else {
+          setErrorMessage("An unknown error occurred.");
+        }
       }
     }
   }
