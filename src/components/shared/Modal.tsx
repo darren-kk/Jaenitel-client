@@ -1,9 +1,14 @@
-import PropTypes from "prop-types";
+import { ReactNode } from "react";
 import { createPortal } from "react-dom";
 
 import Button from "./Button";
 
-function Modal({ children, title }) {
+interface ModalProps {
+  children: ReactNode;
+  title: string;
+}
+
+function Modal({ children, title }: ModalProps) {
   return createPortal(
     <div className="fixed flex-center left-0 right-0 top-0 bottom-0 bg-opacity-50 z-50">
       <div className="flex-center relative h-auto w-auto bg-gray-bg border-2 overflow-auto">
@@ -19,10 +24,5 @@ function Modal({ children, title }) {
     document.body,
   );
 }
-
-Modal.propTypes = {
-  children: PropTypes.any,
-  title: PropTypes.string.isRequired,
-};
 
 export default Modal;
