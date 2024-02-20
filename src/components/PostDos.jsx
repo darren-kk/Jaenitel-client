@@ -31,7 +31,7 @@ function PostDos({ handleAddContent, contentRefs }) {
 
   useEffect(() => {
     function handleKeyDown(event) {
-      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
+      if (event.key === "Escape") {
         commandInputRef.current.focus();
       }
     }
@@ -146,7 +146,7 @@ function PostDos({ handleAddContent, contentRefs }) {
             postMode === "new" ? "사진 첨부" : "사진 추가"
           }(image) ${
             postMode === "new" ? "동영상 첨부" : "동영상 추가"
-          }(video) 요소 수정(번호 go) 명령어입력창(ctrl + shift + k(케이))`}
+          }(video) 요소 수정(번호 go) 명령어입력창(esc / escape)`}
         </span>
 
         <div className="mt-2">

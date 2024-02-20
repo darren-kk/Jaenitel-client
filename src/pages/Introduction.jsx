@@ -23,7 +23,7 @@ function Introduction() {
           <span className="w-full text-center font-press-start">** PC JAENITEL **</span>
           <p className="flex-shrink-0 mt-10 mb-10">본 애플리케이션은 PC 환경에 최적화 되어 있습니다.</p>
           <p className="flex-shrink-0">이에 따라, 모바일 환경에서는 원활한 사용이 어려우니 이점 양해 부탁드리며</p>
-          <p className="flex-shrink-0">보다 생동감 넘치는 경험을 위해 PC로접속해주시길 부탁드립니다.</p>
+          <p className="flex-shrink-0">보다 생동감 넘치는 경험을 위해 PC로 접속 해주시길 부탁드립니다.</p>
         </div>
         <div className="px-10 mt-4">
           <ul>

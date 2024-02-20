@@ -22,8 +22,8 @@ function CreateChatRoomDos() {
     }
 
     function handleKeyDown(event) {
-      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "t") {
-        titleInputRef.current.focus();
+      if (event.key === "Escape") {
+        setShowCreateChatRoomDos(false);
       }
     }
 
@@ -46,12 +46,6 @@ function CreateChatRoomDos() {
     }
 
     if (event.key === "Enter") {
-      if (title === "$ c") {
-        setShowCreateChatRoomDos(false);
-
-        return;
-      }
-
       try {
         await fetchCreateChatRoom();
       } catch (error) {
@@ -64,13 +58,13 @@ function CreateChatRoomDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>## 대화실 생성(Enter) 취소($ c) 돌아오기(ctrl + shift + t(티))</span>
+        <span>## 대화방 생성(Enter) 취소(esc / escape)</span>
         <div>
           <label>
-            {">>"}
+            {"대화방 이름 >>"}
             <Input
               ref={titleInputRef}
-              className="ml-2 outline-none w-11/12"
+              className="ml-2 outline-none w-10/12"
               type="text"
               value={title}
               onChange={(event) => setTitle(event.target.value)}

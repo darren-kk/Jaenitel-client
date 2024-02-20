@@ -58,8 +58,8 @@ function MainDos() {
 
   useEffect(() => {
     function handleKeyDown(event) {
-      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
-        commandInputRef.current.focus();
+      if (event.key === "Escape") {
+        commandInputRef.current?.focus();
       }
     }
 

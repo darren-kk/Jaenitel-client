@@ -48,7 +48,7 @@ function ChatRoomDos() {
     }
 
     if (event.key === "Enter" && chat.trim()) {
-      if (chat === "$ home") {
+      if (chat === "/home" || chat === "/h") {
         setShowMainDos(true);
         setShowCreateChatRoomDos(false);
         navigate("/boards");
@@ -56,7 +56,7 @@ function ChatRoomDos() {
         return;
       }
 
-      if (chat === "$ back") {
+      if (chat === "/back" || chat === "/b") {
         setShowMainDos(true);
         setShowCreateChatRoomDos(false);
         navigate(-1);
@@ -64,7 +64,7 @@ function ChatRoomDos() {
         return;
       }
 
-      if (chat === "$ delete") {
+      if (chat === "/delete" || chat === "/d") {
         await deleteChatRoom(roomId);
 
         return;
@@ -110,7 +110,7 @@ function ChatRoomDos() {
     }
 
     function handleKeyDown(event) {
-      if ((event.metaKey || event.ctrlKey) && event.shiftKey && event.key === "k") {
+      if (event.key === "Escape") {
         chatInputRef.current.focus();
       }
     }
@@ -132,7 +132,7 @@ function ChatRoomDos() {
     <div className="fixed bottom-0 left-0 bg-blue-bg w-full min-h-15vh z-10">
       <div className="bg-white w-full h-1"></div>
       <div className="flex flex-col px-16 py-3">
-        <span>## 채팅(Enter) 나가기($ back) 대화방 삭제($ delete) 대화창(ctrl + shift + k(케이))</span>
+        <span>## 채팅(Enter) 나가기(/back) 대화방 삭제(/delete) 대화창(esc / escape)</span>
         <div>
           <label>
             {">>"}
