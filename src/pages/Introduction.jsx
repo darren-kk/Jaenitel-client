@@ -4,12 +4,53 @@ import Button from "../components/shared/Button";
 import ModemModal from "../components/ModemModal";
 
 import { showModalAtom } from "../atoms/loginAtoms";
+import { useMediaQuery } from "react-responsive";
 
 function Introduction() {
   const [showModal, setShowModal] = useAtom(showModalAtom);
+  const isMobile = useMediaQuery({ query: "(max-width:1023px)" });
 
   function handleClick() {
     setShowModal(true);
+  }
+
+  if (isMobile) {
+    return (
+      <div className="cursor-default">
+        <div className="flex flex-col justify-start items-start w-full h-3/5 p-10">
+          <span className="w-full text-center font-press-start">** PC JAENITEL **</span>
+          <p className="flex-shrink-0 mt-10 mb-10">본 애플리케이션은 PC 환경에 최적화 되어 있습니다.</p>
+          <p className="flex-shrink-0">이에 따라, 모바일 환경에서는 원활한 사용이 어려우니 이점 양해 부탁드리며</p>
+          <p className="flex-shrink-0">보다 생동감 넘치는 경험을 위해 PC로접속해주시길 부탁드립니다.</p>
+        </div>
+        <div className="px-10 mt-4">
+          <ul>
+            <li className="mb-4">
+              <a
+                href="https://github.com/darren-kk/Jaenitel-client"
+                className="flex flex-row mb-4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - 리드미 읽으러 가기
+                <img className="w-5 h-5 ml-2" src="/assests/addressBook.png" alt="addressBook" />
+              </a>
+            </li>
+            <li>
+              <a
+                href="https://youtu.be/dTFjQ8IDwvA?si=IV0Tz4BTz5MoUUUG&t=2461"
+                className="flex flex-row mb-4"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                - 시연 영상 보러가기
+                <img className="w-5 h-5 ml-2" src="/assests/mediaPlayer.png" alt="mediaPlayer" />
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    );
   }
 
   return (
