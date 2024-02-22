@@ -11,7 +11,7 @@ function VideoRef({ className, src }: VideoProps, ref: ForwardedRef<HTMLVideoEle
   const [volume, setVolume] = useState<number>(0.5);
 
   useEffect(() => {
-    const videoRef: HTMLVideoElement | null = (ref as React.RefObject<HTMLVideoElement>).current;
+    const videoRef: HTMLVideoElement | null = (ref as React.RefObject<HTMLVideoElement>)?.current;
 
     const handleVolumeChange = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight" && volume < 1) {
@@ -35,7 +35,8 @@ function VideoRef({ className, src }: VideoProps, ref: ForwardedRef<HTMLVideoEle
   }, [ref, volume]);
 
   useEffect(() => {
-    const videoRef: HTMLVideoElement | null = (ref as React.RefObject<HTMLVideoElement>).current;
+    const videoRef: HTMLVideoElement | null = (ref as React.RefObject<HTMLVideoElement>)?.current;
+    console.log(videoRef);
 
     if (videoRef) {
       videoRef.load();
