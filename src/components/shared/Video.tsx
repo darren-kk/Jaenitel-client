@@ -1,15 +1,19 @@
-import { useState, forwardRef, useEffect } from "react";
-import PropTypes from "prop-types";
+import { useState, forwardRef, useEffect, ForwardedRef } from "react";
 
-function VideoRef({ className, src }, ref) {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [volume, setVolume] = useState(0.5);
+interface VideoProps {
+  className?: string;
+  src: string;
+}
+
+function VideoRef({ className, src }: VideoProps, ref: ForwardedRef<HTMLVideoElement>) {
+  const [isPlaying, setIsPlaying] = useState<boolean>(false);
+  const [currentTime, setCurrentTime] = useState<number>(0);
+  const [volume, setVolume] = useState<number>(0.5);
 
   useEffect(() => {
-    const videoRef = ref?.current;
+    const videoRef: HTMLVideoElement | null = (ref as React.RefObject<HTMLVideoElement>).current;
 
-    const handleVolumeChange = (event) => {
+    const handleVolumeChange = (event: KeyboardEvent) => {
       if (event.key === "ArrowRight" && volume < 1) {
         setVolume((prevVolume) => Math.min(prevVolume + 0.1, 1));
       }
@@ -31,7 +35,7 @@ function VideoRef({ className, src }, ref) {
   }, [ref, volume]);
 
   useEffect(() => {
-    const videoRef = ref?.current;
+    const videoRef: HTMLVideoElement | null = (ref as React.RefObject<HTMLVideoElement>).current;
 
     if (videoRef) {
       videoRef.load();
@@ -108,7 +112,7 @@ function VideoRef({ className, src }, ref) {
             step="0.1"
             className="accent-gray-400 ml-2"
             value={volume}
-            onChange={(e) => setVolume(e.target.value)}
+            onChange={(e) => setVolume(Number(e.target.value))}
           />
         </div>
       </div>
@@ -116,11 +120,6 @@ function VideoRef({ className, src }, ref) {
   );
 }
 
-const Video = forwardRef(VideoRef);
-
-VideoRef.propTypes = {
-  className: PropTypes.string,
-  src: PropTypes.string,
-};
+const Video = forwardRef<HTMLVideoElement, VideoProps>(VideoRef);
 
 export default Video;
