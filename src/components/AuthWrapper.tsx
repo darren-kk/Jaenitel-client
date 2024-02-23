@@ -1,11 +1,15 @@
 import { useAtomValue } from "jotai";
-import PropTypes from "prop-types";
 
 import { userAtom } from "../atoms/userAtom";
 
 import useGetAuthCheck from "../apis/getAuthCheck";
+import { ReactNode } from "react";
 
-function AuthWrapper({ children }) {
+interface AuthWrapperProp {
+  children: ReactNode;
+}
+
+function AuthWrapper({ children }: AuthWrapperProp) {
   const user = useAtomValue(userAtom);
   useGetAuthCheck();
 
@@ -15,9 +19,5 @@ function AuthWrapper({ children }) {
 
   return children;
 }
-
-AuthWrapper.propTypes = {
-  children: PropTypes.any,
-};
 
 export default AuthWrapper;
