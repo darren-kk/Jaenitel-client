@@ -1,8 +1,8 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, KeyboardEvent } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useQueryClient } from "@tanstack/react-query";
 import { useAtomValue, useSetAtom } from "jotai";
-import io from "socket.io-client";
+import io, { Socket } from "socket.io-client";
 
 import Input from "./shared/Input";
 
@@ -17,13 +17,13 @@ import usePostChat from "../apis/postChat";
 const baseURL = import.meta.env.VITE_BASE_URL;
 
 function ChatRoomDos() {
-  const [chat, setChat] = useState("");
-  const chatInputRef = useRef(null);
-  const socketRef = useRef();
+  const [chat, setChat] = useState<string>("");
+  const chatInputRef = useRef<HTMLInputElement>(null);
+  const socketRef = useRef<Socket | null>(null);
 
   const queryClient = useQueryClient();
 
-  const { roomId } = useParams();
+  const { roomId } = useParams<{ roomId: string }>();
   const navigate = useNavigate();
 
   const deleteChatRoom = useDeleteChatRoom();
@@ -38,11 +38,11 @@ function ChatRoomDos() {
     socketRef.current = io(baseURL);
 
     return () => {
-      socketRef.current.disconnect();
+      socketRef.current?.disconnect();
     };
-  }, [roomId, user._id, user.nickname]);
+  }, [roomId, user?._id, user?.nickname]);
 
-  async function handleSendChat(event) {
+  async function handleSendChat(event: KeyboardEvent<HTMLInputElement>) {
     if (event.nativeEvent.isComposing) {
       return;
     }
@@ -72,32 +72,41 @@ function ChatRoomDos() {
 
       const newChat = {
         roomId: roomId,
-        writer: { _id: user._id, nickname: user.nickname },
+        writer: { _id: user?._id, nickname: user?.nickname },
         content: chat.trim(),
         isSystem: false,
       };
 
-      queryClient.setQueryData(["chatRoom", roomId], (oldData) => {
+      queryClient.setQueryData(["chatRoom", roomId], (oldData: any) => {
+        if (!oldData) {
+          return {
+            chats: [newChat],
+            _id: "",
+            title: "",
+            madeBy: "",
+          };
+        }
+
         return {
           ...oldData,
           chats: [...oldData.chats, newChat],
         };
       });
 
-      socketRef.current.emit("send-chat", newChat);
+      socketRef.current?.emit("send-chat", newChat);
       await postChat(newChat);
       setChat("");
     }
 
-    if (event.key === "ArrowDown") {
-      scrollRef.current.scrollTo({
+    if (event.key === "ArrowDown" && scrollRef) {
+      scrollRef?.current?.scrollTo({
         top: scrollRef.current.scrollTop + 30,
         behavior: "smooth",
       });
     }
 
-    if (event.key === "ArrowUp") {
-      scrollRef.current.scrollTo({
+    if (event.key === "ArrowUp" && scrollRef) {
+      scrollRef?.current?.scrollTo({
         top: scrollRef.current.scrollTop - 30,
         behavior: "smooth",
       });
@@ -109,21 +118,21 @@ function ChatRoomDos() {
       chatInputRef.current.focus();
     }
 
-    function handleKeyDown(event) {
+    function handleKeyDown(event: KeyboardEvent) {
       if (event.key === "Escape") {
-        chatInputRef.current.focus();
+        chatInputRef?.current?.focus();
       }
     }
 
     function handleOnClick() {
-      chatInputRef.current.focus();
+      chatInputRef?.current?.focus();
     }
 
-    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keydown", handleKeyDown as any as EventListener);
     window.addEventListener("click", handleOnClick);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keydown", handleKeyDown as any as EventListener);
       window.removeEventListener("click", handleOnClick);
     };
   }, []);

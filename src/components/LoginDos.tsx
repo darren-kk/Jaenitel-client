@@ -41,11 +41,11 @@ function LoginDos() {
       idInputRef.current?.focus();
     }
 
-    window.addEventListener("keydown", handleKeyDown as unknown as EventListener);
+    window.addEventListener("keydown", handleKeyDown as any as EventListener);
     window.addEventListener("click", handleOnClick);
 
     return () => {
-      window.removeEventListener("keydown", handleKeyDown as unknown as EventListener);
+      window.removeEventListener("keydown", handleKeyDown as any as EventListener);
       window.removeEventListener("click", handleOnClick);
     };
   }, []);
