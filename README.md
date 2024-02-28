@@ -23,28 +23,28 @@
 
 # Table of Contents
 
-- [Motivation](#motivation)
-- [Test-Coverage](#test-coverage)
-- [Features](#features)
-- [Challenges](#challenges)
+- [💪 Motivation](#motivation)
+- [🧮 Test-Coverage](#test-coverage)
+- [📟 Features](#features)
+- [🏔️ Challenges](#challenges)
   - [1. 그 시절 통신 프로그램 재현을 위한 노력](#1-그-시절-통신-프로그램-재현을-위한-노력)
     - [1-1. 마우스라는 하드웨어가 없던 시절, 어떻게 DOS창을 재현할까>](#1-1-마우스라는-하드웨어가-없던-시절-어떻게-dos-창을-재현할까)
     - [1-2. 좋지 않았던 통신환경, 어떻게 재현해야 할까?: 서버 지연 vs 클라이언트 렌더링](#1-2-좋지-않았던-통신환경-어떻게-재현해야-할까--서버-지연-vs-클라이언트-렌더링)
-  - [2. 불편함이라는 테마 속 자연스러운 유저 경험을 위한 고민](#2-불편함이라는-테마-속-자연스러운-유저-경험을-위한-고민)
+  - [2. 불편함이라는 테마 속 자연스러운 유저 경험을 위한 고민](#2-불편함이라는-테마-속--유저-경험을-위한-고민)
     - [2-1. 마우스의 사용이 너무 익숙한 브라우저 환경, 보다 나은 ux를 위한 고민은?](#2-1-마우스의-사용이-너무-익숙한-브라우저-환경-보다-나은-ux를-위한-고민은)
     - [2-2. 모두 다른 화면크기, 혹시 내 프로젝트 ui가 깨지진 않을까?](#2-2-모두-다른-화면크기-혹시-내-프로젝트-ui가-깨지진-않을까)
-- [Issues](#issues)
+- [🔥 Issues](#issues)
   - [1. 실시간 통신을 위한 socket.io DB 쿼리는 어디에서?](#1-실시간-통신을-위한-socketio-db-쿼리는-어디에서)
   - [2. 배포 과정에서 겪었던 이슈들](#2-배포-과정에서-겪었던-이슈들)
     - [2-1. nginx 프록시 서버 파일 크기 제한](#2-1-nginx-프록시-파일-크기-제한)
     - [2-2. samesite 속성의 express 버전 문제](#2-2-samesite-속성의-express-버전-문제)
-- [Schedule](#schedule)
-- [Repository-Link](#repository-link)
-- [Tech-Stacks](#tech-stacks)
-- [Memoir](#memoir)
+- [🗓️ Schedule](#schedule)
+- [📌 Repository-Link](#repository-link)
+- [⚙️ Tech-Stacks](#tech-stacks)
+- [🎞️ Memoir](#memoir)
   <br></br>
 
-# Motivation
+# 💪 Motivation
 
 저는 평소에 음악을 굉장히 좋아합니다. 단순 음악에 그치지 않고 음악을 듣는 계기, 장소, 기기, 등 다양한 요소들에 따라 다르게 들리는 음악을 좋아합니다.
 <br>
@@ -69,13 +69,13 @@ LP를 통해 불편한 과정을 거쳐 음악을 듣는것 처럼,
 **_그렇게 저는 불편함 속에서 즐거움을 찾기 위해 예전 PC통신을 재해석한 프로젝트를 시작하게 되었습니다._**
 <br></br>
 
-# Test-Coverage
+# 🧮 Test-Coverage
 
 - ### Client - 70%
 - ### Server - 80%
   <br></br>
 
-# Features
+# 📟 Features
 
 ### 안내 페이지 및 로그인
 
@@ -127,7 +127,7 @@ LP를 통해 불편한 과정을 거쳐 음악을 듣는것 처럼,
 - 시스템 메시지를 통해 들어오고 나가는 사용자의 기록이 대화방에 생성됨
   <br></br>
 
-# Challenges
+# 🏔️ Challenges
 
 ## 1. 그 시절 통신 프로그램 재현을 위한 노력
 
@@ -369,7 +369,7 @@ res.status(200).json({
 
 서버 측에서는 요청된 페이지와 페이지당 제한된 게시글 수에 따라 해당하는 게시글 데이터를 제공합니다. 클라이언트에서 계산된 게시글 수를 기준으로 서버에서는 필요한 만큼의 데이터만 전송하여, 네트워크 트래픽을 최적화하고 사용자 경험을 개선하고자 했습니다.
 
-# Issues
+# 🔥 Issues
 
 ### 1. 실시간 통신을 위한 Socket.io, DB 쿼리는 어디에서?
 
@@ -499,7 +499,7 @@ res.cookie("AccessToken", token, {
 
 <br></br>
 
-# Schedule
+# 🗓️ Schedule
 
 ### 프로젝트 기간: 2023.08.07(월) ~ 2023.08.25(금)
 
@@ -513,14 +513,14 @@ res.cookie("AccessToken", token, {
 
 <br></br>
 
-# Repository-Link
+# 📌 Repository-Link
 
 [Jaenitel - Client](https://github.com/darren-kk/Jaenitel-client)
 <br></br>
 [Jaenitel - Server](https://github.com/darren-kk/Jaenitel-server)
 <br></br>
 
-# Tech-Stacks
+# ⚙️ Tech-Stacks
 
 ### Client
 
@@ -561,7 +561,7 @@ res.cookie("AccessToken", token, {
 
 <br></br>
 
-# Memoir
+# 🎞️ Memoir
 
 약간은 오래되고 아날로그한 요소들을 좋아하고 즐기는 저에겐 굉장히 즐거운 과정이자 프로젝트 였습니다.
 <br>
