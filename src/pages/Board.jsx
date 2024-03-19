@@ -1,8 +1,9 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useLocation } from "react-router-dom";
 import { useAtom, useAtomValue } from "jotai";
 
 import useGetPosts from "../apis/getPosts";
+import useResize from "../utils/useResize";
 
 import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms/pageAtoms";
 
@@ -23,23 +24,7 @@ function Board() {
 
   const pageNumbers = [];
 
-  useEffect(() => {
-    const postHeight = 48;
-
-    const handleResize = () => {
-      if (mainRef.current) {
-        const mainHeight = mainRef.current.clientHeight;
-        setPostsPerPage(Math.floor(mainHeight / postHeight));
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [mainRef, setPostsPerPage]);
+  useResize(mainRef, setPostsPerPage, 48);
 
   for (let i = 1; i <= Math.ceil(posts?.length / postsPerPage); i++) {
     pageNumbers.push(i);
@@ -57,7 +42,7 @@ function Board() {
         </div>
       </header>
       <div className="bg-white w-full h-1 mb-2"></div>
-      <main ref={mainRef} className="flex-start w-full h-60vh px-10 py-4">
+      <main ref={mainRef} className="flex-start w-full px-10 py-4 short:h-[55vh] tall:h-[60vh]">
         {posts?.map((post) => (
           <div key={post._id} className="flex justify-between w-full h-7 mb-4">
             <span className="text-xl w-1/12">{post.index}</span>

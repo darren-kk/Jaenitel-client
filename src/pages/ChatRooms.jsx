@@ -1,7 +1,8 @@
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useAtom, useAtomValue } from "jotai";
 
 import useGetChatRooms from "../apis/getChatrooms";
+import useResize from "../utils/useResize";
 
 import { currentPageAtom, totalPageAtom, postsPerPageAtom } from "../atoms/pageAtoms";
 
@@ -17,23 +18,7 @@ function ChatRooms() {
 
   const pageNumbers = [];
 
-  useEffect(() => {
-    const postHeight = 90;
-
-    const handleResize = () => {
-      if (mainRef.current) {
-        const mainHeight = mainRef.current.clientHeight;
-        setPostsPerPage(Math.floor(mainHeight / postHeight));
-      }
-    };
-
-    window.addEventListener("resize", handleResize);
-    handleResize();
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, [mainRef, setPostsPerPage]);
+  useResize(mainRef, setPostsPerPage, 90);
 
   for (let i = 1; i <= Math.ceil(chatRooms?.length / postsPerPage); i++) {
     pageNumbers.push(i);

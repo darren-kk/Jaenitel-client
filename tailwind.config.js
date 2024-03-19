@@ -36,6 +36,10 @@ module.exports = {
         "75vh": "75vh",
         "80vh": "80vh",
       },
+      screens: {
+        short: { raw: "(max-height: 754px)" },
+        tall: { raw: "(min-height: 755px)" },
+      },
       keyframes: {
         typewriter: {
           "0%": { width: "0%" },
