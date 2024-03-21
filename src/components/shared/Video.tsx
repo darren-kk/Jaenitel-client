@@ -36,7 +36,6 @@ function VideoRef({ className, src }: VideoProps, ref: ForwardedRef<HTMLVideoEle
 
   useEffect(() => {
     const videoRef: HTMLVideoElement | null = (ref as React.RefObject<HTMLVideoElement>)?.current;
-    console.log(videoRef);
 
     if (videoRef) {
       videoRef.load();

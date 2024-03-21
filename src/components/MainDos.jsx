@@ -6,6 +6,7 @@ import Input from "./shared/Input";
 import CreateChatRoomDos from "./CreateChatRoomDos";
 
 import { commandList, boardsNumberList } from "../constants";
+import * as Commands from "../utils/commands";
 
 import { currentPageAtom, totalPageAtom } from "../atoms/pageAtoms";
 import { scrollRefAtom, videoRefAtom } from "../atoms/refAtoms";
@@ -80,7 +81,7 @@ function MainDos() {
     };
   }, []);
 
-  async function handleCommand() {
+  const handleCommand = async () => {
     let boardName;
     let index;
     let postId;
@@ -95,153 +96,88 @@ function MainDos() {
       postId = path[5];
     }
 
-    if (command === "h") {
-      setShowCommandList(!showCommandList);
-    }
+    switch (true) {
+      case command === "h":
+        Commands.toggleCommandList(showCommandList, setShowCommandList).execute();
+        break;
 
-    if (command === "x") {
-      setLabelMessage("종료하고 로그인 화면으로 돌아가시겠습니까?");
-    }
+      case command === "t":
+        Commands.navigateToHome(navigate, setShowMainDos).execute();
+        break;
 
-    if (command === "t") {
-      setShowMainDos(true);
-      navigate("/boards");
-    }
+      case command === "x":
+        Commands.setLogoutMessage(setLabelMessage).execute();
+        break;
 
-    if (labelMessage) {
-      if (command === "y") {
-        if (labelMessage.includes("삭제")) {
-          await fetchDeletePost(postId);
+      case command === "y" && labelMessage.includes("삭제"):
+        await Commands.confirmDeletePost(fetchDeletePost, postId, setCommand, setLabelMessage).execute();
+        break;
+
+      case command === "y" && labelMessage.includes("종료"):
+        Commands.confirmLogout(fetchLogout, setCommand, setLabelMessage).execute();
+        break;
+
+      case command === "n":
+        if (labelMessage) {
+          Commands.cancelCommand(setCommand, setLabelMessage).execute();
+          break;
+        } else {
+          Commands.nextPage(setCurrentPage, totalPage).execute();
+          break;
         }
 
-        if (labelMessage.includes("종료")) {
-          fetchLogout();
-        }
+      case command === "p":
+        Commands.previousPage(setCurrentPage).execute();
+        break;
 
-        setCommand("");
-        setLabelMessage("");
+      case command === "b":
+        Commands.goBack(navigate, path.length).execute();
+        break;
 
-        return;
-      }
+      case command === "new":
+        Commands.createNew(
+          navigate,
+          setShowMainDos,
+          setShowCreateChatRoomDos,
+          setModalState,
+          boardName,
+          path,
+        ).execute();
+        break;
 
-      if (command === "n") {
-        setCommand("");
-        setLabelMessage("");
+      case command === "edit" && Boolean(postId):
+        Commands.editPost(setShowMainDos, navigate, user, posts, index, boardName, postId).execute();
+        break;
 
-        return;
-      }
-    }
+      case command === "delete" && Boolean(postId):
+        Commands.setDeletePostMessage(setLabelMessage, user, posts, index).execute();
+        break;
 
-    if (command.endsWith("go")) {
-      const number = command.split("g")[0].trim();
+      case ["play", "pause", "stop"].includes(command):
+        Commands.controlVideo(videoRef, command).execute();
+        break;
 
-      if (path[path.length - 1] === "boards") {
-        navigate(`${boardsNumberList[number]}`);
-        setCommand("");
+      case command.endsWith("go"):
+        Commands.navigateByCommand(
+          navigate,
+          setCommand,
+          setModalState,
+          boardsNumberList,
+          posts,
+          messages,
+          chatRooms,
+          path,
+          boardName,
+        ).execute(command);
+        break;
 
-        return;
-      }
-
-      if (["greetings", "free", "humor"].includes(boardName)) {
-        navigate(`/boards/${boardName}/post/${number}/${posts[number].postId}`);
-        setCommand("");
-
-        return;
-      }
-
-      if (path[2] === "messages") {
-        setModalState({
-          isOpen: true,
-          messageId: messages[number].messageId,
-        });
-      }
-
-      if (path[2] === "chatrooms") {
-        navigate(`/boards/chatrooms/${number}/${chatRooms[number].roomId}`);
-        setCommand("");
-
-        return;
-      }
-    }
-
-    if (command === "delete" && postId) {
-      if (path[path.legnth - 1] === "edit") {
-        setCommand("");
-
-        return;
-      }
-
-      if (user._id !== posts[index].madeBy) {
-        setLabelMessage("삭제 권한이 없습니다!");
-        setCommand("");
-
-        return;
-      }
-
-      setLabelMessage("해당 게시글을 삭제하시겠습니까?");
-    }
-
-    if (command === "new") {
-      if (["humor", "greetings", "free"].includes(boardName)) {
-        setShowMainDos(false);
-        navigate(`/boards/${boardName}/post/new`);
-      }
-
-      if (path[2] === "messages") {
-        setModalState({
-          isOpen: true,
-          messageId: "new",
-        });
-      }
-
-      if (path[2] === "chatrooms") {
-        setShowCreateChatRoomDos(true);
-      }
-    }
-
-    if (command === "edit" && postId) {
-      if (user._id !== posts[index].madeBy) {
-        setLabelMessage("수정 권한이 없습니다!");
-        setCommand("");
-
-        return;
-      }
-
-      setShowMainDos(false);
-      navigate(`/boards/${boardName}/post/${index}/${postId}/edit`);
-    }
-
-    if (command === "n") {
-      setCurrentPage((old) => (old === totalPage ? old : old + 1));
-    }
-
-    if (command === "p") {
-      setCurrentPage((old) => (old === 1 ? old : old - 1));
-    }
-
-    if (command === "b") {
-      if (path.length === 2) {
-        return;
-      }
-
-      navigate(-1);
-    }
-
-    if (command === "play") {
-      videoRef.current.play();
-    }
-
-    if (command === "pause") {
-      videoRef.current.pause();
-    }
-
-    if (command === "stop") {
-      videoRef.current.pause();
-      videoRef.current.currentTime = 0;
+      default:
+        Commands.cancelCommand(setCommand, setLabelMessage).execute();
+        break;
     }
 
     setCommand("");
-  }
+  };
 
   function handleKeyDown(event) {
     if (modalState.isOpen) {
