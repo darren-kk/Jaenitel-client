@@ -23,25 +23,25 @@
 
 # Table of Contents
 
-- [💪 Motivation](#💪-motivation)
-- [🧮 Test-Coverage](#🧮-test-coverage)
-- [📟 Features](#📟-features)
-- [🏔️ Challenges](#🏔️-challenges)
+- [💪 Motivation](#-motivation)
+- [🧮 Test-Coverage](#-test-coverage)
+- [📟 Features](#-features)
+- [🏔️ Challenges](#-challenges)
   - [1. 그 시절 통신 프로그램 재현을 위한 노력](#1-그-시절-통신-프로그램-재현을-위한-노력)
     - [1-1. 마우스라는 하드웨어가 없던 시절, 어떻게 DOS창을 재현할까>](#1-1-마우스라는-하드웨어가-없던-시절-어떻게-dos-창을-재현할까)
     - [1-2. 좋지 않았던 통신환경, 어떻게 재현해야 할까?: 서버 지연 vs 클라이언트 렌더링](#1-2-좋지-않았던-통신환경-어떻게-재현해야-할까--서버-지연-vs-클라이언트-렌더링)
   - [2. 불편함이라는 테마 속 자연스러운 유저 경험을 위한 고민](#2-불편함이라는-테마-속--유저-경험을-위한-고민)
     - [2-1. 마우스의 사용이 너무 익숙한 브라우저 환경, 보다 나은 ux를 위한 고민은?](#2-1-마우스의-사용이-너무-익숙한-브라우저-환경-보다-나은-ux를-위한-고민은)
     - [2-2. 모두 다른 화면크기, 혹시 내 프로젝트 ui가 깨지진 않을까?](#2-2-모두-다른-화면크기-혹시-내-프로젝트-ui가-깨지진-않을까)
-- [🔥 Issues](#🔥-issues)
+- [🔥 Issues](#-issues)
   - [1. 실시간 통신을 위한 socket.io DB 쿼리는 어디에서?](#1-실시간-통신을-위한-socketio-db-쿼리는-어디에서)
   - [2. 배포 과정에서 겪었던 이슈들](#2-배포-과정에서-겪었던-이슈들)
     - [2-1. nginx 프록시 서버 파일 크기 제한](#2-1-nginx-프록시-파일-크기-제한)
     - [2-2. samesite 속성의 express 버전 문제](#2-2-samesite-속성의-express-버전-문제)
-- [🗓️ Schedule](#🗓️-schedule)
-- [📌 Repository-Link](#📌-repository-link)
-- [⚙️ Tech-Stacks](#⚙️-tech-stacks)
-- [🎞️ Memoir](#🎞️-memoir)
+- [🗓️ Schedule](#-schedule)
+- [📌 Repository-Link](#-repository-link)
+- [⚙️ Tech-Stacks](#-tech-stacks)
+- [🎞️ Memoir](#-memoir)
   <br></br>
 
 # 💪 Motivation
